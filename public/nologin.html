@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+  <title>Pennsic Books</title>
+  <link href="/stylesheets/styles.css?1246433490" media="screen" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<section id="header">
+  <div id="user">
+    <p>You are not logged in.</p>
+    <div class="buttons">
+      <button type="button"><a href="/account/login">Login</a></button>
+      <button type="button"><a href="/account/signup">Sign Up</a></button>
+    </div>
+  </div> <!-- user -->
+ <div id="banner">
+   <h1>Pennsic Books</h1>
+ </div>
+</section> <!-- header -->
+<section id="main">
+<div id="intro">
+  <p>The intent of this website is to make it easier to share books at Heralds Point by helping make sure 
+       that we have all the books we need without having too many copies 
+       of books we use less often. It also lists books that should not be brought as they have been found to be unhelpful.</p>
+  <p>Thanks for helping out by loaning your books to Heralds Point!</p>
+</div>
+<div id="actions">
+  <form id="event_selection">
+  <label for="event_id">Event:</label>
+  <select name="event_id">
+    <option value="30" >Pennsic</option>
+    <option value="35">War Practice</option>
+  </select>
+  <label for="order">Sort by:</label>
+  <select name="order">
+    <option value="name">Author's Name</option>
+    <option value="title">Title</option>
+    <option value="short">Short name</option>
+  </select>
+  <label for="search"><img src="1495598363_icon-111-search.svg" alt="search" height="12" width="12"/></label>
+  <input type="text" name="search">
+  </form>
+</div>
+<div id="books">
+  <h2>Current Book Status</h2>
+  <div class="table" id="priority_books">
+    <h3>Priority Books</h3>
+    <!-- Question: is it better to say 0 needed or better to move to a separate list? Try both ways -->
+    
+    <table class="book_table">
+      <tr>
+	<th>Book</th>
+	<th>Number still needed</th>
+	<th>Currently bringing</th>
+      </tr>
+      <tr>
+	<td class="descriptions"><span class="short_name">Abramowicz</span> <span class="author">Abramowicz</span> <span class="title">Abramowicz, S&#x0142;ownik Historycznyck Nazw Osobowych Bia&#x0142;ostocczyzny (XV-XVII w.)</span> </td>
+	<td class="need">1</td>
+	<td class="names"></td>
+      <tr>
+      <tr>
+	<td class="descriptions"><span class="author">Adachi</span> <span class="title"Japanese Design Motifs</span> </td>
+	<td class="need"></td>
+	<td class="names">Myfanwy</td>
+      <tr>
+      <tr>
+	<td class="descriptions"><span class="short_name">Bahlow-Gentry</span> <span class="author">Bahlow</span> <span class="title">Dictionary of German Names (Edda Gentry translation)</span> </td>
+	<td class="need">2</td>
+	<td class="names"></td>
+      <tr>
+     </table>
+  </div>
+  <div class="table" id="optional_books">
+    <h3>Optional Books</h3>
+    <table class="book_table">
+      <tr>
+	<th>Book</th>
+	<th>Currently Bringing</th>
+      </tr>
+      <tr>
+	<td class="descriptions"><span class="author">Appleton, David</span> <span class="title">The Boke of St. Albans</span> </td>
+	<td class="names">Elsbeth</td>
+      </tr>
+    </table>
+  </div>
+  <div class="table" id="banned_books">
+    <h3>Do Not Bring</h3>
+    <table class="book_table">
+    </table>
+  </div>
+</div> <!-- books -->
+</section>  
+<!--
+    <tr>
+    <td class="title" title="Bahlow, Deutsches Namenlexikon">Bahlow Namenlexikon</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Bahlow, Deutschlands geographisches Namenwelt: etymologisches Lexikon der Fluss- und Ortsnamen alteuropäischer Herkunf">Bahlow Namenwelt</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Bahlow, Unsere Vornamen im Wandel der Jahrhunderte">Bahlow Vornamen</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Barber, Bestiary">Barber Bestiary</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Bardsley, A Dictionary of English and Welsh Surnames">Bardsley</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Bedingfeld & Gwynn-J, Heraldry">Bedingfeld & Gwynn-J</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Beider, A Dictionary of Ashkenazic Given Names">Beider Ashkenazic Given</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Black, The Surnames of Scotland: Their Origin, Meaning and History">Black</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Bolos i Masclan, Repertori d'Antroponims Catalans, vol.1 ">Bolos i Masclan</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Brault, Eight Thirteenth-Century Rolls of Arms in French and Anglo-Norman Blazon">Brault 13th C Rolls</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Brault, The Rolls of Arms of Edward I_, Aspilogia III">Brault Aspilogia III</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Brault, Early Blazon: Heraldic Terminology in the Twelfth and Thirteenth Centuries with Special Reference to Arthurian Heraldry">Brault Early Blazon</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Brechenmacher, Etymologisches Woerterbuch der deutschen Familiennamen">Brechenmacher</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Brooke-Little, An Heraldic Alphabet">Brooke-Little</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", CA 022 - Heraldry">CA 22 (Heraldry)</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", CA 050 - Armorial Display">CA 50 (Arm Disp)</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", CA 051 - The Islamic World">CA 51 (Islamic)</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Campbell, The Scots Roll: A Study of a Fifteenth Century Roll of Arms">Campbell Scots Roll</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Chuks-orji, Names from Africa">Chuks-orji Names from Africa</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Dauzat & Rostaing, Dictionnaire Etymologique des Noms de Lieux de la France">Dauzat & Rostaing</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="De Felice, Dizionario dei cognomi italiani">De Felice cognomi</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="De Felice, Dizionario dei nomi italiani">De Felice nomi</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Denys, Heraldic Imagination">Denys Heraldic Imagination</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Diez Melcon, Apellidos Castellano-Leoneses: Siglos IX-XIII, ambos inclusive">Diez Melcon</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Draconarius, A Pictorial Dictionary of Heraldry as Used in the Society for Creative Anachronism">Draconarius Pic-Dic</td>
+    <td class="priority">Required</td>
+    <td class="need">6</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Dunkling & Gosling, The New American Dictionary of First Names">Dunkling & Gosling</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Edward of Effingham, CA 065 - A Japanese Miscellany">Edward of Effingham CA 65 (Jap Misc)</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Ekwall, The place-names of Lancashire">Ekwall Lancashire</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Ekwall, Early London Personal Names">Ekwall Personal Names</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Ekwall, The Concise Oxford Dictionary of English Place-names (4th ed.)">Ekwall Placenames</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Elián, El gran libro de loas Appelidos y la Heráldica">Elián</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Fabre, Noms de lieux de Languedoc">Fabre</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Farmer, Oxford Dictionary of Saints">Farmer Farmer Saints</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Fehértói, Árpád-kori személynévtár (1000-1301) (new edition)">Fehértói</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Fellows Jensen, Scandinavian Personal Names in Lincolnshire and Yorkshire">Fellows Jensen</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Flutre, Table des Noms Propres">Flutre</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Foster, The Dictionary of Heraldry">Foster</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Fox-Davies, A Complete Guide to Heraldry">Fox-Davies</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Fransson, Middle English Surnames of Occupation, 1100-1350">Fransson</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Friar, A Dictionary of Heraldry">Friar</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Friar & Ferguson, Basic Heraldry">Friar & Ferguson</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Fucilla, Our Italian Surnames">Fucilla</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Geirr Bassi, The Old Norse Name">Geirr Bassi</td>
+    <td class="priority">Required</td>
+    <td class="need">3</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Geraud, Paris sous Philippe-le-Bel: d'aprés des documents originaux et notamment d'aprés un manuscript contenant Le Rôle de la taille imposée sur les habitants de Paris en 1292">Geraud 1292 Census Data</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Gruffudd, Enwau i'r Cymry/Welsh Personal Names">Gruffudd</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Gullim, Display of Heraldry Manifesting a More Easy Access to the Knowledge Thereof">Gullim</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Gwynn-Jones, The Art of Heraldry">Gwynn-Jones</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Hildebrandt, handbuc der heraldíe Wappenfíbel">Hildebrandt</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", Handbook of Hindu Names">Hindu Names</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Hitching & Hitching, References to English Surnames in 1601 and 1602">Hitching & Hitching</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Hjertstedt, Middle English Nicknames in the Lay Subsidy Rolls for Warwickshire">Hjertstedt</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Humphrey-Smith, Anglo-Norman Armory Two">Humphrey-Smith</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Innes, An Index of Period Given Names Contained in _A Dictionary of English and Welsh Surnames_ by Charles Bardsley">Innes Bardsley Index</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Innes, An Index of Given Names Contained in _The Oxford Dictionary of English Christian Names_ by E. G. Withycombe">Innes Withycombe Index</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Janzén, Nordisk Kultur Personnamn">Janzén</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Johnston, Place-Names of Scotland (3rd ed.)">Johnston</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Jones, The Mabinogin">Jones</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Jönsjö, Studies on Middle English Nicknames">Jönsjö</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Khera, Directory of Personal Names in the Indian History from the earliest to 1947">Khera</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Kihō, O-umajirushi A 17th-Century Compendium of Samurai Heraldry ">Kihō O-umajirushi</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Kázmér, Régi Magyar családnevek szótára, XIV-XVII század">Kázmér</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Legh, The accedens of armory">Legh</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Lind, Norsk-Isländska Dopnamn ock Fingerade Namn från Medeltiden">Lind Dopnamn</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Lind, Supplementband">Lind Supplementband</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Lind, Norsk-Isländska Personbinamn från Medeltiden">Lind binamn</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", Livro do Armeiro-Mor">Livro do Armeiro-Mor</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="MacLagan & Louda, Lines of Succession: Heraldry of the Royal Families of Europe">MacLagan & Louda Lines of Succession</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="MacLysaght, The Surnames of Ireland">MacLysaght Surnames</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Mayer, Saracenic Heraldry">Mayer Saracenic Heraldry</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Michelena, Apellidos Vascos">Michelena Apellidos Vascos</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Mills, A Dictionary of London Place-Names">Mills London</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Mills, A Dictionary of British Place-Names">Mills Mills British</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Mills, A Dictionary of English Place-Names">Mills Mills English</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Modéer, Svenska Personnamn">Modéer</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morgan & Morgan, Welsh Surnames">Morgan & Morgan</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morgan, Ainmean Chloinne: Scottish Gaelic Names for Children">Morgan Scottish Gaelic Name</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morlet, Les Noms de Personne sur le Territoire de l'Ancienne Gaule du VIe au XIIe Siècle, vol. I">Morlet Morlet I</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morlet, Les Noms de Personne sur le Territoire de l'Ancienne Gaule du VIe au XIIe Siècle, vol. II">Morlet Morlet II</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morlet, Les Noms de Personne sur le Territoire de l'Ancienne Gaule du VIe au XIIe Siècle, vol. III">Morlet Morlet III</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morlet, Dictionnaire Étymologique des Noms de Famille">Morlet Noms de Famille</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Morlet, Etude d'anthroponymie picarde, les noms de personne en Haute Picardie aux XIIIe, XIVe, XVe siecles">Morlet Picardie</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Mullins of Dublin, Heraldic Scroll and Map of Family Names and Origins">Mullins of Dublin</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Musere & Odhiambo, African Ethnics and Personal Names">Musere & Odhiambo</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Naumann, Das grosse Buch der Familiennamen">Naumann</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", Libro de Armeria del Reino de Navarra">Navarra</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Neubecker, Heradlry:Sources, Symbols and Meaning">Neubecker</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Nyulászi-Straub, Öt évszázad címerei (Wappen aus fünf Jahrhunderten)">Nyulászi-Straub</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Parker, A Glossary of Terms used in Heraldry">Parker</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Paszkiewicz & Kulczy, Herby Rodów Polskich / Polish Coats of Arms">Paszkiewicz & Kulczy Polish Coats of Arms</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Patrick, Roots of the Russian Language">Patrick</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Pinches & Wood, A European Armorial: An Armorial of Knights of the Golden Fleece and 15th Century Europe">Pinches & Wood A European Armorial</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Plata, Catalogo de Pasajeros a Indias, vol. 2-3">Plata Catalogo 2-3</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Prior, 501 Latin Verbs">Prior</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="RIA, Dictionary of the Irish Language: based mainly on Old and Middle Irish materials">RIA DIL</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Reaney & Wilson, A Dictionary of English Surnames">Reaney & Wilson</td>
+    <td class="priority">Required</td>
+    <td class="need">4</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Reaney, The Origin of English Surnames">Reaney Origin Eng. Surnames</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Reaney, The Origin of English Place Names">Reaney Place Names</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Room, Dictionary of Irish Place-Names">Room</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Rymut, Nazwiska Polaków">Rymut</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title=", Sveriges Medeltida Personnamn">SMP</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Schimmel, Islamic Names">Schimmel</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Searle, Onomasticon Anglo-Saxonicum">Searle</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Seibicke, Historisches Deutsches Vornamenbuch">Seibicke</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Seltén, The Anglo-Saxon Heritage in Middle English Personal Names">Seltén</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Siebmacher, Johann Siebmachers Wappenbuch von 1605">Siebmacher</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Slater, The Complete Book of Heraldry">Slater</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Smith, English Place-Name Elements">Smith</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Socin, Mittelhochdeutsches Namenbuch. Nach oberrheinischen Quellen des 12. und 13. Jahrhunderts">Socin</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Solis, Wappenbuchlein">Solis</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Solveig, Name Construction in Mediaeval Japan (2003 ed.)">Solveig NCMJ (2003 ed.)</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Stokes, English Place-Names">Stokes</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Swift, Cities of the Renaissance World: Maps from Civitates Orbis Terrarum">Swift</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Szamota & Zolnai, Magyar Oklevél-szótár">Szamota & Zolnai</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Tangwystyl, CA 066 - A Welsh Miscellany">Tangwystyl CA 66 (Welsh Misc)</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Tangwystyl, Baby Names For Dummies">Tangwystyl Dummies</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Tengvik, Old English Bynames">Tengvik</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Thuresson, Middle English Occupational Terms">Thuresson</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Turnbull, Samurai Heraldry">Turnbull</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Von Feilitzen, The Pre-Conquest Personal Names of Domesday Book">Von Feilitzen</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Wagner, A Catalogue of English Mediaeval Rolls of Arms">Wagner Aspilogia I</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Wagner, Aspilogia II">Wagner Aspilogia II</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Watts, Cambridge Dictionary of English Place-Names: Based on the Collections of the English Place-Name Society">Watts</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="White, The Book of Beasts">White Book of Beasts</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Wickenden, Dictionary of Period Russian Names (3rd ed.)">Wickenden (3rd ed.)</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Williams, Geiriadur Termau / Dictionary of Terms">Williams</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Williamson, Debrett's Guide to Heraldry and Regalia">Williamson Debrett's</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Withycombe, The Oxford Dictionary of English Christian Names (3rd ed.)">Withycombe (3rd ed.)</td>
+    <td class="priority">Required</td>
+    <td class="need">4</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woodcock & Robinson, The Oxford Guide to Heraldry">Woodcock & Robinson</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woodcook et. al., Dictionary of British Arms: Medieval Ordinary Volume 1">Woodcook et. al. DBA 1</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woodcook et. al., Dictionary of British Arms: Medieval Ordinary Volume 2">Woodcook et. al. DBA 2</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woodcook et. al., Dictionary of British Arms: Medieval Ordinary, Volume 3">Woodcook et. al. DBA 3</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woodcook et. al., Dictionary of British Arms: Medieval Ordinary, Volume 4">Woodcook et. al. DBA 4</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woodward, A Treatise on Heraldry British and Foreign">Woodward</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woolf, The Old Germanic Principles of Name-Giving">Woolf</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woulfe, Sloinnte Gaedheal is Gall: Irish Names and Surnames (Revised ed.)">Woulfe</td>
+    <td class="priority">Required</td>
+    <td class="need">2</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Woulfe, Irish Names for Children">Woulfe Given Names</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Zelenka, Die Wappen der böhmischen und mährischen Bischöfe">Zelenka</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Welsh / Welsh-English">[any] (any) Eng/Welsh dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Bohemian / Bohemian-English (any)">[any] Eng/Bohemian dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Dutch / Dutch-English (any)">[any] Eng/Dutch dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Finnish / Finnish-English (any)">[any] Eng/Finnish dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-French / French-English (any)">[any] Eng/French dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-German / German-English (any)">[any] Eng/German dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Hungarian / Hungarian-English (any)">[any] Eng/Hungarian dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Italian / Italian-English (any)">[any] Eng/Italian dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Japanese (Kanji) / Japanese (Kanji)-English (any)">[any] Eng/Jap(Kanji) dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Japanese (Romaji) / Japanese (Romaji)-English (any)">[any] Eng/Jap(Romaji) dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Latin / Latin-English (any)">[any] Eng/Latin dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Norwegian / Norwegian-English (any)">[any] Eng/Norwegian dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Polish / Polish-English (any)">[any] Eng/Polish dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Portuguese/ Portuguese-English (any)">[any] Eng/Portuguese dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Russian / Russian-English (any)">[any] Eng/Russian dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Spanish / Spanish-English (any)">[any] Eng/Spanish dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: English-Swedish / Swedish-English (any)">[any] Eng/Swedish dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], Geographical Dictionary (any)">[any] Geographical dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="[any], dictionary: Old English / Anglo-Saxon (any)">[any] Old English dict</td>
+    <td class="priority">Don't Bring</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="de Bara, Le Blason des Armoiries">de Bara</td>
+    <td class="priority">Optional</td>
+    <td class="need">0</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="de Boos, L'armorial Le Breton">de Boos</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="van de Eeckhout, Le Grand Armorial Equestre de la Toison d'Or, L'Armorial de Flandre ">van de Eeckhout Armorial de Flandre</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="von Volborth, The Art of Heraldry">von Volborth Art of Heraldry</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="von Volborth, Heraldry: Customs, Rules and Styles">von Volborth Customs</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="von den Bergen, Gelre">von den Bergen Gelre</td>
+    <td class="priority">Optional</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+    <tr>
+    <td class="title" title="Ó Corráin & Maguir, Irish Names">Ó Corráin & Maguir OCM</td>
+    <td class="priority">Required</td>
+    <td class="need">1</td>
+    <td class="have">
+                0
+                </td>
+    
+             <td class="names"></td>
+    		     
+  </tr>
+</table>
+-->
+</body>
+</html>
