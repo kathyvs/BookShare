@@ -20,10 +20,14 @@
 /node_modules
 /yarn-error.log
 
+# Ignore deployment app file
+/app.yaml
+
 # Ignore eclipse and Mac files
 /.DS_Store
 /.buildpath
 /.project
 /.rvmrc
 
+#Ignore history
 .byebug_history
