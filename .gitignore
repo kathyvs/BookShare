@@ -22,6 +22,7 @@
 
 # Ignore deployment app file
 /app.yaml
+/secret-setup.sh
 
 # Ignore eclipse and Mac files
 /.DS_Store
