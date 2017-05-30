@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PennsicBooks2</title>
+    <title>Book Share</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <section id="banner">
+      <div id="user">
+        <p><%= link_to "Log In", login_path %></p>
+      </div> 
+      <h1>Pennsic Book Share</h1>
+    </section>
+    <section id="main">
+      <%= yield %>
+    </section>
   </body>
 </html>
