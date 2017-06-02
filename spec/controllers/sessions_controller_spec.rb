@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SessionsController, type: :controller do
 
   let(:auth_environment) {
-    {uid: "12345", image_url: "http://test.com/iimage12345"}
+    {uid: "12345", image_url: "http://test.com/image12345"}
   }
 
   let(:empty_session) { {} }
