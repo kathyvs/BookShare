@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "profiles/edit", type: :view do
   before(:each) do
+    pending "A valid create method"
     @profile = assign(:profile, Profile.create!(
       :name => "MyString"
     ))

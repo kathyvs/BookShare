@@ -1,6 +1,7 @@
 class AuthUser
   
-  attr_accessor :uid, :image_url
+  attr_reader :uid, :image_url
+  attr_accessor :profile
   
   def initialize(uid, image_url)
     @uid = uid

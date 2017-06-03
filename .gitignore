@@ -33,6 +33,6 @@ public/spec-results.html
 
 #Ignore C9 files
 setup.sh
-.ircrb
+.irbrc
 
 .byebug_history
