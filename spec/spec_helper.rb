@@ -14,6 +14,8 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+#ENV["RAILS_ENV"] ||= "test"
+
 require 'omniauth'
 
 OmniAuth.config.test_mode = true
