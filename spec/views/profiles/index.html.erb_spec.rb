@@ -1,18 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe "events/index", type: :view do
+RSpec.describe "profiles/index", type: :view do
   before(:each) do
-    assign(:events, [
-      Event.create!(
+    pending "A valid create method"
+    assign(:profiles, [
+      Profile.create!(
         :name => "Name"
       ),
-      Event.create!(
+      Profile.create!(
         :name => "Name"
       )
     ])
   end
 
-  it "renders a list of events" do
+  it "renders a list of profiles" do
     render
     assert_select "tr>td", :text => "Name".to_s, :count => 2
   end

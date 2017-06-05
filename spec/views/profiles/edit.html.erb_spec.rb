@@ -1,18 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe "events/edit", type: :view do
+RSpec.describe "profiles/edit", type: :view do
   before(:each) do
-    @event = assign(:event, Event.create!(
+    pending "A valid create method"
+    @profile = assign(:profile, Profile.create!(
       :name => "MyString"
     ))
   end
 
-  it "renders the edit event form" do
+  it "renders the edit profile form" do
     render
 
-    assert_select "form[action=?][method=?]", event_path(@event), "post" do
+    assert_select "form[action=?][method=?]", profile_path(@profile), "post" do
 
-      assert_select "input[name=?]", "event[name]"
+      assert_select "input[name=?]", "profile[name]"
     end
   end
 end

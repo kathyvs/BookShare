@@ -14,6 +14,21 @@ class ApplicationRecord
     )
   end
   
+  def entity_name
+    self.class.to_s
+  end
+  
+  def save
+    if valid?
+      entity = to_entity
+      self.class.dataset.save entity
+      self.id = entity.key.id
+      true
+    else 
+      false
+    end
+  end
+  
   def persisted? 
     to_key != nil
   end
