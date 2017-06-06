@@ -3,9 +3,13 @@ require 'record_extensions'
 
 RSpec.describe "ApplicationRecord", type: :model do
   
-  class TestRecord extends ApplicationRecord do
+  class TestRecord < ApplicationRecord 
     attr_accessor :value
     extend RecordExtensions
+
+    def add_entity_data(entity)
+      entity["value"] = value
+    end
 
   end
   
@@ -15,7 +19,7 @@ RSpec.describe "ApplicationRecord", type: :model do
   
   describe "save" do
     
-    content "when valid" do
+    context "when valid" do
       before do
         entity = TestRecord.new
         entity.value = 100
@@ -23,12 +27,12 @@ RSpec.describe "ApplicationRecord", type: :model do
       end
 
       it "returns true" do
-        expect(@result).to be_true
+        expect(@result).to be true
       end
       it "stores the entity under the appropriate kind"
     end
     
-    content "when invalid" do
+    context "when invalid" do
       it "returns false"
     end
   end

@@ -1,5 +1,7 @@
 require 'active_model/conversion'
 require 'active_model'
+require 'google/cloud/datastore'
+
 
 class ApplicationRecord
   include ActiveModel::Model
@@ -16,8 +18,12 @@ class ApplicationRecord
     )
   end
   
+  def self.entity_class_name
+    return self.to_s
+  end
+
   def entity_name
-    self.class.to_s
+    self.class.entity_class_name
   end
   
   def save
@@ -34,4 +40,19 @@ class ApplicationRecord
   def persisted? 
     to_key != nil
   end
+
+   #
+  # Used to save to datastore. Subclasses must implement entity_data below.
+  #
+  def to_entity
+    entity = Google::Cloud::Datastore::Entity.new
+    entity.key = Google::Cloud::Datastore::Key.new entity_name, id
+    add_entity_data(entity)
+    entity
+  end
+  
+  protected
+    def add_entity_data(entity)
+      raise "Implement add_entity_data(entity) to add the data to save."
+    end
 end

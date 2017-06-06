@@ -1,5 +1,3 @@
-require 'google/cloud/datastore'
-
 class Event < ApplicationRecord
 
   attr_accessor :name, :month
@@ -7,15 +5,11 @@ class Event < ApplicationRecord
   def Event.all 
     return ApplicationRecord.all("Event")
   end
+
+  protected
+    def add_entity_data(entity)
+      entity["name"] = name
+      entity["month"] = month.mon
+    end
   
-  #
-  # Used to save to datastore
-  def to_entity
-    entity = Google::Cloud::Datastore::Entity.new
-    entity.key = Google::Cloud::Datastore::Key.new entity_name, id
-    entity["name"] = name
-    entity["month"] = month.mon
-    entity
-  end
-  
-end
+ end

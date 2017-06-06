@@ -28,7 +28,7 @@ alias gts='git status'
 /bookshare-secret.json
 
 # Ignore eclipse and Mac files
-/.DS_Store
+.DS_Store
 /.buildpath
 /.project
 /.rvmrc
