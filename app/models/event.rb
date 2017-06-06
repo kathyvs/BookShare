@@ -2,10 +2,10 @@ require 'google/cloud/datastore'
 
 class Event < ApplicationRecord
 
-  attr_accessor :id, :name, :month
+  attr_accessor :name, :month
   
   def Event.all 
-    return []
+    return ApplicationRecord.all("Event")
   end
   
   #

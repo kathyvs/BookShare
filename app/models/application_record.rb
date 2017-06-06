@@ -4,7 +4,9 @@ require 'active_model'
 class ApplicationRecord
   include ActiveModel::Model
   include ActiveModel::Conversion
-
+  
+  attr_accessor :id
+   
   # Return a Google::Cloud::Datastore::Dataset for the configured dataset.
   # The dataset is used to create, read, update, and delete entity objects.
   def self.dataset
