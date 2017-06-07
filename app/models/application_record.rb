@@ -22,6 +22,14 @@ class ApplicationRecord
     return self.to_s
   end
 
+  def self.all
+    query = Google::Cloud::Datastore::Query.new
+    query.kind entity_class_name
+
+    results = dataset.run query
+    results.map {|entity| self.from_entity entity }
+  end
+
   def entity_name
     self.class.entity_class_name
   end

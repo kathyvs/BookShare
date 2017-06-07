@@ -5,15 +5,20 @@ class FakeDataset
     def dataset 
       @fake_dataset ||= FakeDataset.new
     end
+
   end
   
   
   def save entity
     entity.key.id = next_id unless entity.key.complete?
     datastore(entity.key.kind)[entity.key.id] = entity
-    print entity.to_json
+    print "Total #{entity.key.kind} saved: #{datastore(entity.key.kind).size}\n"
   end
 
+  def run query
+    kind = query.to_grpc.kind[0]["name"]
+    datastore(kind).values
+  end
   private
   
     def next_id
@@ -23,6 +28,6 @@ class FakeDataset
     
     def datastore(kind)
       @datastore ||= {}
-      @datastore[kind] = {}
+      @datastore[kind] ||= {}
     end
 end
