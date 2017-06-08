@@ -8,6 +8,15 @@ class FakeDataset
 
   end
   
+  def lookup key
+    kind_map = datastore(key.kind)
+    entity = kind_map[key.id]
+    if entity
+      [entity]
+    else 
+      []
+    end
+  end
   
   def save entity
     entity.key.id = next_id unless entity.key.complete?

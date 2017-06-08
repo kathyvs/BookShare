@@ -11,6 +11,7 @@ module RecordExtensions
   end
   
   def delete_all
+    print "Deleting all #{entity_class_name}"
     query = Google::Cloud::Datastore::Query.new.kind entity_class_name
     loop do
       books = dataset.run query

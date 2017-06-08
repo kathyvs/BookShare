@@ -8,13 +8,13 @@ RSpec.describe "Events", type: :request do
   Event.extend FakeDataset::WithFakeDataset
 
   let(:valid_attributes) {
-    {name: "Test", month: Date.new(2017,06,03)}
+    {name: "Test", month: 06}
   }
 
   describe "GET /events" do
 
     attr_reader :events
-    before do 
+    before(:all) do 
       names = ["First", "Second", "Third"]
       @events = []
       names.each do |n|
@@ -22,9 +22,7 @@ RSpec.describe "Events", type: :request do
         attrs[:name] = n
         @events << Event.create!(attrs)
       end
-      print "Event created count = #{@events.size}\n"
       get events_path
-      print "Event saved count = #{Event.all.size}"
     end
 
     it "succeeds (even without authentication)" do
@@ -40,4 +38,16 @@ RSpec.describe "Events", type: :request do
     it "marks the next event"
 
   end
+
+  describe "GET /events/:id" do
+    before do 
+      @event = Event.create! valid_attributes
+      get "/events/#{@event.to_param}"
+    end
+
+    it "returns a success response (even without authentication)" do
+      expect(response).to be_success
+    end
+  end
+
 end

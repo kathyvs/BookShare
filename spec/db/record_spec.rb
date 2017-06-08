@@ -24,17 +24,17 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
 
   end
   
-  after do
-    TestRecord.delete_all
-  end
-  
   describe "save" do
     
     context "when valid" do
-      before do
+      before(:all) do
         @entity = TestRecord.new
         @entity.value = 100
         @result = @entity.save
+      end
+
+      after(:all) do
+        TestRecord.delete_all
       end
 
       it "returns true" do
@@ -51,7 +51,7 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
     end
     
     context "when invalid" do
-      before do 
+      before(:each) do 
         @entity = TestRecord.new
         @entity.value = -100
         @result = @entity.save
@@ -71,7 +71,7 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
 
   describe "all" do
 
-    before do
+    before(:all) do
       @values = [10, 20, 30]
       @ids = []
       @values.each do |v|
@@ -80,10 +80,54 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
       end
     end
 
+    after(:all) do
+      TestRecord.delete_all
+    end
+
     it "retrieves all entities" do
       entries = TestRecord.all
       expect(entries.map {|e| e.value}).to contain_exactly(*@values)
       expect(entries.map {|e| e.id}).to contain_exactly(*@ids)
     end
   end
+
+  describe "destroy" do
+
+    before(:each) do
+      @entity = TestRecord.create! value: 50
+    end
+
+    it "removes from database" do
+      id = @entity.id
+      @entity.destroy
+      expect(TestRecord.find(id)).to be_nil
+    end
+  end
+
+  describe "find" do
+
+    before(:all) do 
+      @entity = TestRecord.create! value: 3
+    end
+
+    after(:all) do
+      @entity.destroy
+    end
+
+    context "when id matches" do
+
+      it "returns the saved entity" do
+        expect(TestRecord.find(@entity.id).to_json).to eq(@entity.to_json)
+      end
+    end
+
+    context "when id does not match" do
+
+      it "returns nil" do
+        id = @entity.id + 1
+        expect(TestRecord.find(id)).to be_nil
+      end
+    end
+  end
+
 end

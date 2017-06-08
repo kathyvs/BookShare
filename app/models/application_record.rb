@@ -30,6 +30,14 @@ class ApplicationRecord
     results.map {|entity| self.from_entity entity }
   end
 
+  # Returns the entity with the given (integer) id or nil if it is not present
+  def self.find id
+    query    = Google::Cloud::Datastore::Key.new entity_class_name, id.to_i
+    entities = dataset.lookup query
+
+    from_entity entities.first if entities.any?
+  end
+
   def entity_name
     self.class.entity_class_name
   end
@@ -44,12 +52,16 @@ class ApplicationRecord
       false
     end
   end
+
+  def destroy
+    self.class.dataset.delete entity_key
+  end
   
   def persisted? 
     to_key != nil
   end
 
-   #
+  #
   # Used to save to datastore. Subclasses must implement entity_data below.
   #
   def to_entity
@@ -60,6 +72,11 @@ class ApplicationRecord
   end
   
   protected
+
+    def entity_key
+      Google::Cloud::Datastore::Key.new entity_name, id
+    end
+
     def add_entity_data(entity)
       raise "Implement add_entity_data(entity) to add the data to save."
     end
