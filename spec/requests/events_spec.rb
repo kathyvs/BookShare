@@ -14,7 +14,7 @@ RSpec.describe "Events", type: :request do
   describe "GET /events" do
 
     attr_reader :events
-    before(:all) do 
+    before do 
       names = ["First", "Second", "Third"]
       @events = []
       names.each do |n|

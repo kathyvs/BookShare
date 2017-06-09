@@ -2,6 +2,12 @@ class Event < ApplicationRecord
 
   attr_accessor :name, :month
   
+  def month=(month)
+    month = month.mon if month.respond_to? :mon
+    print "Setting month to #{month}"
+    @month = month
+  end
+
   def month_name
     Date::MONTHNAMES[month]
   end
