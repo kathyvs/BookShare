@@ -2,14 +2,16 @@ class Event < ApplicationRecord
 
   attr_accessor :name, :month
   
+  validates_presence_of :name, :month
+  validates_numericality_of :month, only_integer: true, less_than_or_equal_to: 12, greater_than_or_equal_to: 1
+
   def month=(month)
     month = month.mon if month.respond_to? :mon
-    print "Setting month to #{month}"
     @month = month
   end
 
   def month_name
-    Date::MONTHNAMES[month]
+    Date::MONTHNAMES[month.to_i]
   end
 
   protected
