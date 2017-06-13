@@ -28,7 +28,8 @@ class Event < ApplicationRecord
       entity["month"] = month
     end
   
-    def self.from_entity(entity)
-      Event.new id: entity.key.id, name: entity['name'], month: entity['month']
+    def copy_from_entity(entity)
+      self.name = entity['name']
+      self.month = entity['month']
     end
  end
