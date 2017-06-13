@@ -15,11 +15,8 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
       return value > 0
     end
 
-    def self.from_entity entity
-      record = TestRecord.new
-      record.id = entity.key.id
-      record.value = entity['value']
-      record
+    def copy_from_entity entity
+      self.value = entity['value']
     end
 
   end
@@ -180,6 +177,21 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
     end
   end
 
+  describe "reload" do
+
+    before(:all) do
+      @entity1 = TestRecord.create! value: 10
+      @entity2 = TestRecord.find @entity1.id
+    end
+
+    it "reloads to the saved version" do
+      @entity1.update value: 30
+      expect(@entity2.value).to_not be(@entity1.value)
+      @entity2.reload
+      expect(@entity2.value).to be(@entity1.value)
+    end
+  end
+  
   after(:all) do 
     TestRecord.delete_all
   end

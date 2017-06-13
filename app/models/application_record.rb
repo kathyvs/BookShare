@@ -32,10 +32,8 @@ class ApplicationRecord
 
   # Returns the entity with the given (integer) id or nil if it is not present
   def self.find id
-    query    = Google::Cloud::Datastore::Key.new entity_class_name, id.to_i
-    entities = dataset.lookup query
-
-    from_entity entities.first if entities.any?
+    entity = self.lookup id
+    from_entity entity if entity
   end
 
   def entity_name
@@ -77,6 +75,11 @@ class ApplicationRecord
     add_entity_data(entity)
     entity
   end
+
+  def reload
+    entity = self.class.lookup id
+    copy_from_entity(entity)
+  end
   
   protected
 
@@ -86,5 +89,23 @@ class ApplicationRecord
 
     def add_entity_data(entity)
       raise "Implement add_entity_data(entity) to add the data to save."
+    end
+
+    def self.from_entity(entity) 
+      obj = self.new id: entity.key.id
+      obj.copy_from_entity(entity)
+      obj
+    end
+
+    def copy_from_entity(entity)
+      raise "Implement copy_from_entity to copy date from entity to this object"
+    end
+
+  private
+
+    def self.lookup id
+      query  = Google::Cloud::Datastore::Key.new entity_class_name, id.to_i
+      entities = dataset.lookup query
+      entities.first if entities.any?
     end
 end

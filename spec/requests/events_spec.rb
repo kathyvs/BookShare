@@ -155,7 +155,7 @@ RSpec.describe "Events", type: :request do
         end
   
         it "redirects to the event" do
-          put event_path(event.id), params: {id: event.to_param, event: new_attributes}
+          put event_path(@event.id), params: {id: @event.to_param, event: new_attributes}
           expect(response).to redirect_to(@event)
         end
       end
@@ -163,7 +163,7 @@ RSpec.describe "Events", type: :request do
       context "with invalid params" do
         it "returns a success response (i.e. to display the 'edit' template)" do
           event = Event.create! valid_attributes
-          put event_path(event.id), params: {id: event.to_param, event: invalid_attributes}
+          put event_path(@event.id), params: {id: @event.to_param, event: invalid_attributes}
           expect(response).to be_success
         end
       end
