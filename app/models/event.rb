@@ -22,14 +22,15 @@ class Event < ApplicationRecord
     Date::MONTHNAMES[month.to_i]
   end
 
+  def copy_from_entity(entity)
+    self.name = entity['name']
+    self.month = entity['month']
+  end
+
   protected
     def add_entity_data(entity)
       entity["name"] = name
       entity["month"] = month
     end
   
-    def copy_from_entity(entity)
-      self.name = entity['name']
-      self.month = entity['month']
-    end
  end

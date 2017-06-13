@@ -86,7 +86,7 @@ RSpec.describe "Events", type: :request do
 
       before do 
         @event = Event.create! valid_attributes
-        get edit_event_url id: event.to_param
+        get edit_event_url id: @event.to_param
       end
 
       it "returns a success response" do
@@ -163,7 +163,7 @@ RSpec.describe "Events", type: :request do
       context "with invalid params" do
         it "returns a success response (i.e. to display the 'edit' template)" do
           event = Event.create! valid_attributes
-          put event_path(@event.id), params: {id: @event.to_param, event: invalid_attributes}
+          put event_path(event.id), params: {id: event.to_param, event: invalid_attributes}
           expect(response).to be_success
         end
       end
