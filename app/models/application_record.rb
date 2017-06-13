@@ -53,6 +53,13 @@ class ApplicationRecord
     end
   end
 
+  def update attributes
+    attributes.each do |name, value|
+      send "#{name}=", value if respond_to? "#{name}="
+    end
+    save
+  end
+
   def destroy
     self.class.dataset.delete entity_key
   end

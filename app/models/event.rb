@@ -2,9 +2,17 @@ class Event < ApplicationRecord
 
   attr_accessor :name, :month
   
-  validates_presence_of :name, :month
-  validates_numericality_of :month, only_integer: true, less_than_or_equal_to: 12, greater_than_or_equal_to: 1
+  MIN_MONTH = 1
+  MAX_MONTH = 12
 
+  validates_presence_of :name, :month
+  validates_numericality_of :month, only_integer: true, 
+      less_than_or_equal_to: MAX_MONTH, 
+      greater_than_or_equal_to: MIN_MONTH
+
+  def self.all_months
+    return (MIN_MONTH .. MAX_MONTH)
+  end
   def month=(month)
     month = month.mon if month.respond_to? :mon
     @month = month

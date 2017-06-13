@@ -15,10 +15,12 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    @months = Event.all_months.collect {|m| Event.new month: m}
   end
 
   # GET /events/1/edit
   def edit
+    @months = Event.all_months.collect {|m| Event.new month: m}
   end
 
   # POST /events

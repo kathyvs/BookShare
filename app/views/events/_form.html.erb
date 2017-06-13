@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= form.label :month %>
-    <%= form.month_field :month, id: :event_month %>
+    <%= form.select :month, @months.collect {|m| [m.month_name, m.month] } %>
   </div>
 
   <div class="actions">

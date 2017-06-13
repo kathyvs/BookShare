@@ -28,13 +28,10 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
     
     context "when valid" do
       before(:all) do
+        TestRecord.delete_all
         @entity = TestRecord.new
         @entity.value = 100
         @result = @entity.save
-      end
-
-      after(:all) do
-        TestRecord.delete_all
       end
 
       it "returns true" do
@@ -52,6 +49,7 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
     
     context "when invalid" do
       before(:each) do 
+        @original_count= TestRecord.count
         @entity = TestRecord.new
         @entity.value = -100
         @result = @entity.save
@@ -63,7 +61,62 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
 
       it "does not save the entity" do
         expect(@entity.id).to be_nil
-        expect(TestRecord.all).to be_empty
+        expect(TestRecord.count).to eq(@original_count)
+      end
+
+    end
+  end
+
+  describe "update" do
+    
+    context "when valid" do
+
+      def old_value
+        50
+      end
+
+      def new_value
+        51
+      end
+
+      before(:all) do
+        TestRecord.delete_all
+        @entity = TestRecord.new
+        @entity.value = old_value
+        @entity.save
+        @result = @entity.update value: new_value
+      end
+
+      it "returns true" do
+        expect(@result).to be true
+      end
+
+      it "update the value in the database" do
+        entity = TestRecord.find(@entity.id)
+        expect(entity.value).to eq(new_value)
+      end
+    end
+    
+    context "when invalid" do
+
+      def good_value 
+        60
+      end
+
+      before(:all) do 
+        @entity = TestRecord.new
+        @entity.value = good_value
+        @entity.save
+        @result = @entity.update value: -33
+      end
+
+      it "returns false" do
+        expect(@result).to be false
+      end
+
+      it "does not save the entity" do
+        saved_entity = TestRecord.find(@entity.id.to_i)
+        expect(saved_entity.value).to eq(good_value)
       end
 
     end
@@ -72,16 +125,13 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
   describe "all" do
 
     before(:all) do
+      TestRecord.delete_all
       @values = [10, 20, 30]
       @ids = []
       @values.each do |v|
         entry = TestRecord.create! value: v
         @ids << entry.id
       end
-    end
-
-    after(:all) do
-      TestRecord.delete_all
     end
 
     it "retrieves all entities" do
@@ -130,4 +180,7 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
     end
   end
 
+  after(:all) do 
+    TestRecord.delete_all
+  end
 end

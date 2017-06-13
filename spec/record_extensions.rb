@@ -22,4 +22,8 @@ module RecordExtensions
       end
     end
   end
+
+  def count
+    all.length
+  end
 end
