@@ -124,8 +124,7 @@ RSpec.describe "Events", type: :request do
 
       context "with invalid params" do
         it "returns a success response (i.e. to display the 'new' template)" do
-          pending "A valid save method"
-          post events_path, params: {event: valid_attributes}
+          post events_path, params: {event: invalid_attributes}
           expect(response).to be_success
         end
       end
@@ -174,4 +173,27 @@ RSpec.describe "Events", type: :request do
       it "returns a permissions error"
     end
   end
+
+  describe "DELETE #destroy" do
+    context "when authorized" do
+      it "destroys the requested event" do
+        event = Event.create! valid_attributes
+        expect {
+          delete event_path(event.id)
+        }.to change(Event, :count).by(-1)
+      end
+
+      it "redirects to the events list" do
+        event = Event.create! valid_attributes
+        delete event_path(event.id)
+        expect(response).to redirect_to(events_url)
+      end
+    end
+
+    context "when unauthorized" do
+
+      it "returns a permissions error"
+    end
+  end
+
 end
