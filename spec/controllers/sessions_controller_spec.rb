@@ -41,7 +41,7 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it "adds the matching profile into session" do
-        expect(session[:profile]).to eq @profile.id
+        expect(session[:profile_id]).to eq @profile.id
       end
 
       it "redirects to the original url"

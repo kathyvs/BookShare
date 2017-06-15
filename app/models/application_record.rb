@@ -51,6 +51,7 @@ class ApplicationRecord
 
     def run
       results = @record_class.dataset.run @query
+      print "Results are #{results}"
       results.map {|entity| @record_class.from_entity entity }
     end
 
