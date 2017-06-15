@@ -23,11 +23,7 @@ class ApplicationRecord
   end
 
   def self.all
-    query = Google::Cloud::Datastore::Query.new
-    query.kind entity_class_name
-
-    results = dataset.run query
-    results.map {|entity| self.from_entity entity }
+    query.run
   end
 
   # Returns the entity with the given (integer) id or nil if it is not present
@@ -36,6 +32,29 @@ class ApplicationRecord
     from_entity entity if entity
   end
 
+  def self.query
+    Query.new(self)
+  end
+
+  class Query
+
+    def initialize(record_class)
+      @record_class = record_class
+      @query = Google::Cloud::Datastore::Query.new
+      @query.kind @record_class.entity_class_name
+    end
+
+    def where(method, op, value)
+      @query = @query.where(method.to_s, op, value)
+      self
+    end
+
+    def run
+      results = @record_class.dataset.run @query
+      results.map {|entity| @record_class.from_entity entity }
+    end
+
+  end
   def entity_name
     self.class.entity_class_name
   end

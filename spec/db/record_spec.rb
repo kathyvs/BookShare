@@ -191,6 +191,33 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
       expect(@entity2.value).to be(@entity1.value)
     end
   end
+
+  describe "query" do
+
+    before(:all) do
+      TestRecord.delete_all
+      @values = [10, 50, 100, 200]
+      @values.each {|v| TestRecord.create! value: v}
+    end
+
+    it "returns an object that takes where clauses" do
+      query = TestRecord.query
+      expect(query).to respond_to(:where)
+    end
+
+    it "filters on the where clause" do
+      query = TestRecord.query.where(:value, ">=", 80)
+      result = query.run
+      expect(result.collect {|r| r.value}).to contain_exactly(100, 200)
+      result.each do |r|
+        expect(r).to be_an_instance_of(TestRecord)
+      end
+    end
+
+    it "returns an object that takes order clauses"
+
+    it "returns an object that takes projection clauses"
+  end
   
   after(:all) do 
     TestRecord.delete_all

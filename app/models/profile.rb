@@ -1,9 +1,10 @@
 
 class Profile < ApplicationRecord
 
-  attr_accessor :id, :uid, :name
+  attr_accessor :uid, :name
   
-  def Profile.all 
-    []
+  def add_entity_data(entity)
+    entity[:uid] = uid
+    entity[:name] = name
   end
 end
