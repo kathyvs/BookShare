@@ -19,6 +19,7 @@ class FakeDataset
   end
   
   def save entity
+    print "Saving #{entity.key}"
     entity.key.id = next_id unless entity.key.complete?
     datastore(entity.key.kind)[entity.key.id] = entity
   end
@@ -35,7 +36,7 @@ class FakeDataset
   private
   
     def next_id
-      @next_id ||= -1
+      @next_id ||= 10
       @next_id += 1
     end
     

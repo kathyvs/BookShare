@@ -8,7 +8,11 @@ class AuthUser
     @image_url = image_url
   end
   
+  def AuthUser.from_hash(dict)
+    AuthUser.new(dict["uid"], dict["image_url"])
+  end
+
   def AuthUser.from_auth(dict)
-    AuthUser.new(dict[:uid], dict[:image_url])
+    AuthUser.new(dict[:uid], dict[:image])
   end
 end

@@ -15,7 +15,7 @@ class Profile < ApplicationRecord
   end
 
   def copy_from_entity(entity)
-    uid = entity[:uid]
-    name = entity[:name]
+    self.uid = entity[:uid]
+    self.name = entity[:name]
   end
 end

@@ -8,7 +8,7 @@ RSpec.describe SessionsController, type: :controller do
   Profile.extend FakeDataset::WithFakeDataset
 
   let(:auth_environment) {
-    {uid: "12345", image_url: "http://test.com/image12345"}
+    {uid: "12345", image: "http://test.com/image12345"}
   }
 
   describe "POST #create" do
@@ -19,8 +19,9 @@ RSpec.describe SessionsController, type: :controller do
       end
 
       it "puts an AuthUser into session" do
-        user = session[:user]
+        user = Marshal.load session[:user]
         expect(user.uid).to eq auth_environment[:uid]
+        expect(user.image_url).to eq auth_environment[:image]
       end
 
       it "redirects to the creating a profile" do
@@ -32,11 +33,12 @@ RSpec.describe SessionsController, type: :controller do
       before do
         @request.env["omniauth.auth"] = auth_environment
         @profile = Profile.create! uid: auth_environment[:uid], name: "Test"
+        print "Created profile: #{@profile} with id #{@profile.id}\n"
         @response = post :create
       end
 
       it "puts an AuthUser into session" do
-        user = session[:user]
+        user = Marshal.load session[:user]
         expect(user.uid).to eq auth_environment[:uid]
       end
 
