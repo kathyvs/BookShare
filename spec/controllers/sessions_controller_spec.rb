@@ -14,6 +14,7 @@ RSpec.describe SessionsController, type: :controller do
   describe "POST #create" do
     context "with no matching profile" do
       before do
+        Profile.delete_all
         @request.env["omniauth.auth"] = auth_environment
         @response = post :create
       end
@@ -31,9 +32,9 @@ RSpec.describe SessionsController, type: :controller do
     
     context "with matching profile" do
       before do
+        Profile.delete_all
         @request.env["omniauth.auth"] = auth_environment
         @profile = Profile.create! uid: auth_environment[:uid], name: "Test"
-        print "Created profile: #{@profile} with id #{@profile.id}\n"
         @response = post :create
       end
 
@@ -46,7 +47,25 @@ RSpec.describe SessionsController, type: :controller do
         expect(session[:profile_id]).to eq @profile.id
       end
 
-      it "redirects to the original url"
+      it "redirects to the root url" do
+        expect(response).to redirect_to(root_url)
+      end
     end
   end
+
+  describe "POST #destroy" do
+    
+    it "clears session[:user]" do 
+      session[:user] = "Something"
+      delete :destroy
+      expect(session).to_not have_key(:user)
+    end
+
+    it "clears session[:profile_id]" do
+      session[:profile_id] = "Something"
+      delete :destroy
+      expect(session).to_not have_key(:profile_id)
+    end
+  end
+
 end

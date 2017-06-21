@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "events#index"
   resources :events
   resources :profiles
   resources :sessions, only: [:create, :destroy]
@@ -6,5 +7,6 @@ Rails.application.routes.draw do
 
   # These are used for the OpenAuth
   get "/login", to: redirect("/auth/google_oauth2")
+  get "/logout", to: "sessions#destroy"
   get "/auth/google_oauth2/callback", to: "sessions#create"
 end

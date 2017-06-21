@@ -29,8 +29,10 @@ class FakeDataset
     datastore(kind).values
   end
 
-  def delete key
-    datastore(key.kind).delete(key.id)
+  def delete *entities
+    entities.each do |e|
+      datastore(e.key.kind).delete(e.key.id)
+    end
   end
 
   private
