@@ -66,6 +66,11 @@ RSpec.describe SessionsController, type: :controller do
       delete :destroy
       expect(session).to_not have_key(:profile_id)
     end
+
+    it "redirects to root" do
+      delete :destroy
+      expect(response).to redirect_to(root_url)
+    end
   end
 
 end
