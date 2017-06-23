@@ -19,5 +19,6 @@ RSpec.describe "AuthUser", type: :model do
       user = AuthUser.from_auth authinfo
       expect(user.image_url).to eq authinfo[:image]
     end
-  end          
+  end 
+         
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root to: "events#index"
+  resources :books
+  root to: "books#index"
   resources :events
   resources :profiles
   resources :sessions, only: [:create, :destroy]

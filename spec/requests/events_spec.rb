@@ -1,11 +1,16 @@
 require 'rails_helper'
 require 'record_extensions'
 require 'fake_dataset_helper'
+require 'auth_helper'
 
 RSpec.describe "Events", type: :request do
 
   Event.extend RecordExtensions
   Event.extend FakeDataset::WithFakeDataset
+
+  include AuthHelper
+
+  AuthHelper.use_fake_for_profiles
 
   let(:valid_attributes) {
     {name: "Test", month: 06}
@@ -19,6 +24,7 @@ RSpec.describe "Events", type: :request do
 
     attr_reader :events
     before do 
+      Event.delete_all
       names = ["First", "Second", "Third"]
       @events = []
       names.each do |n|
@@ -62,6 +68,14 @@ RSpec.describe "Events", type: :request do
     
     context "when authorized" do
 
+      before do 
+        login_as :admin
+      end
+
+      after do
+        logout
+      end
+
       it "returns a success response" do
         get new_event_path
         expect(response).to be_success
@@ -76,7 +90,20 @@ RSpec.describe "Events", type: :request do
 
     context "when unauthorized" do
 
-      it "returns a permissions error"
+      it "returns a unauthenticated error for no users" do
+        get new_event_path
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns a permissions error for normal users" do
+        login_as :normal
+        get new_event_path
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      after do
+        logout
+      end
     end
   end
 
@@ -85,6 +112,7 @@ RSpec.describe "Events", type: :request do
     context "when authorized" do
 
       before do 
+       Event.delete_all
         @event = Event.create! valid_attributes
         get edit_event_url id: @event.to_param
       end
@@ -195,5 +223,10 @@ RSpec.describe "Events", type: :request do
       it "returns a permissions error"
     end
   end
+
+  after(:all) do 
+    Event.delete_all
+  end
+ 
 
 end

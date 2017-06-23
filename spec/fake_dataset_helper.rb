@@ -19,7 +19,6 @@ class FakeDataset
   end
   
   def save entity
-    print "Saving #{entity.key}"
     entity.key.id = next_id unless entity.key.complete?
     datastore(entity.key.kind)[entity.key.id] = entity
   end
@@ -31,7 +30,8 @@ class FakeDataset
 
   def delete *entities
     entities.each do |e|
-      datastore(e.key.kind).delete(e.key.id)
+      key = (e.respond_to? :key and e.key or e)
+      datastore(key.kind).delete(key.id)
     end
   end
 

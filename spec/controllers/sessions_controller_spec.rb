@@ -12,6 +12,7 @@ RSpec.describe SessionsController, type: :controller do
   }
 
   describe "POST #create" do
+    
     context "with no matching profile" do
       before do
         Profile.delete_all

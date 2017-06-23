@@ -15,6 +15,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    authorize @event
     @months = Event.all_months.collect {|m| Event.new month: m}
   end
 

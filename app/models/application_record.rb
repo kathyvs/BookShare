@@ -51,7 +51,6 @@ class ApplicationRecord
 
     def run
       results = @record_class.dataset.run @query
-      print "Results are #{results}"
       results.map {|entity| @record_class.from_entity entity }
     end
 
@@ -125,7 +124,9 @@ class ApplicationRecord
 
     def self.lookup id
       query  = Google::Cloud::Datastore::Key.new entity_class_name, id.to_i
+      print "Query is #{query}"
       entities = dataset.lookup query
+      puts ", result is #{entities}\n"
       entities.first if entities.any?
     end
 end

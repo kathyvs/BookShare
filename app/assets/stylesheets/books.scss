@@ -1,0 +1,41 @@
+// Place all the styles related to the Books controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#actions label {
+  display: inline;
+}
+
+#priority_books td.description {
+    width: 70%;
+}
+
+td.description {
+    width: 80%;
+
+    th {
+	text-align: left
+    }
+}
+
+td.actions {
+    min-width: 3.5em;
+}
+
+.short_name {
+    display: block;
+}
+
+td.need, td.bringing {
+    text-align: center;
+    width: 10%;
+}
+
+button.add {
+    background: yellowgreen;
+}
+
+button.remove {
+    background: red;
+    color: white;
+}

@@ -1,0 +1,120 @@
+<p id="notice"><%= notice %></p>
+
+<div id="actions">
+  <form id="book_filter">
+  <label for="order">Sort by:</label>
+  <select name="order">
+    <option value="name">Author's Name</option>
+    <option value="title">Title</option>
+    <option value="short">Short name</option>
+  </select>
+  <label for="search"><img src="/search-512.png" alt="search" height="12" width="12"/></label>
+  <input type="text" name="search">
+  </form>
+</div>
+<div id="books">
+  <h2>Current Book Status</h2>
+  <% if current_user.nil? %>
+  <div class="table" id="brought_books">
+    <h3>Books being brought</h3>
+    <table class="book_table">
+      <tr>
+<th class="description">Book</th>
+  <th class="need">Number still needed</th>
+  <th class="bringing">Currently bringing</th>
+      </tr>
+      <tr>
+  <td class="descriptions"> <span class="author">Abramowicz</span> <span class="title">Abramowicz, S&#x0142;ownik Historycznyck Nazw Osobowych Bia&#x0142;ostocczyzny (XV-XVII w.)</span> </td>
+  <td class="need">1</td>
+  <td class="names"></td>
+      </tr>
+      <tr>
+  <td class="descriptions"><span class="author">Adachi</span> <span class="title">Japanese Design Motifs</span>, </td>
+  <td class="need">0</td>
+  <td class="names">Myfanwy</td>
+      </tr>
+     <tr>
+  <td class="descriptions"><span class="author">Appleton, David</span>, <span class="title">The Boke of St. Albans</span> </td>
+  <td class="need">0</td>
+  <td class="names">Elsbeth</td>
+      </tr>
+      <tr>
+  <td class="descriptions"><span class="short_name">Bahlow-Gentry</span> <span class="author">Bahlow</span>, <span class="title">Dictionary of German Names (Edda Gentry translation)</span> </td>
+  <td class="need">2</td>
+  <td class="names"></td>
+      </tr>
+      <tr><td class="descriptions"><span class="author">Denys</span>, The Heraldic Imagination</td>
+      <td class="need">1</td>
+      <td class="names">Elsbeth, Herveus</td></tr>
+    </table>
+  </div>
+  <% else %>
+  <div class="table" id="priority_books">
+    <h3>Bring these books if you can</h3>
+    <!-- Question: is it better to say 0 needed or better to move to a separate list? Try both ways -->
+    
+    <table class="book_table">
+      <tr>
+  <th class="descriptions">Book</th>
+  <th class="need">Number still needed</th>
+  <th class="bringing">Number you are bringing</th>
+   <th class="actions">&nbsp;</th>
+     </tr>
+      <tr>
+  <td class="descriptions"> <span class="author">Abramowicz</span> <span class="title">Abramowicz, S&#x0142;ownik Historycznyck Nazw Osobowych Bia&#x0142;ostocczyzny (XV-XVII w.)</span> </td>
+  <td class="need">1</td>
+  <td class="bringing">0</td>
+  <td class="actions"><button class="add">+</button></td>
+      </tr>
+      <tr>
+  <td class="descriptions"><span class="author">Adachi</span> <span class="title">Japanese Design Motifs</span>, </td>
+  <td class="need">0</td>
+  <td class="bringing">0</td>
+  <td class="actions"><button class="add">+</button></td>
+      </tr>
+       <tr>
+  <td class="descriptions"><span class="short_name">Bahlow-Gentry</span> <span class="author">Bahlow</span>, <span class="title">Dictionary of German Names (Edda Gentry translation)</span> </td>
+  <td class="need">1</td>
+  <td class="bringing">0</td>
+  <td class="actions"><button class="add">+</button></td>
+      </tr>
+     </table>
+  </div>
+  <div class="table" id="optional_books">
+    <h3>Bring these books if you wish and have space</h3>
+    <table class="book_table">
+      <tr>
+  <th class="descriptions">Book</th>
+  <th class="bringing">Number you are bringing</th>
+   <th class="actions">&nbsp;</th>
+      </tr>
+      <tr>
+  <td class="descriptions"><span class="author">Appleton, David</span>, <span class="title">The Boke of St. Albans</span> </td>
+  <td class="bringing">1</td>
+  <td class="actions"><button class="add">+</button><button class="remove">-</button></td>
+      </tr>
+    </table>
+  </div>
+  <div class="table" id="filled_books">
+    <h3>People are currently bringing enough of these books:</h3>
+    <table class="book_table">
+    <tr>
+  <th>Book</th>
+  <th>You are bringing</th>
+  <th>&nbsp;</th>
+      </tr>
+    <tr><td class="descriptions"><span class="author">Denys</span>, The Heraldic Imagination</td>
+      <td class="bringing">1</td>
+      <td class="actions"><button class="add">+</button><button class="remove">-</button></td>
+    </tr>
+  </table>
+  </div>
+  <div class="table" id="banned_books">
+    <h3>Never bring these books</h3>
+    <table class="book_table">
+      <tr><td class="descriptions">MacLysaght, The Surnames of Ireland</td></tr>
+    </table>
+  </div>
+  <%end %>
+</div> <!-- books -->
+</section>
