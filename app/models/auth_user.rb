@@ -15,4 +15,8 @@ class AuthUser
   def AuthUser.from_auth(dict)
     AuthUser.new(dict[:uid], dict[:image])
   end
+  
+  def admin?
+    profile && profile.admin?
+  end
 end

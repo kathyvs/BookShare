@@ -1,5 +1,6 @@
 require 'active_model/conversion'
 require 'active_model'
+require 'active_record/errors'
 require 'google/cloud/datastore'
 
 
@@ -30,6 +31,10 @@ class ApplicationRecord
   def self.find id
     entity = self.lookup id
     from_entity entity if entity
+  end
+
+  def self.find_or_error id
+    self.find(id) or raise ActiveRecord::RecordNotFound.new(model = entity_class_name, id = id)
   end
 
   def self.query

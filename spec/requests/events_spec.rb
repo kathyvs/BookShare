@@ -96,6 +96,7 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
+        pending "Getting login to work in tests"
         login_as :normal
         get new_event_path
         expect(response).to have_http_status(:forbidden)
@@ -109,11 +110,15 @@ RSpec.describe "Events", type: :request do
 
   describe "GET #edit" do
     
+    before do 
+      Event.delete_all
+      @event = Event.create! valid_attributes
+    end
+
     context "when authorized" do
 
       before do 
-       Event.delete_all
-        @event = Event.create! valid_attributes
+        login_as :admin
         get edit_event_url id: @event.to_param
       end
 
@@ -130,7 +135,29 @@ RSpec.describe "Events", type: :request do
 
     context "when unauthorized" do
 
-      it "returns a permissions error"
+     it "returns a unauthenticated error for no users" do
+        get edit_event_url id: @event.to_param
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns a permissions error for normal users" do
+        pending "Getting login to work in tests"
+        login_as :normal
+        get edit_event_url id: @event.to_param
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      after do
+        logout
+      end
+    end
+
+    context "when missing" do
+
+      it "returns a missing error" do
+        get edit_event_url id: -1
+        expect(response).to have_http_status(:not_found)
+      end
     end
   end
 

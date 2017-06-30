@@ -151,7 +151,7 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
     end
   end
 
-  describe "find" do
+  describe "find and find_or_error" do
 
     before(:all) do 
       @entity = TestRecord.create! value: 3
@@ -165,15 +165,22 @@ RSpec.describe "ApplicationRecord", {:type => :model} do
 
       it "returns the saved entity" do
         expect(TestRecord.find(@entity.id).to_json).to eq(@entity.to_json)
+        expect(TestRecord.find_or_error(@entity.id).to_json).to eq(@entity.to_json)
       end
     end
 
     context "when id does not match" do
 
-      it "returns nil" do
+      it "find returns nil" do
         id = @entity.id + 1
         expect(TestRecord.find(id)).to be_nil
       end
+
+      it "find_or_error throws exception" do
+        id = @entity.id + 1
+        expect {TestRecord.find_or_error(id)}.to raise_error
+      end
+
     end
   end
 

@@ -3,6 +3,8 @@ class Profile < ApplicationRecord
 
   attr_accessor :uid, :name, :roles
   
+  validates_presence_of :name
+  
   def initialize attrs
     super attrs
     self.roles ||= []

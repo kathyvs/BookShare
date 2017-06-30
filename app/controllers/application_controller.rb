@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+  
   def user_not_authorized
     if current_user.nil?
       return head(:unauthorized)
