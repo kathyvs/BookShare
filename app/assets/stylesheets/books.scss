@@ -10,6 +10,11 @@
     width: 70%;
 }
 
+td.header {
+    font-weight: bold;
+    padding-top: 0.5em;
+}
+
 td.description {
     width: 80%;
 
@@ -23,7 +28,8 @@ td.actions {
 }
 
 .short_name {
-    display: block;
+    font-weight:bold;
+    font-color: 333;
 }
 
 td.need, td.bringing {
