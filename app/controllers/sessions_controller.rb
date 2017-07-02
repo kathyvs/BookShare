@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
     
     def create
       user_info = request.env["omniauth.auth"]
-      print "Session create for user #{user_info}"
       user = AuthUser.from_auth(user_info)
       session[:user] = Marshal.dump user
       profile = Profile.find_for_user user

@@ -13,6 +13,7 @@ class Event < ApplicationRecord
   def self.all_months
     return (MIN_MONTH .. MAX_MONTH)
   end
+  
   def month=(month)
     month = month.mon if month.respond_to? :mon
     @month = month

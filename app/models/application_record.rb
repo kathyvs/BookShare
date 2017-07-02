@@ -112,7 +112,7 @@ class ApplicationRecord
     end
 
     def add_entity_data(entity)
-      raise "Implement add_entity_data(entity) to add the data to save."
+      raise "Implement #{entity_name}.add_entity_data(entity) to add the data to save."
     end
 
     def self.from_entity(entity) 
@@ -122,16 +122,14 @@ class ApplicationRecord
     end
 
     def copy_from_entity(entity)
-      raise "Implement copy_from_entity to copy date from entity to this object"
+      raise "Implement #{entity_name}.copy_from_entity to copy date from entity to this object"
     end
 
   private
 
     def self.lookup id
       query  = Google::Cloud::Datastore::Key.new entity_class_name, id.to_i
-      print "Query is #{query}"
       entities = dataset.lookup query
-      puts ", result is #{entities}\n"
       entities.first if entities.any?
     end
 end

@@ -16,7 +16,6 @@ class Profile < ApplicationRecord
   end
 
   def admin?
-    puts "profile: #{self.name}"
     roles.include? :admin
   end
 
