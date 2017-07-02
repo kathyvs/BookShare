@@ -96,7 +96,6 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        pending "Getting login to work in tests"
         login_as :normal
         get new_event_path
         expect(response).to have_http_status(:forbidden)
@@ -141,7 +140,6 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        pending "Getting login to work in tests"
         login_as :normal
         get edit_event_url id: @event.to_param
         expect(response).to have_http_status(:forbidden)
@@ -164,6 +162,11 @@ RSpec.describe "Events", type: :request do
   describe "POST #create" do
 
     context "when authorized" do
+
+      before do
+        login_as :admin
+      end
+
       context "with valid params" do
         it "creates a new Event" do
           expect {
@@ -172,7 +175,7 @@ RSpec.describe "Events", type: :request do
         end
 
         it "redirects to the created event" do
-           post events_path, params: {event: valid_attributes}
+          post events_path, params: {event: valid_attributes}
           expect(response).to redirect_to(Event.all.last)
         end
       end
@@ -187,21 +190,40 @@ RSpec.describe "Events", type: :request do
 
     context "when unauthorized" do
 
-      it "returns a permissions error"
+      it "returns a unauthenticated error for no users" do
+        post events_path, params: {event: valid_attributes}
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns a permissions error for normal users" do
+        login_as :normal
+        post events_path, params: {event: valid_attributes}
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      after do
+        logout
+      end
     end
   end
 
   describe "PUT #update" do
+
+    before do 
+      @event = Event.create! valid_attributes
+    end
+  
     context "when authorized" do
+
+      before do
+        login_as :admin
+      end
+
       context "with valid params" do
         let(:new_attributes) {
           {name: "New Name", month: 8}
         }
 
-        before do 
-          @event = Event.create! valid_attributes
-        end
-  
         it "updates the requested event" do
           put event_path(@event.id), params: {id: @event.to_param, event: new_attributes}
           @event.reload
@@ -225,29 +247,69 @@ RSpec.describe "Events", type: :request do
     
     context "when unauthorized" do
 
-      it "returns a permissions error"
+      it "returns a unauthenticated error for no users" do
+        put event_path(@event.id), params: {id: @event.to_param, event: valid_attributes}
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns a permissions error for normal users" do
+        login_as :normal
+        put event_path(@event.id), params: {id: @event.to_param, event: valid_attributes}
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      after do
+        logout
+      end
     end
+
+    after do
+      @event.destroy if @event
+    end
+
   end
 
   describe "DELETE #destroy" do
+
+    before do
+      @event = Event.create! valid_attributes
+    end
+
     context "when authorized" do
+
+      before do
+        login_as :admin
+      end
+
       it "destroys the requested event" do
-        event = Event.create! valid_attributes
         expect {
-          delete event_path(event.id)
+          delete event_path(@event.id)
         }.to change(Event, :count).by(-1)
       end
 
       it "redirects to the events list" do
-        event = Event.create! valid_attributes
-        delete event_path(event.id)
+        delete event_path(@event.id)
         expect(response).to redirect_to(events_url)
       end
     end
 
     context "when unauthorized" do
 
-      it "returns a permissions error"
+      it "returns a unauthenticated error for no users" do
+        delete event_path(@event.id)
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it "returns a permissions error for normal users" do
+        login_as :normal
+        delete event_path(@event.id)
+        expect(response).to have_http_status(:forbidden)
+      end
+
+      after do
+        logout
+        @event.destroy
+      end
     end
   end
 

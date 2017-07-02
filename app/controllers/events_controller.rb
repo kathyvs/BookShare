@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
-  before_action :auth, except: [:index, :show]
   # GET /events
   # GET /events.json
   def index
@@ -15,11 +14,13 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    authorize @event
     @months = Event.all_months.collect {|m| Event.new month: m}
   end
 
   # GET /events/1/edit
   def edit
+    authorize @event
     @months = Event.all_months.collect {|m| Event.new month: m}
   end
 
@@ -27,7 +28,7 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
+    authorize @event
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -43,6 +44,7 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    authorize @event
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
@@ -58,6 +60,7 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    authorize @event
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
@@ -69,10 +72,6 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find_or_error(params[:id])
-    end
-
-    def auth
-      authorize Event.new
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

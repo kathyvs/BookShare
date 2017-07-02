@@ -11,8 +11,8 @@ module AuthHelper
 
   def login_as user_name
     logout
-    print "**Request auth = #{@request.env['omniauth.auth']}"
-    get auth_google_oauth2_callback_url, env: { "omniauth.auth" => user_for(user_name), test: "Test" }
+    setup_user(user_name)
+    get auth_google_oauth2_callback_url, env: { "omniauth.auth" => OmniAuth.config.mock_auth[:default]}
   end
 
   def logout
@@ -21,26 +21,22 @@ module AuthHelper
 
   private 
 
-    def user_for user_name
+    def setup_user(user_name)
       Profile.delete_all
+      create_profile(user_name)
+    end
+
+    def profile_for user_name
       @users ||= {
-        admin: create_user(:admin, uid: ADMIN_UID, name: "Admin User", image: "http://admin.test.com", roles: [:admin]),
-        normal: create_user(:normal, uid: NORM_UID, name: "Normal User", image: "http://norma.test.com", roles: [])
+        admin: {name: "Admin User", roles: [:admin]},
+        normal: {name: "Normal User", roles: []}
       }
       return @users[user_name]  
     end
 
-    def create_user(key, attrs)
-      user = AuthUser.new attrs[:uid], attrs[:image]
-      OmniAuth.config.add_mock(key, {
-        :uid => user.uid,
-        :info => {
-          :name => key.to_s,
-          :image => user.image_url
-        }
-      })
-      profile = Profile.create! uid: attrs[:uid], name: attrs[:name], roles: attrs[:roles]
-      user.profile = profile
-      return OmniAuth.config.mock_auth[key]
+    def create_profile(key)
+      auth = OmniAuth.config.mock_auth[:default]
+      attrs = profile_for(key)
+      profile = Profile.create! uid: auth[:uid], name: attrs[:name], roles: attrs[:roles]
     end
 end

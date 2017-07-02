@@ -9,6 +9,10 @@ module UserHelper
     end
     @current_user
   end
+  
+  def admin?
+    current_user && current_user.admin?
+  end
 
   def logged_in?
     session.has_key? :user

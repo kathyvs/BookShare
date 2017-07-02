@@ -7,9 +7,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    return head(:not_found)
   end
   
   def user_not_authorized

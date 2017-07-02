@@ -1,6 +1,18 @@
 class EventPolicy < ApplicationPolicy
 
-  def new?
-    user and user.profile.admin?
+  def create?
+    admin?
+  end
+
+  def update?
+    admin?
+  end
+
+  def destroy?
+    admin?
+  end
+
+  def admin?
+    user and user.admin?
   end
 end
