@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
-  resources :books
-  root to: "books#index"
+  root to: "assignments#index"
+  
   resources :events do
     get "/:year/assignments", to: "assignments#index", as: :assignments
   end
+  
   resources :profiles
+  
   resources :sessions, only: [:create, :destroy]
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlrails
 
   # Assignments are all per event and year (and sometimes profile id)

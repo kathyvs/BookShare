@@ -3,9 +3,10 @@ class AssignmentsController < ApplicationController
 
   # GET /event/3/2017/assignments
   # GET /event/3/2017/assignments.json
+  # GET /
   def index
-    @event_id = params[:event_id].to_i
-    @year = params[:year].to_i
+    @event_id = params.has_key?(:event_id?) ? params[:event_id].to_i : Event.current.id
+    @year = params.has_key?(:year) ? params[:year].to_i : Date.today.year
     @books = Book.all
     @assignments = Assignment.all_for @event_id, @year
   end
