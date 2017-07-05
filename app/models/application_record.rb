@@ -58,7 +58,10 @@ class ApplicationRecord
       results = @record_class.dataset.run @query
       results.map {|entity| @record_class.from_entity entity }
     end
-
+    
+    def to_s
+      "#{@record_class} query #{@query}"
+    end
   end
   def entity_name
     self.class.entity_class_name
@@ -105,6 +108,10 @@ class ApplicationRecord
     copy_from_entity(entity)
   end
   
+  def copy_from_entity(entity)
+    raise "Implement #{entity_name}.copy_from_entity to copy date from entity to this object"
+  end
+
   protected
 
     def entity_key
@@ -119,10 +126,6 @@ class ApplicationRecord
       obj = self.new id: entity.key.id
       obj.copy_from_entity(entity)
       obj
-    end
-
-    def copy_from_entity(entity)
-      raise "Implement #{entity_name}.copy_from_entity to copy date from entity to this object"
     end
 
   private

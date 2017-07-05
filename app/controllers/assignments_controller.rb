@@ -1,10 +1,13 @@
 class AssignmentsController < ApplicationController
   before_action :set_assignment, only: [:show, :edit, :update, :destroy]
 
-  # GET /assignments
-  # GET /assignments.json
+  # GET /event/3/2017/assignments
+  # GET /event/3/2017/assignments.json
   def index
-    @assignments = Assignment.all
+    @event_id = params[:event_id].to_i
+    @year = params[:year].to_i
+    @books = Book.all
+    @assignments = Assignment.all_for @event_id, @year
   end
 
   # GET /assignments/1

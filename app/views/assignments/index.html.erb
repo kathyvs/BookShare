@@ -1,25 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Assignments</h1>
-
-<table>
-  <thead>
+<div id="books">
+  <h2>Current Book Assignments for <%= @year %></h1>
+  <div class="table">
+    <table class="book_table">
     <tr>
-      <th colspan="3"></th>
+      <th class="description">Book</th>
+      <th class="need">Number still needed</th>
+      <th class="bringing">Currently bringing</th>
     </tr>
-  </thead>
-
-  <tbody>
-    <% @assignments.each do |assignment| %>
-      <tr>
-        <td><%= link_to 'Show', assignment %></td>
-        <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
-        <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Assignment', new_assignment_path %>
+    <%= render partial: "book", collection: @books, general: true %>
+    </table>
+  </div> <!-- table -->

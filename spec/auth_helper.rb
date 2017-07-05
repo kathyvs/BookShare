@@ -21,9 +21,7 @@ module AuthHelper
 
   def profile_for user_sym
     user_name = profile_data_for(user_sym)[:name]
-    query = Profile.query.where("name", "=", user_name)
-    result = query.run
-    print "Profile query result: #{result}"
+    result = Profile.all.select {|p| p.name == user_name}
     if (result.empty?)
       create_profile(user_sym)
     else
