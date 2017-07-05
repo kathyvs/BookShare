@@ -6,7 +6,6 @@ require 'auth_helper'
 RSpec.describe "Assignments", type: :request do
 
   Assignment.extend RecordExtensions
-  Assignment.extend FakeDataset::WithFakeDataset
   Book.extend RecordExtensions
   Book.extend FakeDataset::WithFakeDataset
   Event.extend RecordExtensions
@@ -25,6 +24,12 @@ RSpec.describe "Assignments", type: :request do
       number = c + 1
       @books << Book.create!(title: "Book #{number}", author: "Author #{number}")
     end
+  end
+
+  after(:all) do
+    Assignment.delete_all
+    Event.delete_all
+    Book.delete_all
   end
 
   def book_id(number)
@@ -68,30 +73,72 @@ RSpec.describe "Assignments", type: :request do
           @assignments << a if e.id == event.id && y == year
         end
       end
-      get event_assignments_path(event, year)
     end
 
-    it "succeeds (even without authentication)" do
-      expect(response).to have_http_status(200)
-    end
+    context "with no profile parameter" do
 
-    it "displays all books" do
-      books.each do |b|
-        expect(response.body).to include(b.title)
+      before(:all) do
+        get event_assignments_path event.id, year
+      end
+      
+      it "succeeds (even without authentication)" do
+        expect(response).to have_http_status(200)
+      end
+  
+      it "displays all books" do
+        books.each do |b|
+          expect(response.body).to include(b.title)
+        end
+      end
+  
+      it "displays name for everyone with an assignment for this event" do
+        [:normal, :other].each do |s|
+          expect(response.body).to include(profile_for(s).name)
+        end
+      end
+  
+      it "displays the count when the count is not 1" do
+        [143, 152, 153].each do |c|
+          expect(response.body).to include(c.to_s)
+        end
+      end
+  
+      it "does not display assignments for other events" do
+        expect(response.body).to_not include("100")
+      end
+  
+      context "with no authentication" do
+  
+        it "contains no assignment links"
+      end
+  
+      context "with normal authorization" do
+  
+        before do
+          login_as :normal
+        end
+  
+        it "contains a link to the user's assignments"
       end
     end
+    context "with profile parameter" 
+    
 
-    it "displays name for everyone with an assignment for this event" do
-      [:normal, :other].each do |s|
-        expect(response.body).to include(profile_for(s).name)
-      end
+  end
+
+  describe "GET assignments/:assignment_id" do
+
+    attr_reader :assignment, :year
+
+    before(:all) do 
+      Assignment.delete_all
+      @year = 2016
+      bringing = {book_id(1) => 1, book_id(3) => 2}
+      pid = profile_for(:normal).id
+      @assignment = Assignment.create! event_id: e.id, year: y, profile_id: pid, bringing: bringing
+      #get event_assignments_path(event, year, profile_id)
     end
 
-    it "displays the count when the count is not 1" do
-      [143, 152, 153].each do |c|
-        expect(response.body).to include(c.to_s)
-      end
-    end
 
   end
 end

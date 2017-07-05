@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   resources :events do
     get "/:year/assignments", to: "assignments#index", as: :assignments
+    get "/:year/assignments/id", to: "assignments#show", as: :user_assignments
   end
   
   resources :profiles
