@@ -6,9 +6,11 @@ class SessionsController < ApplicationController
       session[:user] = Marshal.dump user
       profile = Profile.find_for_user user
       if profile
+        print profile.name
         session[:profile_id] = profile.id
         redirect_to root_path
       else
+        print "<no profile found>"
         session.delete :profile_id
         redirect_to new_profile_path
       end

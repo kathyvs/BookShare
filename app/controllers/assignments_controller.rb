@@ -9,11 +9,13 @@ class AssignmentsController < ApplicationController
     @year = params.has_key?(:year) ? params[:year].to_i : Date.today.year
     @books = Book.all
     @assignments = Assignment.all_for @event_id, @year
+    print "Assignments = #{@assignments}"
   end
 
   # GET /assignments/1
   # GET /assignments/1.json
   def show
+    redirect_to root_path unless current_user
   end
 
   # GET /assignments/new

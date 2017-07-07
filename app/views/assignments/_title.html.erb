@@ -1,0 +1,7 @@
+<% if book.has_author? %>
+<span class="author"><%= book.author %></span>, 
+<% end %>
+<span class="title"><%= book.title %></span>
+<% if book.has_short_name? %>
+[<span class="short_name"><%= book.short_name%></span>]
+<% end %>

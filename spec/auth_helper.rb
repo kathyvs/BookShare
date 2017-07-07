@@ -6,9 +6,17 @@ module AuthHelper
   Profile.extend RecordExtensions
 
   def self.use_fake_for_profiles
-    Profile.extend FakeDataset::WithFakeDataset
+#    Profile.extend FakeDataset::WithFakeDataset
+#    Profile.extend UidSearch
+    Profile.delete_all
   end
 
+  def set_session_as profile
+    user = AuthUser.new profile.uid, "test.ignore"
+    user.profile = profile
+    session[:user] = Marshal.dump user
+  end
+    
   def login_as user_sym
     logout
     setup_user(user_sym)
@@ -32,8 +40,20 @@ module AuthHelper
   private 
 
     def setup_user(user_sym)
-      Profile.delete_all
-      create_profile(user_sym)
+      profile = profile_for(user_sym)
+      auth = OmniAuth.config.mock_auth[:default]
+      Profile.all.each do |p|
+        p.uid = "1"
+        result = p.save
+      end
+      profile.uid = auth[:uid]
+      profile.save
+    end
+
+    def profile_uids
+      Profile.all.map do |p|
+        "<#{p.name}: #{p.uid}>"
+      end
     end
 
     def profile_data_for user_sym
@@ -45,9 +65,8 @@ module AuthHelper
       return @users[user_sym]  
     end
 
-  def create_profile(user_sym)
-      auth = OmniAuth.config.mock_auth[:default]
+    def create_profile(user_sym)
       attrs = profile_data_for(user_sym)
-      Profile.create! uid: auth[:uid], name: attrs[:name], roles: attrs[:roles]
+      Profile.create! uid: "1", name: attrs[:name], roles: attrs[:roles]
     end
 end

@@ -10,7 +10,7 @@ RSpec.describe "Events", type: :request do
 
   include AuthHelper
 
-  AuthHelper.use_fake_for_profiles
+  #AuthHelper.use_fake_for_profiles
 
   let(:valid_attributes) {
     {name: "Test", month: 06}

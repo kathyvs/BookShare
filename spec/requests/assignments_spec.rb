@@ -7,7 +7,6 @@ RSpec.describe "Assignments", type: :request do
 
   Assignment.extend RecordExtensions
   Book.extend RecordExtensions
-  Book.extend FakeDataset::WithFakeDataset
   Event.extend RecordExtensions
   Event.extend FakeDataset::WithFakeDataset
 
@@ -80,7 +79,7 @@ RSpec.describe "Assignments", type: :request do
       before(:all) do
         get event_assignments_path event.id, year
       end
-      
+
       it "succeeds (even without authentication)" do
         expect(response).to have_http_status(200)
       end
@@ -109,7 +108,10 @@ RSpec.describe "Assignments", type: :request do
   
       context "with no authentication" do
   
-        it "contains no assignment links"
+        it "contains no assignment links" do
+          pattern = Regexp.new(".*#{event_user_assignments_path('.*', '.*', '.*')}.*")
+          expect(response.body).to_not match(pattern)
+        end
       end
   
       context "with normal authorization" do
@@ -118,7 +120,18 @@ RSpec.describe "Assignments", type: :request do
           login_as :normal
         end
   
-        it "contains a link to the user's assignments"
+        it "contains a link to only the user's assignments" do
+          get event_assignments_path event.id, year
+          pid = profile_for(:normal).id
+          assignments.each do |a|
+            pattern = Regexp.new(".*#{event_user_assignments_path(event.id, year, a.id)}.*")
+            if (a.profile_id == pid)
+              expect(response.body).to match(pattern)
+            else 
+              expect(response.body).to_not match(pattern)
+            end
+          end
+        end
       end
     end
     context "with profile parameter" 
@@ -135,10 +148,16 @@ RSpec.describe "Assignments", type: :request do
       @year = 2016
       bringing = {book_id(1) => 1, book_id(3) => 2}
       pid = profile_for(:normal).id
-      @assignment = Assignment.create! event_id: e.id, year: y, profile_id: pid, bringing: bringing
-      #get event_assignments_path(event, year, profile_id)
+      @assignment = Assignment.create! event_id: event.id, year: year, profile_id: pid, bringing: bringing
+      get event_user_assignments_path(event.id, year, assignment.id)
     end
 
+    context "with no authentication" do
 
+      it "redirects to root" do
+        expect(response).to redirect_to(root_path)
+      end
+
+    end
   end
 end

@@ -1,5 +1,6 @@
 require 'pundit'
 require 'user_helper'
+#require 'active_record/errors'
 
 class ApplicationController < ActionController::Base
   include Pundit
@@ -7,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  #rescue_from ActiveRecord::RecordNotFound, with: :not_found
   
   def not_found
     return head(:not_found)
@@ -20,4 +21,5 @@ class ApplicationController < ActionController::Base
       return head(:forbidden)
     end
   end
+  
 end

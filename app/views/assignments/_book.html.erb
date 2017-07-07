@@ -1,0 +1,9 @@
+    <tr class="<%= book_counter.even? ? 'even' : 'odd' %>">
+      <td class="description"><%= render partial: 'title', locals: {book: book} %></td>
+      <td class="need"></td>
+      <td class="bringing"><%= render partial: 'named_assignment', 
+                                      collection: select_for_book(book, @assignments),
+                                      as: :assignment,
+                                      locals: {book: book},
+                                      spacer_template: 'shared/comma'%></td>
+    </tr>

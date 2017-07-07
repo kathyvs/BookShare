@@ -25,6 +25,7 @@ class FakeDataset
 
   def run query
     kind = query.to_grpc.kind[0]["name"]
+    print "Warning: running fake query does not work\n"
     datastore(kind).values
   end
 

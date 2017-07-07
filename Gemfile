@@ -48,6 +48,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'rspec', '>= 3.6.0'
   gem 'rspec-rails'
+  gem 'teaspoon-jasmine'
 end
 
 group :development do

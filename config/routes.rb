@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root to: "assignments#index"
   
   resources :events do
+    # Assignments are all per event and year
+
     get "/:year/assignments", to: "assignments#index", as: :assignments
-    get "/:year/assignments/id", to: "assignments#show", as: :user_assignments
+    get "/:year/assignments/:id", to: "assignments#show", as: :user_assignments
   end
   
   resources :profiles
@@ -12,7 +14,6 @@ Rails.application.routes.draw do
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlrails
 
-  # Assignments are all per event and year (and sometimes profile id)
   
   
   # These are used for the OpenAuth
