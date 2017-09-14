@@ -9,6 +9,7 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    return not_found unless @event.present?
   end
 
   # GET /events/new
@@ -20,6 +21,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    return not_found unless @event.present?
     authorize @event
     @months = Event.all_months.collect {|m| Event.new month: m}
   end
@@ -71,7 +73,7 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find_or_error(params[:id])
+      @event = Event.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
