@@ -9,22 +9,13 @@ body {
   color: $dark-text-color;
   margin: $outer-margin;
   font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 0.85em;
+  font-size: 1.2em;
   line-height: 1.5em;
 }
 
-$banner-height: 5em;
 #banner {
   background-color: $dark-color;
   color: $light-color;
-  width: 100%;
-  display: block;
-  position: relative;
-  h1 {
-    padding: 0 1em;
-    margin: 0;
-    line-height: ($banner-height / 2) + 1em;
-  }
   a {
     color: $light-link-color;
     
@@ -37,12 +28,6 @@ $banner-height: 5em;
       background-color: $dark-color;
     }
   }
-}
-
-#user {
-  position: absolute;
-  right: 1em;
-  top: 0;
 }
 
 p, ol, ul, td {

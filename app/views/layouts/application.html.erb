@@ -4,24 +4,43 @@
     <title>Book Share</title>
     <%= csrf_meta_tags %>
 
+<!-- Bootstrap core CSS -->
+    <%= stylesheet_link_tag 'bootstrap.min', media: 'all', 'data-turbolinks-track': 'reload' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <section id="banner">
-      <div id="user">
-        <% if current_user %>
-          <p><%= current_user.profile.name %></p>
-          <p><%= link_to "Logout", logout_path %></p>
-        <% else %>
-          <p><%= link_to "Log In", login_path %></p>
-        <% end %>
+    <header class="navbar navbar-expand-md navbar-dark bg-primary" id="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">&lt;TBD&gt; Book Share</a>
+        </div>
+        <div id="navbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+          </ul>
+          <ul class="nav navbar-nav pull-right">
+            <% if current_user %>
+              <li><%= current_user.profile.name %></li>
+              <li><%= button_link_to "Logout", logout_path %></li>
+            <% else %>
+              <li><%= link_to "Log In", login_path, :class => 'btn' %></li>
+            <% end %>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div> 
-      <h1>Pennsic Book Share</h1>
-    </section>
-    <section id="main">
-      <%= yield %>
-    </section>
-  </body>
+    </div>
+  </header>
+  <main id="content">
+    <%= yield %>
+  </main>
+</body>
 </html>
