@@ -1,22 +1,22 @@
 class AuthUser
   
-  attr_reader :uid, :image_url
-  attr_accessor :profile
+  include Mongoid::Document
   
-  def initialize(uid, image_url)
-    @uid = uid
-    @image_url = image_url
-  end
+  attr_accessor :current_profile
+  
+  field :uid, type: String
+  field :image_url, type: String
+  embeds_many :profiles
   
   def AuthUser.from_hash(dict)
-    AuthUser.new(dict["uid"], dict["image_url"])
+    AuthUser.new(uid: dict["uid"], image_url: dict["image_url"])
   end
 
   def AuthUser.from_auth(dict)
-    AuthUser.new(dict[:uid], dict[:image])
+    AuthUser.new(uid: dict[:uid], image_url: dict[:image])
   end
   
   def admin?
-    profile && profile.admin?
+    current_profile && current_profile.admin?
   end
 end

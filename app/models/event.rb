@@ -1,6 +1,9 @@
-class Event < ApplicationRecord
+class Event 
+  
+  include Mongoid::Document
 
-  attr_accessor :name, :month
+  field :name, type: String
+  field :month, type: Integer
   
   MIN_MONTH = 1
   MAX_MONTH = 12
@@ -21,22 +24,10 @@ class Event < ApplicationRecord
   
   def month=(month)
     month = month.mon if month.respond_to? :mon
-    @month = month
+    write_attribute(:month, month)
   end
 
   def month_name
     Date::MONTHNAMES[month.to_i]
   end
-
-  def copy_from_entity(entity)
-    self.name = entity['name']
-    self.month = entity['month']
-  end
-
-  protected
-    def add_entity_data(entity)
-      entity["name"] = name
-      entity["month"] = month
-    end
-  
- end
+end

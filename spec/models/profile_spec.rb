@@ -3,7 +3,14 @@ require 'rails_helper'
 #require 'fake_dataset_helper'
 
 RSpec.describe "Profile", type: :model do
-  
+
+  context "persistence" do
+    
+    it "is persisted by Mongoid" do
+      expect(Profile).to be_mongoid_document
+    end
+  end
+   
   context "when initializing" do
 
     let(:valid_attributes) {

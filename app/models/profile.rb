@@ -1,5 +1,7 @@
 
-class Profile < ApplicationRecord
+class Profile
+  
+  include Mongoid::Document
 
   attr_accessor :uid, :name, :roles
   

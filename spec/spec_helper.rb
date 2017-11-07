@@ -18,6 +18,7 @@ ENV["RAILS_ENV"] ||= "test"
 ENV["DATASTORE_EMULATOR_HOST"] = ENV["TEST_HOST"] || "localhost:8081"
 
 require 'omniauth'
+require 'mongoid-rspec'
 
 OmniAuth.config.test_mode = true
 
@@ -101,4 +102,5 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 
+  config.include Mongoid::Matchers
 end

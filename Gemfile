@@ -8,9 +8,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.0'
-# Using Google Cloud for the database
-gem "google-cloud"
-# Using Google Auth for authentication
+# Using Mongodb and Mongoid for the database
+gem "mongoid"
+# Using Devise for authentication
+gem "devise"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 
@@ -30,6 +31,8 @@ gem 'bootstrap'
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
+
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -47,11 +50,19 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13.0'
+  gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
   gem 'selenium-webdriver'
+#  gem 'cucumber-rails', '~> 1.5'
+  gem 'factory_bot_rails'
   gem 'rspec', '>= 3.6.0'
   gem 'rspec-rails'
   gem 'teaspoon-jasmine'
+end
+
+group :test do 
+  gem 'capybara', '~> 2.14'
+  gem 'mongoid-rspec', git: 'https://github.com/mongoid-rspec/mongoid-rspec.git'
+  gem 'email_spec', '~> 2.1'
 end
 
 group :development do

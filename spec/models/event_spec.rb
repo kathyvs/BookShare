@@ -4,6 +4,13 @@ require 'rails_helper'
 
 RSpec.describe "Event", type: :model do
   
+  context "persistence" do
+    
+    it "is persisted by Mongoid" do
+      expect(Event).to be_mongoid_document
+    end
+    
+  end
   context "when initializing" do
 
     let(:valid_attributes) {
