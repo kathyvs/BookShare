@@ -7,7 +7,6 @@ require 'support/factory_bot'
 RSpec.describe "Profile", type: :model do
 
   context "persistence" do
-    
     it "is persisted by Mongoid" do
       expect(Profile).to be_mongoid_document
     end

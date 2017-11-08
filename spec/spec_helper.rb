@@ -14,7 +14,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-ENV["RAILS_ENV"] ||= "test"
+ENV["RAILS_ENV"] = "test"
 ENV["DATASTORE_EMULATOR_HOST"] = ENV["TEST_HOST"] || "localhost:8081"
 
 require 'omniauth'
@@ -104,3 +104,6 @@ RSpec.configure do |config|
 
   config.include Mongoid::Matchers
 end
+
+Mongoid.load!(File.expand_path('mongoid.yml', './config'))
+  
