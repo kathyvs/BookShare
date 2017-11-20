@@ -59,7 +59,17 @@ RSpec.describe Assignment, type: :model do
         end
       end
       
-      it "is limited to given year"
+      it "is limited to given year" do
+        years.each do |y|
+          events.each do |event|
+            a = event.assignments.for_year(y)
+            a.each do |a|
+              expect(a.year).to eq(y)
+            end
+            expect(a.to_a).to_not be_empty
+          end
+        end
+      end
     end
   end
 
