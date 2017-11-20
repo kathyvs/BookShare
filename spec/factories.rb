@@ -1,16 +1,26 @@
 FactoryBot.define do
   
   factory :user, class: AuthUser do
-    uid "user-id"
-    image_url "http://test.com"
+    email "user@test.kathyvs.net"
+    password "user-password"
+    image_url "http://test.kathyvs.net/user"
+#    association :profiles, factory: profile
   end
-  factory :profile do
+  factory :admin_user, class: AuthUser do
+    email "admin@test.kathyvs.net"
+    password "admin-password"
+#    association :profiles, factory: admin
+  end
+  factory :profile, class: Profile do
     name "Test"
+    association :user, factory: :user, strategy: :build
   end
   factory :admin, class: Profile do
     name "Admin"
     roles [:admin]
+    association :user, factory: :admin_user, strategy: :build
   end
+  
   factory :january_event, class: Event do
     name "January Event"
     month 1
@@ -26,8 +36,25 @@ FactoryBot.define do
   factory :assignment do
     
   end
-  factory :book do
-    
+  factory :parker, class: Book do
+    author "Parker, James"
+    title "A Glossary of Terms Used in Heraldry"
+    type :armory
   end
-  # factories will go here
+  factory :bahlow, class: Book do
+    author "Bahlow, Hans and Edda Gentry"
+    title "Dictionary of German Names"
+    type :name
+  end
+  factory :ssno, class: Book do
+    author "Taszycki, Witold"
+    title "S\u0142ownik Staropolskich Nazw Osobowych"
+    volume 1  
+    type :name
+  end
+  factory :ncmj, class: Book do 
+    author "Sólveig Þróndardóttir"
+    title "Name Construction in Medieval Japan"
+    type :name
+  end
 end

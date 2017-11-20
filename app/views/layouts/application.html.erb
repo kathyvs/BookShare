@@ -30,9 +30,9 @@
           <ul class="nav navbar-nav pull-right">
             <% if current_user %>
               <li><%= current_user.profile.name %></li>
-              <li><%= button_link_to "Logout", logout_path %></li>
+              <li><%= button_link_to "Logout", destroy_auth_user_session_path %></li>
             <% else %>
-              <li><%= link_to "Log In", login_path, :class => 'btn' %></li>
+              <li><%= link_to "Log In", new_auth_user_session_path, :class => 'btn' %></li>
             <% end %>
           </ul>
         </div><!--/.nav-collapse -->

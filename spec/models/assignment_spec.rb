@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/factory_bot'
+require 'support/database_cleaner'
 
 RSpec.describe Assignment, type: :model do
   context "persistence" do
@@ -19,29 +19,47 @@ RSpec.describe Assignment, type: :model do
     }
     
     let(:profiles) {
-      [create(:user), create(:admin)]
+      [create(:profile), create(:admin)]
     }
-    context "all_for" do
+    
+    let(:years) {
+      [2015, 2016, 2017, 2018]
+    }
+    
+    context "assignments.for_year" do
       
-#      before do
-#        @assignments = {}
-#        events.each do |e|
-#          @assignments[e.name] = {}
-#          books.each do |b|
-#            @assigments[e.name][b.title] = {}
-#            profiles.each do |p|
-#              @assignments[e.name][b.title][p.name] = []
-#              assignment = Assignment.new(book: book, event: event, profile: profile, count: rand(10))
-#              @assignments[e.name][b.title][p.name] << assignment
-#            end
-#          end
-#        end
-#      end
-      it "uses event in query" do
-        expect(events).to eq(3)
+      before do
+        @assignments = {}
+        events.each do |e|
+          @assignments[e.name] = {}
+          books.each do |b|
+            @assignments[e.name][b.title] = {}
+            profiles.each do |p|
+              @assignments[e.name][b.title][p.name] = {}
+              years.each do |y|
+                assignment = Assignment.new(book: b, event: e, year: y, profile: p, count: rand(10))
+                assignment.save!
+                @assignments[e.name][b.title][p.name][y] ||= []
+                @assignments[e.name][b.title][p.name][y] << assignment
+              end
+            end
+          end
+        end
       end
       
-      it "uses year in query"
+      it "is limited to source event" do
+        events.each do |event|
+          years.each do |y|
+            a = event.assignments.for_year(y)
+            a.each do |a|
+              expect(a.event).to eq(event)
+            end
+            expect(a.to_a).to_not be_empty
+          end
+        end
+      end
+      
+      it "is limited to given year"
     end
   end
 

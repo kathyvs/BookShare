@@ -14,7 +14,10 @@ gem "mongoid"
 # Using Devise for authentication
 gem "devise"
 gem "omniauth"
-gem "omniauth-google-oauth2"
+#gem "omniauth-google_oauth2"
+
+#gem "omniauth-amazon"
+#gem "omniauth-facebook"
 
 # Use Puma as the app server
 gem 'puma', '~> 3.7'

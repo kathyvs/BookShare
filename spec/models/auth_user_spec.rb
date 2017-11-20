@@ -1,6 +1,5 @@
 require 'rails_helper'
-#require 'record_extensions'
-#require 'fake_dataset_helper'
+require 'support/database_cleaner'
 
 RSpec.describe "AuthUser", type: :model do
   
@@ -14,35 +13,65 @@ RSpec.describe "AuthUser", type: :model do
   context "when pulling from auth info" do
 
     let(:authinfo) {
-      {uid: "12345", image: "https://test.com"}
+      {uid: "12345", email: "test@test.com", image: "https://test.com"}
     }
 
-    it "copies uid" do
+    it "copies email" do
       user = AuthUser.from_auth authinfo
-      expect(user.uid).to eq authinfo[:uid]
+      expect(user.email).to eq(authinfo[:email])
     end
 
-    it "copies image_url from image" do
+    it "copies image_url from image if exists" do
       user = AuthUser.from_auth authinfo
-      expect(user.image_url).to eq authinfo[:image]
+      expect(user.image_url).to eq(authinfo[:image])
     end
-    
-  end 
-  
+
+    it "sets image_url to nil if it does not exist" do
+      authinfo.delete :image
+      user = AuthUser.from_auth authinfo
+      expect(user.image_url).to be_nil
+    end
+  end
+      
   context "current profile" do
     before do
-      @user = AuthUser.new(uid: "1234", image_url: "test.com")
+      @user = build(:user)
     end
     
-    it "is null when no profiles" do
-      expect(@user.current_profile).to be_nil
+    context "when current profile set" do
+      
+      it "uses the set current profile"
+      
+    end
+    
+    context "when no current profile set" do
+      context "when no profiles" do
+        before do 
+          @user.profiles.clear
+        end
+        it "is null" do
+          expect(@user.current_profile).to be_nil
+        end
+      end
+    
+      context "when profiles" do
+      
+        context "when no default profile" do
+          it "is the first profile in profiles"
+        end
+
+        context "when default profile is set" do
+          it "is the default profile"
+        end
+
+      end
     end
   end
   
   context "checking admin" do
     before do
       @user = build(:user)
-      @user.profiles = []
+      @user.profiles.clear
     end
     
     it "is false when no profile" do

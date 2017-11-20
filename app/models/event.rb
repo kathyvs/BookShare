@@ -5,6 +5,13 @@ class Event
   field :name, type: String
   field :month, type: Integer
   
+  has_many :assignments do 
+    
+    def for_year (y)
+      return self.where(year: y)
+    end
+  end
+
   MIN_MONTH = 1
   MAX_MONTH = 12
 
