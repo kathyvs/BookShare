@@ -34,6 +34,8 @@ class AuthUser
   attr_accessor :current_profile
   
   field :image_url, type: String
+  field :default_profile_index, type: Integer
+  
   embeds_many :profiles
   
   def AuthUser.from_hash(dict)
@@ -43,6 +45,20 @@ class AuthUser
   def AuthUser.from_auth(dict)
     AuthUser.new(email: dict[:email], image_url: dict[:image])
   end
+  
+  def current_profile
+    return @current_profile || default_profile || profiles[0]
+  end
+  
+  def default_profile=(profile)
+    profiles.each_with_index do |p, i|
+      self.default_profile_index = i if p == profile
+    end
+  end
+
+  def default_profile
+    default_profile_index && profiles[default_profile_index]
+  end  
   
   def admin?
     current_profile && current_profile.admin?

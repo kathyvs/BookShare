@@ -4,12 +4,10 @@ FactoryBot.define do
     email "user@test.kathyvs.net"
     password "user-password"
     image_url "http://test.kathyvs.net/user"
-#    association :profiles, factory: profile
   end
   factory :admin_user, class: AuthUser do
     email "admin@test.kathyvs.net"
     password "admin-password"
-#    association :profiles, factory: admin
   end
   factory :profile, class: Profile do
     name "Test"

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'support/database_cleaner'
 
 RSpec.describe "AuthUser", type: :model do
   
@@ -40,7 +39,15 @@ RSpec.describe "AuthUser", type: :model do
     
     context "when current profile set" do
       
-      it "uses the set current profile"
+      before do
+        @profile = Profile.new(name: "Current")
+        @profile.user = @user
+        @user.current_profile = @profile
+      end
+
+      it "uses the set current profile" do
+        expect(@user.current_profile).to eq(@profile)
+      end
       
     end
     
@@ -55,13 +62,28 @@ RSpec.describe "AuthUser", type: :model do
       end
     
       context "when profiles" do
-      
+        
+        before do
+          @first_profile = Profile.new(name: "First")
+          @default_profile = Profile.new(name: "Default")
+          @profiles = [@first_profile, Profile.new(name: "Bad"), @default_profile]
+            @user.profiles = @profiles 
+        end
+        
         context "when no default profile" do
-          it "is the first profile in profiles"
+          it "is the first profile in profiles" do
+            expect(@user.current_profile).to eq(@first_profile)
+          end
         end
 
         context "when default profile is set" do
-          it "is the default profile"
+          before do 
+            @user.default_profile = @default_profile
+          end
+
+          it "is the default profile" do
+            expect(@user.current_profile).to eq(@default_profile) 
+          end
         end
 
       end
