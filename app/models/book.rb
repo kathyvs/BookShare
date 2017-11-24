@@ -7,4 +7,7 @@ class Book
   field :volume, type: Integer
   
   has_many :assignments
+  
+  validates_presence_of :title
+  validates_presence_of :type
 end

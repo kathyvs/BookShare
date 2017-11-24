@@ -1,8 +1,6 @@
 require 'rails_helper'
 require 'support/factory_bot'
-
-#require 'record_extensions'
-#require 'fake_dataset_helper'
+require 'support/validation'
 
 RSpec.describe "Profile", type: :model do
 
@@ -22,23 +20,21 @@ RSpec.describe "Profile", type: :model do
       {name: "Test", user: user}
     }
 
-    def replaced_attributes(attrs)
-      valid_attributes.merge(attrs)
-    end
-
     context "when validating" do
 
+      include Validation
+      
       it "default attributes are valid" do
         expect(Profile.new(valid_attributes)).to be_valid
       end
 
       it "name is required" do
-        expect(Profile.new(replaced_attributes(name: nil))).to be_invalid
-        expect(Profile.new(replaced_attributes(name: ""))).to be_invalid
+        expect(create_with_replaced(Profile, name: nil)).to_not be_valid_at(:name)
+        expect(create_with_replaced(Profile, name: "")).to_not be_valid_at(:name)
       end
 
       it "user is required" do
-        expect(Profile.new(replaced_attributes(user: nil))).to be_invalid
+        expect(create_with_replaced(Profile, user: nil)).to be_invalid
       end
       
     end
