@@ -8,7 +8,8 @@ class AssignmentsController < ApplicationController
     @event_id = params.has_key?(:event_id?) ? params[:event_id].to_i : Event.current.id
     @year = params.has_key?(:year) ? params[:year].to_i : Date.today.year
     @books = Book.all
-    @assignments = Assignment.all_for @event_id, @year
+    @event = Event.find(@event_id)
+    @assignments = @event.assignments.for_year(@year)
     print "Assignments = #{@assignments}"
   end
 
