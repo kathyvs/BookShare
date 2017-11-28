@@ -5,6 +5,12 @@ class Event
   field :name, type: String
   field :month, type: Integer
   
+  has_many :assignment_sets do
+    def for_year (y)
+      return self.where(year: y)
+    end
+  end
+  
   has_many :assignments do 
     
     def for_year (y)

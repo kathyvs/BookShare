@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Arriving:</strong>
+  <%= @assignment_set.arriving %>
+</p>
+
+<p>
+  <strong>Leaving:</strong>
+  <%= @assignment_set.leaving %>
+</p>
+
+<%= link_to 'Edit', edit_assignment_set_path(@assignment_set) %> |
+<%= link_to 'Back', assignment_sets_path %>

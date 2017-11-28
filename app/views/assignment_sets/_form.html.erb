@@ -1,0 +1,27 @@
+<%= form_with(model: assignment_set, local: true) do |form| %>
+  <% if assignment_set.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(assignment_set.errors.count, "error") %> prohibited this assignment_set from being saved:</h2>
+
+      <ul>
+      <% assignment_set.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :arriving %>
+    <%= form.date_select :arriving, id: :assignment_set_arriving %>
+  </div>
+
+  <div class="field">
+    <%= form.label :leaving %>
+    <%= form.date_select :leaving, id: :assignment_set_leaving %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :assignment_sets
   devise_for :auth_users
   root to: "assignments#index"
   

@@ -6,6 +6,7 @@ class Profile
   field :name, type: String
   field :roles, type: Array, default: []
   embedded_in :user, class_name: "AuthUser"
+  has_many :assignment_sets;
   has_many :assignments;
   
   validates_presence_of :name

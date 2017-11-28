@@ -1,4 +1,8 @@
 FactoryBot.define do
+  factory :assignment_set do
+    arriving "2017-11-25"
+    leaving "2017-11-25"
+  end
   
   factory :user, class: AuthUser do
     email "user@test.kathyvs.net"
