@@ -55,7 +55,6 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'database_cleaner', '~> 1.6', '>= 1.6.1'
-  gem 'selenium-webdriver'
 #  gem 'cucumber-rails', '~> 1.5'
   gem 'factory_bot_rails'
   gem 'rspec', '>= 3.6.0'
@@ -67,6 +66,7 @@ group :test do
   gem 'capybara', '~> 2.14'
   gem 'mongoid-rspec', git: 'https://github.com/mongoid-rspec/mongoid-rspec.git'
   gem 'email_spec', '~> 2.1'
+  gem "selenium-webdriver"  
 end
 
 group :development do

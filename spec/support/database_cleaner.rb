@@ -8,10 +8,12 @@ RSpec.configure do |config|
   end
  
   config.before(:each) do
+    puts "Starting DatabaseCleaner\n"
     DatabaseCleaner.start
   end
  
   config.after(:each) do
     DatabaseCleaner.clean
+    puts "Ending DatabaseCleaner\n"
   end
 end
