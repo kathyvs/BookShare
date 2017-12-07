@@ -8,7 +8,8 @@ RSpec.describe "Signin features", type: :feature do
   feature "Signing in" do
     
     background do
-      @user = create(:user)
+      @profile = create(:profile)
+      @user = @profile.user
       @user.confirm
       create(:january_event)
     end
@@ -19,6 +20,7 @@ RSpec.describe "Signin features", type: :feature do
         signin_page.signin_as(@user.email, @user.password)
       end
       expect(page).to have_current_path(root_path)
+      expect(nav_bar).to show_login_as(@profile)
     end
   end
 end

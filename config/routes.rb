@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :assignment_sets
-  devise_for :auth_users
+  devise_for :auth_users do 
+  end
   root to: "assignments#index"
   
   resources :events do
@@ -9,8 +10,6 @@ Rails.application.routes.draw do
     get "/:year/assignments", to: "assignments#index", as: :assignments
     get "/:year/assignments/:id", to: "assignments#show", as: :user_assignments
   end
-  
-  resources :profiles
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlrails
 

@@ -3,10 +3,6 @@
   <head>
     <title>Book Share</title>
     <%= csrf_meta_tags %>
-
-<!-- Bootstrap core CSS -->
-    <%= stylesheet_link_tag 'bootstrap.min', media: 'all', 'data-turbolinks-track': 'reload' %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -27,10 +23,10 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="#">Home</a></li>
           </ul>
-          <ul class="nav navbar-nav pull-right">
-            <% if current_user %>
-              <li><%= current_user.profile.name %></li>
-              <li><%= button_link_to "Logout", destroy_auth_user_session_path %></li>
+          <ul class="nav navbar-nav pull-right" id="user_info">
+            <% if auth_user_signed_in? %>
+              <li><%= link_to current_auth_user.current_profile.name, edit_auth_user_registration_path %></li>
+              <li><%= button_link_to "Logout", destroy_auth_user_session_path, method: :delete %></li>
             <% else %>
               <li><%= link_to "Log In", new_auth_user_session_path, :class => 'btn' %></li>
             <% end %>
@@ -40,9 +36,6 @@
     </div>
   </header>
   <main id="content">
-    <%- flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
-    <%- end -%>  
     <%= yield %>
   </main>
 </body>

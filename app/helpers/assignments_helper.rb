@@ -1,7 +1,5 @@
 module AssignmentsHelper
   
-  include UserHelper
-  
   def profile_for pid
     profiles[pid] = Profile.find(pid) unless profiles.has_key?(pid)
     return profiles[pid]

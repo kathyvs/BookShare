@@ -41,7 +41,6 @@ RSpec.describe "Assignment", {:type => :model} do
           Assignment.create! event_id: e, year: y, profile_id: p, bringing: {}
         end
       end
-      print "Assigment map = #{assignment_map}\n"
     end
 
     context "without profile" do

@@ -10,7 +10,6 @@ class AssignmentsController < ApplicationController
     @books = Book.all
     @event = Event.find(@event_id)
     @assignments = @event.assignments.for_year(@year)
-    print "Assignments = #{@assignments}"
   end
 
   # GET /assignments/1
