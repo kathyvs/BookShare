@@ -1,3 +1,5 @@
+@import 'bootstrap';
+
 $light-color: #fffff0;
 $dark-color: #2b5d0f;
 $dark-text-color: #333;
@@ -27,6 +29,9 @@ body {
       color: $light-color;
       background-color: $dark-color;
     }
+  }
+  .icon-bar {
+     background-color: $light-color;
   }
 }
 

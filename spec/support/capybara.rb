@@ -1,7 +1,8 @@
 require 'capybara/rspec'
 require 'support/database_cleaner'
-require 'features/pages/login'
-require 'features/pages/navigation'
+
+Dir[Rails.root.join('spec/features/pages/**/*.rb')].each { |f| 
+  require f }
 
 Capybara.register_driver :selenium_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -11,8 +12,12 @@ Capybara.javascript_driver = :selenium_chrome
 
 module PageHelper 
 
+  def common_elements
+    Pages::Page.new
+  end
+  
   def nav_bar
-    Pages::NavigationBar.new
+    common_elements.nav_bar
   end
 
   def visit_page(page_sym)
@@ -23,7 +28,10 @@ module PageHelper
   private
   
   def pages
-    @pages ||= {signin: {url: :new_auth_user_session_path, page: Pages::LoginPage}}
+    @pages ||= {
+      signin: {url: :new_auth_user_session_path, page: Pages::LoginPage},
+      registration: {url: :new_auth_user_registration_path, page: Pages::RegistrationPage} 
+      }
   end
 end
 

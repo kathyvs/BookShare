@@ -5,9 +5,10 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  #rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  before_action :configure_permitted_parameters, if: :devise_controller?
   
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+   
   def not_found
     return head(:not_found)
   end
@@ -20,4 +21,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [profiles_attributes: [:name]])
+  end
 end

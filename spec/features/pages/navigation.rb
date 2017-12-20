@@ -4,8 +4,8 @@ module Pages
   class NavigationBar
     include Capybara::DSL
     
-    def is_signed_in?
-      signin_name
+    def signed_in?
+      signin_name != 'Log In'
     end
     
     def signin_name
@@ -17,7 +17,7 @@ module Pages
       
       RSpec::Matchers.define :show_login_as  do |profile|
         match do |nav_bar|
-           nav_bar.is_signed_in? && nav_bar.signin_name == profile.name
+           nav_bar.signed_in? && nav_bar.signin_name == profile.name
         end
         
         

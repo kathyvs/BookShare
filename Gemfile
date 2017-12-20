@@ -29,7 +29,8 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Bootstrap
-gem 'bootstrap'
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -60,6 +61,7 @@ group :development, :test do
   gem 'rspec', '>= 3.6.0'
   gem 'rspec-rails'
   gem 'teaspoon-jasmine'
+  gem 'pry-rails'
 end
 
 group :test do 

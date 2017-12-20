@@ -14,4 +14,7 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+  
+  ##Add Custom Database Matchers
+
 end

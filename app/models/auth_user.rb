@@ -38,6 +38,14 @@ class AuthUser
   
   embeds_many :profiles
   
+  #accepts_nested_attributes_for :default_profile
+  accepts_nested_attributes_for :profiles
+  
+  def initialize(attrs)
+    super attrs
+    binding.pry if attrs.size > 0
+  end
+  
   def AuthUser.from_hash(dict)
     AuthUser.new(email: dict["email"], image_url: dict["image_url"])
   end
@@ -51,9 +59,15 @@ class AuthUser
   end
   
   def default_profile=(profile)
+    found_index = nil
     profiles.each_with_index do |p, i|
-      self.default_profile_index = i if p == profile
+      found_index = i if p == profile
     end
+    if (!found_index)
+      found_index = profiles.size
+      profiles << profile
+    end
+    this.default_profile_index = found_index
   end
 
   def default_profile

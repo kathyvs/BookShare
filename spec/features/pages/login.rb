@@ -1,8 +1,7 @@
-
+require 'features/pages/page'
 module Pages
   
-  class LoginPage
-    include Capybara::DSL
+  class LoginPage < Page
     include FactoryBot::Syntax::Methods
     
     def signin_as(email_or_sym, password=nil)
