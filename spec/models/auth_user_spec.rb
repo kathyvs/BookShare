@@ -93,20 +93,14 @@ RSpec.describe "AuthUser", type: :model do
   context "checking admin" do
     before do
       @user = build(:user)
-      @user.profiles.clear
     end
     
-    it "is false when no profile" do
+    it "is false when admin is not a role" do
       expect(@user).to_not be_admin
     end
     
-    it "is false when current profile is not admin" do
-      @user.current_profile = build(:profile)
-      expect(@user).to_not be_admin
-    end
-    
-    it "is true when profile is admin" do
-      @user.current_profile = build(:admin)
+    it "is true when roles include admin" do
+      @user.roles << :admin
       expect(@user).to be_admin
     end
   end    

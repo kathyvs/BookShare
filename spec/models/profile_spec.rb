@@ -41,14 +41,4 @@ RSpec.describe "Profile", type: :model do
 
   end
 
-  context "when authorization" do
-    
-    it "admin? requires the admin role" do
-      profile = build(:profile)
-      expect(profile).to_not be_admin
-      profile.roles = [:admin]
-      expect(profile).to be_admin
-    end
-  end
-
 end

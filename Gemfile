@@ -62,6 +62,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'teaspoon-jasmine'
   gem 'pry-rails'
+  gem 'rubycritic'
 end
 
 group :test do 

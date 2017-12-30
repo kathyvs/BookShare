@@ -31,6 +31,9 @@ class AuthUser
    field :confirmation_sent_at, type: Time
    field :unconfirmed_email,    type: String # Only if using reconfirmable
  
+  #Roles
+  field :roles, type: Array, default: []
+
   attr_accessor :current_profile
   
   field :image_url, type: String
@@ -70,6 +73,6 @@ class AuthUser
   end  
   
   def admin?
-    current_profile && current_profile.admin?
+    roles.include? :admin
   end
 end

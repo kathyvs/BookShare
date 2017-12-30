@@ -12,6 +12,7 @@ FactoryBot.define do
   factory :admin_user, class: AuthUser do
     email "admin@test.kathyvs.net"
     password "admin-password"
+    roles [:admin]
   end
   factory :profile, class: Profile do
     name "Test"
@@ -19,7 +20,6 @@ FactoryBot.define do
   end
   factory :admin, class: Profile do
     name "Admin"
-    roles [:admin]
     association :user, factory: :admin_user, strategy: :build
   end
   
