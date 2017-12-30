@@ -41,11 +41,6 @@ class AuthUser
   #accepts_nested_attributes_for :default_profile
   accepts_nested_attributes_for :profiles
   
-  def initialize(attrs)
-    super attrs
-    binding.pry if attrs.size > 0
-  end
-  
   def AuthUser.from_hash(dict)
     AuthUser.new(email: dict["email"], image_url: dict["image_url"])
   end
@@ -67,7 +62,7 @@ class AuthUser
       found_index = profiles.size
       profiles << profile
     end
-    this.default_profile_index = found_index
+    self.default_profile_index = found_index
   end
 
   def default_profile

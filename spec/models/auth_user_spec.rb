@@ -47,7 +47,6 @@ RSpec.describe "AuthUser", type: :model do
 
       it "uses the set current profile" do
         expect(@user.current_profile).to eq(@profile)
-        expect(@user.current_profile_or_new).to eq(@profile)
       end
       
     end
@@ -59,11 +58,6 @@ RSpec.describe "AuthUser", type: :model do
         end
         it "is null" do
           expect(@user.current_profile).to be_nil
-        end
-
-        it "or new is new" do
-          expect(@user.current_profile_or_new).to_not be_nil
-          expect(@user.profiles).to contain_exactly(@user.current_profile_or_new)
         end
       end
     
@@ -79,7 +73,6 @@ RSpec.describe "AuthUser", type: :model do
         context "when no default profile" do
           it "is the first profile in profiles" do
             expect(@user.current_profile).to eq(@first_profile)
-            expect(@user.current_profile_or_new).to eq(@first_profile)
           end
         end
 
@@ -90,8 +83,7 @@ RSpec.describe "AuthUser", type: :model do
 
           it "is the default profile" do
             expect(@user.current_profile).to eq(@default_profile) 
-            expect(@user.current_profile_or_new).to eq(@default_profile) 
-          end
+           end
         end
 
       end
