@@ -1,13 +1,9 @@
 FactoryBot.define do
-  factory :assignment_set do
-    arriving "2017-11-25"
-    leaving "2017-11-25"
-  end
-  
   factory :user, class: AuthUser do
     email "user@test.kathyvs.net"
     password "user-password"
     image_url "http://test.kathyvs.net/user"
+
   end
   factory :admin_user, class: AuthUser do
     email "admin@test.kathyvs.net"
@@ -22,7 +18,7 @@ FactoryBot.define do
     name "Admin"
     association :user, factory: :admin_user, strategy: :build
   end
-  
+
   factory :january_event, class: Event do
     name "January Event"
     month 1
@@ -31,12 +27,17 @@ FactoryBot.define do
     name "March Event"
     month 3
   end
-  factory :may_event, class: Event do 
+  factory :may_event, class: Event do
     name "May Event"
     month 5
   end
-  factory :assignment do
-    
+  factory :june_event, class: Event do
+    name "June Event"
+    month 6
+  end
+
+  factory :book do
+    title "Test Book"
   end
   factory :parker, class: Book do
     author "Parker, James"
@@ -51,12 +52,33 @@ FactoryBot.define do
   factory :ssno, class: Book do
     author "Taszycki, Witold"
     title "S\u0142ownik Staropolskich Nazw Osobowych"
-    volume 1  
+    volume 1
     type :name
   end
-  factory :ncmj, class: Book do 
+  factory :ncmj, class: Book do
     author "Sólveig Þróndardóttir"
     title "Name Construction in Medieval Japan"
     type :name
   end
+
+  factory :empty_assignment, class: AssignmentSet do
+    year 2017
+    association :event, factory: :january_event
+    profile
+  end
+
+  factory :mar_user_assignments, class: AssignmentSet do
+    arriving "2018-02-14"
+    leaving "2018-02-28"
+    year 2018
+    association :event, factory: :march_event
+    profile
+
+    factory :mar_admin_assignments, class: AssignmentSet do
+      arriving "2018-02-16"
+      leaving "2018-02-27"
+      association :profile, factory: :admin
+    end
+  end
+
 end

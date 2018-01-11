@@ -1,9 +1,12 @@
 class AssignmentSetsController < ApplicationController
-  before_action :set_assignment_set, only: [:show, :edit, :update, :destroy]
+  #before_action :set_assignment_set, only: [:show, :edit, :update, :destroy]
 
-  # GET /assignment_sets
+  before_action :set_current_event
+  before_action :set_year
+
+  # GET /events/:event/:year/assignment_sets
   def index
-    @assignment_sets = AssignmentSet.all
+    @book_assignments = BookAssignments.new(Book.all)
   end
 
   # GET /assignment_sets/1

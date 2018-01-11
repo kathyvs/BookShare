@@ -1,0 +1,10 @@
+    <tr>
+      <tr class="description">
+        <%= render partial: 'title', locals: {book: book_assignment.book} %>
+      </td>
+      <td class="need"></td>
+      <td class="bringing"><%= render partial: 'named_assignment', 
+                                      collection: book_assignment.profile_assignments,
+                                      as: :assignment,
+                                      spacer_template: 'shared/comma'%></td>
+    </tr>

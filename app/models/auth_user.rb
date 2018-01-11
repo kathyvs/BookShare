@@ -72,6 +72,10 @@ class AuthUser
     default_profile_index && profiles[default_profile_index]
   end  
   
+  def find_profile(profile_id)
+    profiles.first {|p| p.id === profile_id}
+  end
+
   def admin?
     roles.include? :admin
   end

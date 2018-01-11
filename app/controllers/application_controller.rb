@@ -24,4 +24,14 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [profiles_attributes: [:name]])
   end
+
+  protected
+    def set_current_event
+      @event = Event.current(params[:event_id])
+    end
+
+    def set_year
+      @year = Date.today.year
+    end
+
 end

@@ -31,8 +31,9 @@ class Event
   end
   
   # TODO: fix
-  def self.current
-    return Event.all.first
+  def self.current(id = nil)
+    query = Event.where(id: id)
+    return query.exists? ? query.first : Event.first
   end
   
   def month=(month)

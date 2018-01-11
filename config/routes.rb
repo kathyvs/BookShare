@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   devise_for :auth_users
-  root to: "assignments#index"
+  root to: "assignment_sets#root"
   
   resources :books
   
   resources :events do
     # Assignment sets are all per event and year
 
-    get "/:year/assignments", to: "assignments#index", as: :assignments
+    get "/:year/assignments", to: "assignment_sets#index", as: :assignments
     get "/:year/assignments/:id", to: "assignments#show", as: :user_assignments
   end
   

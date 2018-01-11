@@ -8,7 +8,7 @@ ruby '2.4.2'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.0'
+gem 'rails', '~> 5.1.4'
 # Using Mongodb and Mongoid for the database
 gem "mongoid"
 # Using Devise for authentication
@@ -69,7 +69,8 @@ group :test do
   gem 'capybara', '~> 2.14'
   gem 'mongoid-rspec', git: 'https://github.com/mongoid-rspec/mongoid-rspec.git'
   gem 'email_spec', '~> 2.1'
-  gem "selenium-webdriver"  
+  gem "selenium-webdriver"
+  gem 'rails-controller-testing'
 end
 
 group :development do

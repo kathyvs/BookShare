@@ -16,8 +16,7 @@ class Profile
     result.first if result.size > 0
   end
 
-  def admin?
-    roles.include? :admin
+  def id
+   self._id.to_s
   end
-
 end

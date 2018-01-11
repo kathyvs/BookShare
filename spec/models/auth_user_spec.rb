@@ -90,6 +90,30 @@ RSpec.describe "AuthUser", type: :model do
     end
   end
   
+  context "profile by id" do
+
+    NAMES = ["name1", "name2", "name3"]
+    before do 
+      @user = build(:user)
+      @names = ["p2", "p3", "p4"]
+      NAMES.each do |n|
+        @user.profiles << Profile.new(name: n)
+      end
+    end
+
+    def profile_from_name(name)
+      @user.profiles.first {|p| p.name == name}
+    end
+
+    NAMES.each do |n|
+
+      it "finds profile #{n} by id" do
+        profile = profile_from_name(n)
+        expect(@user.find_profile(profile.id)).to be(profile)
+      end
+    end
+  end
+    
   context "checking admin" do
     before do
       @user = build(:user)

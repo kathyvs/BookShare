@@ -11,6 +11,7 @@ RSpec.describe "Event", type: :model do
     end
     
   end
+
   context "when initializing" do
 
     let(:valid_attributes) {
@@ -60,6 +61,22 @@ RSpec.describe "Event", type: :model do
 
   end
 
+  context "current event" do
+    
+    let (:events) {
+      [:january, :march, :may, :june].map { |k| [k, create("#{k}_event".to_sym)] }.to_h
+    }
 
+    it "finds by event id if given id" do 
+      event = events[:march]
+      expect(Event.current(event.id)).to eq(event)
+    end
+
+    it "uses the first event in current month if exists"
+
+    it "uses the first event in the last month if none in current month"
+
+    it "uses the event in the nearest following month otherwise"
+  end
 
 end
