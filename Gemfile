@@ -25,6 +25,10 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
+# Use React for JS
+gem 'react-rails'
+gem 'webpacker'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -65,7 +69,7 @@ group :development, :test do
   gem 'rubycritic'
 end
 
-group :test do 
+group :test do
   gem 'capybara', '~> 2.14'
   gem 'mongoid-rspec', git: 'https://github.com/mongoid-rspec/mongoid-rspec.git'
   gem 'email_spec', '~> 2.1'
