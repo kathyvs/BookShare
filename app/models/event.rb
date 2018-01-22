@@ -1,6 +1,7 @@
 class Event
 
   include Mongoid::Document
+  include GetOrUse
 
   field :name, type: String
   field :month, type: Integer
@@ -30,8 +31,7 @@ class Event
   end
 
   def month=(month)
-    month = month.mon if month.respond_to? :mon
-    write_attribute(:month, month)
+    write_attribute(:month, get_or_use(month, :mon))
   end
 
   def month_name

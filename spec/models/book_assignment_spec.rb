@@ -34,4 +34,13 @@ RSpec.describe BookAssignment, type: :model do
   it "contains a total count its book" do
     expect(book_assignment.total_count).to eq(counts.sum)
   end
+
+  it "contains a list of pairs of profiles and counts" do
+    expect(book_assignment.profile_assignments).to include(
+      [profiles[0], counts[0]], [profiles[2], counts[2]], [profiles[3], counts[3]])
+  end
+
+  it "skips profiles with a count of 0" do
+    expect(book_assignment.profile_assignments).to_not include([profiles[1], counts[1]])
+  end
 end

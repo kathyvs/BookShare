@@ -18,6 +18,14 @@ class BookAssignment
     profile_counts.values.sum
   end
 
+  def profile_assignments(&block)
+    profile_counts.select do |profile_id, count|
+      count > 0
+    end.map do |profile_id, count|
+      [profiles[profile_id], count]
+    end.each(&block)
+  end
+
   #private
     attr_reader :profile_counts
     attr_reader :profiles

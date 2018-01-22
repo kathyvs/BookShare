@@ -1,3 +1,11 @@
+#
+# A book describes a book being brought to the event.
+# It is designed for easy entry and viewing, so the author is just a simple
+# descriptive string. The type describes general categories: :name, :armory, etc.
+#
+# Some books have short names which is what they are known in general conversation,
+# such as "PicDic" for Pictorial Dictionary of Heraldry.
+
 class Book
   include Mongoid::Document
 
