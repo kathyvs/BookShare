@@ -4,7 +4,7 @@ class Profile
   include Mongoid::Document
 
   field :name, type: String
-  embedded_in :user, class_name: "AuthUser"
+  belongs_to :user, class_name: "AuthUser"
   has_many :assignment_sets;
 
   validates_presence_of :name

@@ -20,11 +20,11 @@ body {
   color: $light-color;
   a {
     color: $light-link-color;
-    
+
     &:visited {
       color: $light-link-color;
     }
-    
+
     &:hover {
       color: $light-color;
       background-color: $dark-color;
@@ -33,6 +33,16 @@ body {
   .icon-bar {
      background-color: $light-color;
   }
+}
+
+h1 {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-weight: bold;
 }
 
 p, ol, ul, td {
@@ -58,14 +68,6 @@ a {
   }
 }
 
-th {
-  padding-bottom: 0.35em;
-}
-
-td {
-  padding: 0 0.35em 0.51em;
-}
-
 div {
   &.field, &.actions {
     margin-bottom: 0.75em;
@@ -79,7 +81,7 @@ div {
 .actions input {
   background: $dark-color;
   color: $light-link-color;
-  
+
 }
 .field_with_errors {
   padding: 2px;

@@ -1,6 +1,4 @@
 require 'rails_helper'
-require 'record_extensions'
-require 'fake_dataset_helper'
 require 'auth_helper'
 
 RSpec.describe "Events", type: :request do
@@ -23,7 +21,7 @@ RSpec.describe "Events", type: :request do
   describe "GET /events" do
 
     attr_reader :events
-    before do 
+    before do
       Event.delete_all
       names = ["First", "Second", "Third"]
       @events = []
@@ -50,7 +48,7 @@ RSpec.describe "Events", type: :request do
   end
 
   describe "GET /events/:id" do
-    before do 
+    before do
       @event = Event.create! valid_attributes
       get events_url(id: @event.id)
     end
@@ -65,10 +63,10 @@ RSpec.describe "Events", type: :request do
   end
 
   describe "GET /events/new" do
-    
+
     context "when authorized" do
 
-      before do 
+      before do
         login_as :admin
       end
 
@@ -108,15 +106,15 @@ RSpec.describe "Events", type: :request do
   end
 
   describe "GET #edit" do
-    
-    before do 
+
+    before do
       Event.delete_all
       @event = Event.create! valid_attributes
     end
 
     context "when authorized" do
 
-      before do 
+      before do
         login_as :admin
         get edit_event_url id: @event.to_param
       end
@@ -129,7 +127,7 @@ RSpec.describe "Events", type: :request do
         expect(response.body).to include(events_path)
         expect(response.body).to include("input")
       end
-    
+
     end
 
     context "when unauthorized" do
@@ -209,10 +207,10 @@ RSpec.describe "Events", type: :request do
 
   describe "PUT #update" do
 
-    before do 
+    before do
       @event = Event.create! valid_attributes
     end
-  
+
     context "when authorized" do
 
       before do
@@ -229,13 +227,13 @@ RSpec.describe "Events", type: :request do
           @event.reload
           expect(@event.name).to eq(new_attributes[:name])
         end
-  
+
         it "redirects to the event" do
           put event_path(@event.id), params: {id: @event.to_param, event: new_attributes}
           expect(response).to redirect_to(@event)
         end
       end
-  
+
       context "with invalid params" do
         it "returns a success response (i.e. to display the 'edit' template)" do
           event = Event.create! valid_attributes
@@ -244,7 +242,7 @@ RSpec.describe "Events", type: :request do
         end
       end
     end
-    
+
     context "when unauthorized" do
 
       it "returns a unauthenticated error for no users" do
@@ -313,9 +311,9 @@ RSpec.describe "Events", type: :request do
     end
   end
 
-  after(:all) do 
+  after(:all) do
     Event.delete_all
   end
- 
+
 
 end

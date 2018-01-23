@@ -1,5 +1,5 @@
 class AuthUser
-  
+
   include Mongoid::Document
   # Include default devise modules. Others available are:
   #:lockable, :timeoutable
@@ -30,20 +30,20 @@ class AuthUser
    field :confirmed_at,         type: Time
    field :confirmation_sent_at, type: Time
    field :unconfirmed_email,    type: String # Only if using reconfirmable
- 
+
   #Roles
   field :roles, type: Array, default: []
 
   attr_accessor :current_profile
-  
+
   field :image_url, type: String
   field :default_profile_index, type: Integer
-  
-  embeds_many :profiles
-  
+
+  has_many :profiles
+
   #accepts_nested_attributes_for :default_profile
   accepts_nested_attributes_for :profiles
-  
+
   def AuthUser.from_hash(dict)
     AuthUser.new(email: dict["email"], image_url: dict["image_url"])
   end
@@ -51,11 +51,11 @@ class AuthUser
   def AuthUser.from_auth(dict)
     AuthUser.new(email: dict[:email], image_url: dict[:image])
   end
-  
+
   def current_profile
     return @current_profile || default_profile || profiles[0]
   end
-  
+
   def default_profile=(profile)
     found_index = nil
     profiles.each_with_index do |p, i|
@@ -70,8 +70,8 @@ class AuthUser
 
   def default_profile
     default_profile_index && profiles[default_profile_index]
-  end  
-  
+  end
+
   def find_profile(profile_id)
     profiles.first {|p| p.id === profile_id}
   end

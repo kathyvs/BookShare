@@ -5,7 +5,7 @@ class AssignmentSetsController < ApplicationController
   def index
     @book_assignments = BookAssignments.new(
       Book.all,
-      AssignmentSet.where(event: @event, year: @year))
+      AssignmentSet.where(event: event, year: year))
   end
 
   # GET /assignment_sets/1

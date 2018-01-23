@@ -3,6 +3,8 @@
 #
 class AssignmentSet
   include Mongoid::Document
+  include GetOrUse
+
   field :arriving, type: Date
   field :leaving, type: Date
   field :year, type: Integer
@@ -10,8 +12,11 @@ class AssignmentSet
   belongs_to :event
   belongs_to :profile
 
-  def count_for(book_or_key)
-    key = book_or_key.respond_to?(:key) ? book_or_key.key : book_or_key
-    return books[key]
+  def [](book_or_key)
+    return books[get_or_use(book_or_key, :key)]
+  end
+
+  def []=(book_or_key, value)
+    books[get_or_use(book_or_key, :key)] = value
   end
 end

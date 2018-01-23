@@ -36,5 +36,14 @@ RSpec.describe BookAssignments, type: :model do
     expect(book_assignments.map(&:book)).to contain_exactly(*books)
   end
 
-
+  it "contains all assignments" do
+    expect(assignments.count).to be > 0
+    assignments.each do |assignment_set|
+      expect(assignment_set.books.count).to be > 0
+      assignment_set.books.each do |book_key, count|
+        book_assignment = book_assignments[book_key]
+        expect(book_assignment[assignment_set.profile]).to be >= count
+      end
+    end
+  end
 end

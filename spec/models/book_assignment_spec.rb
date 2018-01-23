@@ -18,7 +18,7 @@ RSpec.describe BookAssignment, type: :model do
     set_by_profile = {}
     counts.each_with_index do |count, profile_index|
       set_by_profile[profile_index] ||= AssignmentSet.new(profile: profiles[profile_index])
-      set_by_profile[profile_index].books[book.key] = count
+      set_by_profile[profile_index][book.key] = count
     end
     return set_by_profile.values
   }

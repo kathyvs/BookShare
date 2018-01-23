@@ -1,5 +1,7 @@
 class BookAssignment
 
+  include GetOrUse
+
   attr_reader :book
 
   def initialize(book)
@@ -9,13 +11,17 @@ class BookAssignment
   end
 
   def << (assignment_set)
-    profile = assignment_set.profile
-    profile_counts[profile.id] += assignment_set.count_for(book)
-    profiles[profile.id] = profile
+    profile_id = assignment_set.profile_id
+    profile_counts[profile_id] += assignment_set[book]
+    profiles[profile_id] = assignment_set.profile
   end
 
   def total_count
     profile_counts.values.sum
+  end
+
+  def [](profile_or_id)
+    return profile_counts[get_or_use(profile_or_id, :id)]
   end
 
   def profile_assignments(&block)

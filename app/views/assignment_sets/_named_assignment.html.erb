@@ -1,1 +1,2 @@
-<%= name_link(assignment.profile) %><%= " (#{assignment.count})" if assignment.count > 1%>
+<% profile, count = assignment %>
+<%= profile.name %><%= " (#{count})" if count > 1%>
