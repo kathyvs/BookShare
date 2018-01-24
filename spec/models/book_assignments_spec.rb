@@ -42,7 +42,7 @@ RSpec.describe BookAssignments, type: :model do
       expect(assignment_set.books.count).to be > 0
       assignment_set.books.each do |book_key, count|
         book_assignment = book_assignments[book_key]
-        expect(book_assignment[assignment_set.profile]).to be >= count
+        expect(book_assignment[assignment_set.profile_id]).to be >= count
       end
     end
   end

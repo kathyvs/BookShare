@@ -30,4 +30,17 @@ class Book
   def key
     id.to_s.freeze
   end
+
+  def self.json_create(object)
+    object["_id"] = object["key"]
+    object.delete("key")
+    Book.new(object)
+  end
+
+  def as_json(*args)
+    result = super.as_json(*args)
+    result.delete("_id")
+    result["key"] = key
+    result
+  end
 end

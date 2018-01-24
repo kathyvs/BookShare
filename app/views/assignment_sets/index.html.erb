@@ -1,16 +1,9 @@
+<%= javascript_pack_tag 'application' %>
+
 <p id="notice"><%= notice %></p>
 
 <div id="books">
   <h2>Current Book Assignments for <%= @year %></h1>
   <div class="table">
-    <table class="table table-hover">
-      <thead class="thead-dark">
-        <th class="description">Book</th>
-        <th class="need">Number still needed</th>
-        <th class="bringing">Currently bringing</th>
-      </thead>
-      <tbody>
-        <%= render partial: "book_assignment", collection: @book_assignments, general: true %>
-      </tbody>
-    </table>
-  </div> <!-- table -->
+    <%= react_component("BookAssignmentTable", assignments: @book_assignments) %>
+  </div>

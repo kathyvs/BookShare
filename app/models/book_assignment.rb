@@ -32,6 +32,15 @@ class BookAssignment
     end.each(&block)
   end
 
+  def as_json(*args)
+    result = super.as_json(*args)
+    result['profile_assignments']= profile_assignments.map do |profile, count|
+      {'profile' => profile.as_json,
+       'count' => count}
+    end
+    result
+  end
+
   #private
     attr_reader :profile_counts
     attr_reader :profiles

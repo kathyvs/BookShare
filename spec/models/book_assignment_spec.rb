@@ -43,4 +43,22 @@ RSpec.describe BookAssignment, type: :model do
   it "skips profiles with a count of 0" do
     expect(book_assignment.profile_assignments).to_not include([profiles[1], counts[1]])
   end
+
+  context "as JSON" do
+
+    it "saves the book" do
+      expect(book_assignment.as_json['book']).to eq(book.as_json)
+    end
+
+    it "saves the mapping as association list" do
+      included_indexes = [0, 2, 3]
+      included_indexes.each do |index|
+        expect(book_assignment.as_json['profile_assignments']).to include({
+          'profile' => profiles[index].as_json,
+          'count' => counts[index]
+          })
+      end
+    end
+
+  end
 end
