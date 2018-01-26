@@ -31,6 +31,31 @@ RSpec.describe Book, type: :model do
     end
   end
 
+  context "when sorting" do
+
+    def test_sort(books)
+      shuffled_books = books.shuffle
+      expect(shuffled_books.sort).to eq(books)
+    end
+
+    it "sorts first by author" do
+      authors = ["A", "B", "C", "D"]
+      titles = ["T1", "T3", "T1", "T2"]
+      test_sort(authors.zip(titles).map {|a, t| Book.new(author: a, title: t) })
+    end
+
+    it "sorts by title when author is identical" do
+      authors = ["A", "A", "A", "A", "C"]
+      titles = ["D", "E", "F", "G", "D"]
+      test_sort(authors.zip(titles).map {|a, t| Book.new(author: a, title: t) })
+    end
+
+    it "sorts by id last" do
+      ids = [1, 2, 3, 4, 5]
+      test_sort(ids.map {|id| Book.new(title: "T", id: id)})
+    end
+  end
+
   context "as json" do
 
     let(:book) {

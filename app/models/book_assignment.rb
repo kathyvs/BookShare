@@ -29,6 +29,8 @@ class BookAssignment
       count > 0
     end.map do |profile_id, count|
       [profiles[profile_id], count]
+    end.sort_by do |profile, count|
+      profile.name
     end.each(&block)
   end
 

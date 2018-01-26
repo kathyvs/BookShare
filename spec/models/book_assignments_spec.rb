@@ -32,8 +32,8 @@ RSpec.describe BookAssignments, type: :model do
     BookAssignments.new(books, assignments)
   }
 
-  it "contains all books" do
-    expect(book_assignments.map(&:book)).to contain_exactly(*books)
+  it "contains all books in order" do
+    expect(book_assignments.map(&:book)).to eq(books.sort)
   end
 
   it "contains all assignments" do

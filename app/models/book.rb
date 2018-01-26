@@ -31,6 +31,13 @@ class Book
     id.to_s.freeze
   end
 
+  def <=>(other)
+    result = author.to_s <=> other.author.to_s
+    result = title <=> other.title if result == 0
+    result = id <=> other.id if result == 0
+    result
+  end
+
   def self.json_create(object)
     object["_id"] = object["key"]
     object.delete("key")

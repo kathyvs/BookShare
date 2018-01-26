@@ -40,6 +40,14 @@ RSpec.describe BookAssignment, type: :model do
       [profiles[0], counts[0]], [profiles[2], counts[2]], [profiles[3], counts[3]])
   end
 
+  it "sorts the profiles by name" do
+    names = ["B", "X", "A", "C"]
+    profiles.zip(names).each do |profile, name|
+      profile.name = name
+    end
+    expect(book_assignment.profile_assignments.map{ |p, c| p.name }).to eq(names.sort.slice(0, 3))
+  end
+
   it "skips profiles with a count of 0" do
     expect(book_assignment.profile_assignments).to_not include([profiles[1], counts[1]])
   end

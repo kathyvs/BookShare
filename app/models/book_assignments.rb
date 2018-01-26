@@ -9,7 +9,9 @@ class BookAssignments
   end
 
   def each(&block)
-    book_assignments.each_value(&block)
+    book_assignments.each_value.sort_by do |book_assignment|
+      book_assignment.book
+    end.each(&block)
   end
 
   def [](book_or_key)
