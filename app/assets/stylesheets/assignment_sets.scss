@@ -1,3 +1,19 @@
 // Place all the styles related to the assignment_sets controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table {
+
+  caption {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #222;
+  }
+
+  tbody {
+    th {
+      font-weight: normal;
+    }
+  }
+}
+

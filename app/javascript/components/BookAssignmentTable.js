@@ -6,11 +6,12 @@ class BookAssignmentTable extends React.Component {
   render () {
     return (
       <table className="table table-hover table-responsive">
+        <caption>{this.props.caption}</caption>
         <thead className="thead-dark">
           <tr>
-            <th className="description">Book</th>
-            <th className="need">Number still needed</th>
-            <th className="bringing">Currently bringing</th>
+            <th className="description" scope="col" colspan="2">Book</th>
+            <th className="need" scope="col">Number still needed</th>
+            <th className="bringing" scope="col">Currently bringing</th>
           </tr>
         </thead>
         <tbody>
@@ -24,6 +25,7 @@ class BookAssignmentTable extends React.Component {
 }
 
 BookAssignmentTable.propTypes = {
-  assignments: PropTypes.array
+  caption: PropTypes.string.isRequired,
+  assignments: PropTypes.array.isRequired
 };
 export default BookAssignmentTable
