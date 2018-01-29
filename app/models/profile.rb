@@ -1,4 +1,10 @@
-
+#
+# A profile is a name attached to a collection of books being brought to an
+# event.  It is not the same as the user because there are occasions where
+# the user may want to organize books for multiple profiles (for example,
+# personal books versus books belonging to an office, or handling books
+# for someone without computer access).
+#
 class Profile
 
   include Mongoid::Document

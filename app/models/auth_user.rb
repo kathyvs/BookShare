@@ -1,3 +1,10 @@
+#
+# AuthUsers represent a person using the website, with their roles and authentication.
+# This class is governed by Devise.
+#
+# This differs from a profile, which refers only to the owner of a collection of
+# books being brought to an event.
+#
 class AuthUser
 
   include Mongoid::Document
@@ -34,14 +41,13 @@ class AuthUser
   #Roles
   field :roles, type: Array, default: []
 
-  attr_accessor :current_profile
+  attr_writer :current_profile
 
   field :image_url, type: String
   field :default_profile_index, type: Integer
 
   has_many :profiles
 
-  #accepts_nested_attributes_for :default_profile
   accepts_nested_attributes_for :profiles
 
   def AuthUser.from_hash(dict)
@@ -52,15 +58,15 @@ class AuthUser
     AuthUser.new(email: dict[:email], image_url: dict[:image])
   end
 
+  # Returns the current profile for this request. This can either be a
+  # direct selection, the default profile, or jsut the first profile.
+  # In the majority of cases, there is only one profile for a user.
   def current_profile
     return @current_profile || default_profile || profiles[0]
   end
 
   def default_profile=(profile)
-    found_index = nil
-    profiles.each_with_index do |p, i|
-      found_index = i if p == profile
-    end
+    found_index = profiles.index(profile)
     if (!found_index)
       found_index = profiles.size
       profiles << profile
@@ -73,7 +79,7 @@ class AuthUser
   end
 
   def find_profile(profile_id)
-    profiles.first {|p| p.id === profile_id}
+    profiles.first {|profile| profile.id === profile_id}
   end
 
   def admin?

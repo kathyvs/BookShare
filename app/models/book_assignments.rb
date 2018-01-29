@@ -1,3 +1,9 @@
+#
+# BookAssignments converts a collection of assignment sets and books into
+# a collection of BookAssignment objects, orgianized by books rather than
+# by profile.  It is typically used in the context of a single event and year,
+# but this is not enforced.
+#
 class BookAssignments
 
   include Enumerable

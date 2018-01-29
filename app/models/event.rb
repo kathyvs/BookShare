@@ -1,3 +1,7 @@
+#
+# An event is a description of an annual event to where the books are to be
+# brought.
+#
 class Event
 
   include Mongoid::Document
@@ -7,8 +11,8 @@ class Event
   field :month, type: Integer
 
   has_many :assignment_sets do
-    def for_year (y)
-      return self.where(year: y)
+    def for_year(year)
+      return self.where(year: year)
     end
   end
 
@@ -24,7 +28,11 @@ class Event
     return (MIN_MONTH .. MAX_MONTH)
   end
 
-  # TODO: fix
+  #
+  # Gives the current event, either based on the id, or the one closest to
+  # the current month without being past it.
+  #
+  # TODO: add more cleverness as per pending specs.
   def self.current(id = nil)
     query = Event.where(id: id)
     return query.exists? ? query.first : Event.first

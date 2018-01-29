@@ -1,3 +1,8 @@
+#
+# BookAssignments are a slice of a set of assignment sets focused on a single
+# book and containing many profiles.  It is typically used in the contextg
+# of a single event and year, but the class does not enforce the restriction.
+#
 class BookAssignment
 
   include GetOrUse
