@@ -7,12 +7,13 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'b9acd5cb45ae88f14603a5b12d850182eda55fad1d0c3beac279e1e8869b0d8e56112650b119bb794e240ee417afeaa3525f71eacf51a0e2fe3ff7ec25c372a6'
+  config.secret_key = '83fde605487540c34095edd33b105de76c5cce44e055c38da88f1eeb27a218b63c2e6f1e3d6db0f58ef416a4fb1bd1895ecc0a2ba9375499fd5b952fbd9bc938'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'elsbeth+bookshare@pobox.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -274,6 +275,6 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
-  #auth_config = Rails.application.config_for(:settings)["oauth2"] 
+  #auth_config = Rails.application.config_for(:settings)["oauth2"]
   #config.omniauth :google, auth_config["client_id"], auth_config["client_secret"]
 end
