@@ -1,1 +1,1 @@
-web: bundle exec rackup -s Puma 
+web: bundle exec rackup -s Puma -p $PORT
