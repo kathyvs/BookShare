@@ -26,6 +26,8 @@ alias gts='git status'
 /app.yaml
 /secret-setup.sh
 /bookshare-secret.json
+/sendgrid.env
+/.env
 
 # Ignore eclipse and Mac files
 .DS_Store
@@ -42,9 +44,11 @@ setup.sh
 
 #Ignore history
 .byebug_history
+#Other ignores
 /public/packs
 /public/packs-test
 /node_modules
 yarn-debug.log*
 yarn-error.log*
 .yarn-integrity
+

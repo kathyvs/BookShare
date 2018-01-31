@@ -17,7 +17,11 @@ production:
 
         # The password of the user for authentication.
         password: <%= ENV["MONGOID_PWD"] %>
-
+    local:
+        database: bookshare_production
+        hosts:
+          - localhost:27017
+        options:
 development:
   # Configure available database clients. (required)
   clients:

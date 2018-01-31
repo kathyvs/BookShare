@@ -24,7 +24,7 @@ BookAssignmentRow.propTypes = {
 function BookDescription ( {book} ) {
   const title = <span className="title">{book.title}</span>;
   const shortName = book.short_name && <span className="short-name">[{book.short_name}]</span>;
-  return (<th>{title} {shortName}</th>);
+  return (<th scope="row">{title} {shortName}</th>);
 }
 
 BookDescription.propTypes = {
