@@ -12,4 +12,7 @@
   "devDependencies": {
     "webpack-dev-server": "^2.11.1"
   }
+  "scripts": {
+    "postinstall": "cd client && npm install"
+  }
 }
