@@ -9,7 +9,7 @@ class BookAssignmentTable extends React.Component {
         <caption>{this.props.caption}</caption>
         <thead className="thead-dark">
           <tr>
-            <th className="description" scope="col" colspan="2">Book</th>
+            <th className="description" scope="col" colSpan="2">Book</th>
             <th className="need" scope="col">Number still needed</th>
             <th className="bringing" scope="col">Currently bringing</th>
           </tr>
