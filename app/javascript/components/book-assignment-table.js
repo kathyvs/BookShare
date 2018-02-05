@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import BookAssignmentRow from "./BookAssignmentRow"
+import BookAssignmentRow from "./book-assignment-row"
 
 class BookAssignmentTable extends React.Component {
   render () {
