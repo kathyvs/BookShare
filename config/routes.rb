@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :event_assignment_sets
   devise_for :auth_users
   root to: "assignment_sets#index"
 

@@ -1,0 +1,2 @@
+module EventAssignmentSetsHelper
+end

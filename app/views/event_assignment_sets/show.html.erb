@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @event_assignment_set.event %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @event_assignment_set.year %>
+</p>
+
+<p>
+  <strong>Books:</strong>
+  <%= @event_assignment_set.books %>
+</p>
+
+<%= link_to 'Edit', edit_event_assignment_set_path(@event_assignment_set) %> |
+<%= link_to 'Back', event_assignment_sets_path %>

@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :event_assignment_set do
+    event ""
+    year ""
+    books ""
+  end
   factory :event_assignment do
     book ""
     count ""

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Assignment Sets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Year</th>
+      <th>Books</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_assignment_sets.each do |event_assignment_set| %>
+      <tr>
+        <td><%= event_assignment_set.event %></td>
+        <td><%= event_assignment_set.year %></td>
+        <td><%= event_assignment_set.books %></td>
+        <td><%= link_to 'Show', event_assignment_set %></td>
+        <td><%= link_to 'Edit', edit_event_assignment_set_path(event_assignment_set) %></td>
+        <td><%= link_to 'Destroy', event_assignment_set, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event Assignment Set', new_event_assignment_set_path %>

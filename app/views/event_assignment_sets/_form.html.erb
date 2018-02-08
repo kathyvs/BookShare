@@ -1,0 +1,32 @@
+<%= form_with(model: event_assignment_set, local: true) do |form| %>
+  <% if event_assignment_set.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event_assignment_set.errors.count, "error") %> prohibited this event_assignment_set from being saved:</h2>
+
+      <ul>
+      <% event_assignment_set.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :event %>
+    <%= form.text_field :event, id: :event_assignment_set_event %>
+  </div>
+
+  <div class="field">
+    <%= form.label :year %>
+    <%= form.text_field :year, id: :event_assignment_set_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :books %>
+    <%= form.text_field :books, id: :event_assignment_set_books %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
