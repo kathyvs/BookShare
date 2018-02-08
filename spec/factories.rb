@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :event_assignment do
+    book ""
+    count ""
+    show false
+  end
   factory :user, class: AuthUser do
     email "user@test.kathyvs.net"
     password "user-password"
