@@ -67,12 +67,21 @@ RSpec.describe AssignmentSetsController, type: :controller do
       expect(response).to be_success
     end
 
-    it "creates a book_assignment list with all books" do |variable|
+    it "creates a book_assignment list with all books" do
       book_assignments = assigns[:book_assignments]
       book_assignments_books = book_assignments.map(&:book)
       Book.all.each do |book|
         expect(book_assignments_books).to include(book)
       end
+    end
+
+    it "it limits the books to 500 to avoid abouse" do
+      600.times do |i|
+        Book.new(title: "Extra book#{i}").save
+      end
+      sleep(1)
+      get :index, params: {event_id: event, year: user_assignments.year}
+      expect(assigns[:book_assignments].length).to be < 500
     end
   end
 

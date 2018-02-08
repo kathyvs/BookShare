@@ -24,6 +24,10 @@ class BookAssignments
     return book_assignments[get_or_use(book_or_key, :key)]
   end
 
+  def length
+    book_assignments.length
+  end
+
   def add_assignment_set(assignment_set)
     assignment_set.books.each_key do |book_key|
       book_assignments[book_key] << assignment_set if book_assignments.has_key? book_key
