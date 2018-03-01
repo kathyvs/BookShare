@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     # Assignment sets are all per event and year
 
     get "/:year/assignments", to: "assignment_sets#index", as: :assignments
-    get "/:year/assignments/:id", to: "assignments#show", as: :user_assignments
+    get "/:year/assignments/:id", to: "assignment_sets#show", as: :user_assignments
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.htmlrails
