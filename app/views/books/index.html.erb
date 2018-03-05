@@ -14,7 +14,7 @@
 </div>
 <div id="books">
   <h2>Current Book Status</h2>
-  <% if current_user.nil? %>
+  <% if current_auth_user.nil? %>
   <div class="table">
     <h3>Books being brought</h3>
     <table class="book_table">
@@ -51,7 +51,7 @@
   <% else %>
   <div class="table" id="priority_books">
     <!-- Question: is it better to say 0 needed or better to move to a separate list? Try both ways -->
-    
+
     <table class="book_table">
 
       <tr>
@@ -61,7 +61,7 @@
    <th class="actions">&nbsp;</th>
      </tr>
      <tr><td class="header">Bring these books if you can</td>
-    
+
       <tr>
   <td class="descriptions"> <span class="author">Abramowicz</span> <span class="title">Abramowicz, S&#x0142;ownik Historycznyck Nazw Osobowych Bia&#x0142;ostocczyzny (XV-XVII w.)</span> </td>
   <td class="need">1</td>
@@ -80,9 +80,9 @@
   <td class="bringing">0</td>
   <td class="actions"><button class="add">+</button></td>
       </tr>
-     
+
     <tr><td class="header">Bring these books if you wish and have space</td></tr>
-    
+
       <tr>
   <td class="descriptions"><span class="author">Appleton, David</span>, <span class="title">The Boke of St. Albans</span> </td>
   <td>&nbsp;</td>
@@ -90,7 +90,7 @@
   <td class="actions"><button class="add">+</button><button class="remove">-</button></td>
       </tr>
     <tr><td class="header">People are currently bringing enough of these books:</td></tr>
-    
+
     <tr><td class="descriptions"><span class="author">Denys</span>, The Heraldic Imagination</td>
       <td>&nbsp;</td>
       <td class="bringing">1</td>
