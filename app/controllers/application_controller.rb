@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
+  rescue_from Mongoid::Errors::DocumentNotFound, with: :not_found
+
   def event
     @event ||= Event.current(params[:event_id])
   end
@@ -22,11 +24,15 @@ class ApplicationController < ActionController::Base
   end
 
   def user_not_authorized
-    if current_user.nil?
+    if current_auth_user.nil?
       return head(:unauthorized)
     else
       return head(:forbidden)
     end
+  end
+
+  def current_user # needed for Pundit
+    current_auth_user
   end
 
   def configure_permitted_parameters

@@ -1,20 +1,12 @@
 require 'rails_helper'
+require 'support/factory_bot'
 
 RSpec.describe "AssignmentSets", type: :request do
 
-  describe "GET /" do
-
-    context "No one logged in" do
-
-      it "redirects to current event and no profile" do
-        get root_path
-        expect(response).to be_redirect("aaa")
-      end
-    end
-  end
-  describe "GET /assignment_sets" do
+  describe "GET /events/3/2018/assignments" do
     it "works! (now write some real specs)" do
-      get assignment_sets_path
+      e = create(:march_event)
+      get event_assignments_path(e.id, 2018)
       expect(response).to have_http_status(200)
     end
   end

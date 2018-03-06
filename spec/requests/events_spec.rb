@@ -1,14 +1,6 @@
 require 'rails_helper'
-require 'auth_helper'
 
 RSpec.describe "Events", type: :request do
-
-  Event.extend RecordExtensions
-  Event.extend FakeDataset::WithFakeDataset
-
-  include AuthHelper
-
-  #AuthHelper.use_fake_for_profiles
 
   let(:valid_attributes) {
     {name: "Test", month: 06}
@@ -67,7 +59,7 @@ RSpec.describe "Events", type: :request do
     context "when authorized" do
 
       before do
-        login_as :admin
+        sign_in :admin
       end
 
       after do
@@ -84,6 +76,11 @@ RSpec.describe "Events", type: :request do
         expect(response.body).to include(events_path)
         expect(response.body).to include("January")
       end
+
+      after do
+        sign_out
+      end
+
     end
 
     context "when unauthorized" do
@@ -94,13 +91,13 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        login_as :normal
+        sign_in :normal
         get new_event_path
         expect(response).to have_http_status(:forbidden)
       end
 
       after do
-        logout
+        sign_out
       end
     end
   end
@@ -115,7 +112,7 @@ RSpec.describe "Events", type: :request do
     context "when authorized" do
 
       before do
-        login_as :admin
+        sign_in :admin
         get edit_event_url id: @event.to_param
       end
 
@@ -128,6 +125,10 @@ RSpec.describe "Events", type: :request do
         expect(response.body).to include("input")
       end
 
+      after do
+        sign_out
+      end
+
     end
 
     context "when unauthorized" do
@@ -138,13 +139,13 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        login_as :normal
+        sign_in :normal
         get edit_event_url id: @event.to_param
         expect(response).to have_http_status(:forbidden)
       end
 
       after do
-        logout
+        sign_out
       end
     end
 
@@ -162,7 +163,7 @@ RSpec.describe "Events", type: :request do
     context "when authorized" do
 
       before do
-        login_as :admin
+        sign_in :admin
       end
 
       context "with valid params" do
@@ -184,6 +185,11 @@ RSpec.describe "Events", type: :request do
           expect(response).to be_success
         end
       end
+
+      after do
+        sign_out
+      end
+
     end
 
     context "when unauthorized" do
@@ -194,13 +200,13 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        login_as :normal
+        sign_in :normal
         post events_path, params: {event: valid_attributes}
         expect(response).to have_http_status(:forbidden)
       end
 
       after do
-        logout
+        sign_out
       end
     end
   end
@@ -214,7 +220,7 @@ RSpec.describe "Events", type: :request do
     context "when authorized" do
 
       before do
-        login_as :admin
+        sign_in :admin
       end
 
       context "with valid params" do
@@ -241,6 +247,11 @@ RSpec.describe "Events", type: :request do
           expect(response).to be_success
         end
       end
+
+      after do
+        sign_out
+      end
+
     end
 
     context "when unauthorized" do
@@ -251,13 +262,13 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        login_as :normal
+        sign_in :normal
         put event_path(@event.id), params: {id: @event.to_param, event: valid_attributes}
         expect(response).to have_http_status(:forbidden)
       end
 
       after do
-        logout
+        sign_out
       end
     end
 
@@ -276,7 +287,7 @@ RSpec.describe "Events", type: :request do
     context "when authorized" do
 
       before do
-        login_as :admin
+        sign_in :admin
       end
 
       it "destroys the requested event" do
@@ -289,6 +300,11 @@ RSpec.describe "Events", type: :request do
         delete event_path(@event.id)
         expect(response).to redirect_to(events_url)
       end
+
+      after do
+        sign_out
+      end
+
     end
 
     context "when unauthorized" do
@@ -299,13 +315,13 @@ RSpec.describe "Events", type: :request do
       end
 
       it "returns a permissions error for normal users" do
-        login_as :normal
+        sign_in :normal
         delete event_path(@event.id)
         expect(response).to have_http_status(:forbidden)
       end
 
       after do
-        logout
+        sign_out
         @event.destroy
       end
     end
