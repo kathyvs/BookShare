@@ -1,6 +1,6 @@
 class EventAssignmentSet
   include Mongoid::Document
-  field :event, type: Event
-  field :year, type: Int
-  field :books, type: List
+
+  belongs_to :event
+  embeds_many :books, class_name: EventAssignment
 end

@@ -16,6 +16,8 @@ class Event
     end
   end
 
+  has_many :event_assignment_sets
+
   MIN_MONTH = 1
   MAX_MONTH = 12
 
