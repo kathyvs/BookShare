@@ -69,6 +69,7 @@ group :development, :test do
   gem 'rspec', '>= 3.6.0'
   gem 'rspec-rails'
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rubycritic'
 end
 

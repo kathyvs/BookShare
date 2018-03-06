@@ -5,17 +5,25 @@ require 'support/factory_bot'
 RSpec.describe "Assignment set features", type: :feature do
   include PageHelper
 
-  feature 'Displaying all assignments for an event' do
+  feature 'displaying all assignments for an event' do
     background do
-      create(:mar_user_assignments)
-      create(:mar_admin_assignments)
+      parker = create(:parker)
+      ssno = create(:ssno)
+      user_set = create(:mar_user_assignments)
+      user_set[parker] = 1
+      user_set[ssno] = 1
+      user_set.save!
+      admin_sets = create(:mar_admin_assignments)
+      admin_sets[parker] = 1
+      admin_sets.event = user_set.event
+      admin_sets.save!
     end
 
-    scenario "When there is no one logged in" do
-      visit_page :root do
+    scenario "When there is no one logged in", js: true do
+      visit_page :root do |page|
         expect(page).to have_content("Admin")
-        expect(page).to have_content("User")
-        expect(page).to include_book("Parker")
+        expect(page).to have_content("Test User")
+        expect(page).to have_content("Parker, James")
       end
     end
   end
