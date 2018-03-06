@@ -11,7 +11,7 @@ FactoryBot.define do
     roles [:admin]
   end
   factory :profile, class: Profile do
-    name "Test"
+    name "Test User"
     association :user, factory: :user, strategy: :build
   end
   factory :admin, class: Profile do
