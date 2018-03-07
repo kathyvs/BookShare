@@ -5,4 +5,8 @@ module ApplicationHelper
     html_options[:class => 'btn']
     link_to(name, options, html_options, &block)
   end
+
+  def admin?
+    current_auth_user && current_auth_user.admin?
+  end
 end
