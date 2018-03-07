@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/database_cleaner'
 
 RSpec.describe "Events", type: :request do
 

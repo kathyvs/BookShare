@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'support/database_cleaner'
 
 RSpec.describe "EventAssignmentSets", type: :request do
   describe "GET /event_assignment_sets" do

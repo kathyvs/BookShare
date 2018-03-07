@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/factory_bot'
+require 'support/database_cleaner'
 
 RSpec.describe "AssignmentSets", type: :request do
 
