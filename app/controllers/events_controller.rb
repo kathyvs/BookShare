@@ -33,8 +33,12 @@ class EventsController < ApplicationController
     authorize @event
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        format.html do
+          redirect_to new_event_event_assignment_set_url(@event), notice: 'Event was successfully created, now assign books'
+        end
+        format.json do
+         render :show, status: :created, location: @event
+       end
       else
         @months = Event.all_months.collect {|m| Event.new month: m}
         format.html { render :new }

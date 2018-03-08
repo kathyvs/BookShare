@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, 'Event name' %>
     <%= form.text_field :name, id: :event_name %>
   </div>
 
   <div class="field">
-    <%= form.label :month %>
+    <%= form.label :month, 'Month when event starts' %>
     <%= form.select :month, @months.collect {|m| [m.month_name, m.month] } %>
   </div>
 

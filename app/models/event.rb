@@ -16,7 +16,7 @@ class Event
     end
   end
 
-  has_many :event_assignment_sets
+  has_one :book_assignments, class_name: 'EventAssignmentSet'
 
   MIN_MONTH = 1
   MAX_MONTH = 12
@@ -47,4 +47,9 @@ class Event
   def month_name
     Date::MONTHNAMES[month.to_i]
   end
+
+  def has_book_assignments?
+    book_assignments && true
+  end
+
 end

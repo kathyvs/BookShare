@@ -1,21 +1,22 @@
 require 'rails_helper'
 require 'support/capybara'
 require 'support/factory_bot'
+require 'support/database_cleaner'
 
 RSpec.describe "Signin features", type: :feature do
   include PageHelper
-  
+
   feature "Signing in" do
-    
+
     background do
-      @profile = create(:profile)
+      @profile = create_profile(:profile)
       @user = @profile.user
       @user.confirm
       create(:january_event)
     end
-    
+
     scenario "Signing in directly with correct credentials" do
-      
+
       visit_page :signin do |signin_page|
         signin_page.signin_as(@user.email, @user.password)
       end

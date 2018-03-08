@@ -10,9 +10,12 @@ class EventAssignmentSetsController < ApplicationController
   def show
   end
 
-  # GET /event_assignment_sets/new
+  # GET /event/1/event_assignment_sets/new
   def new
-    @event_assignment_set = EventAssignmentSet.new
+    authorize event
+    redirect_to edit_event_path(event) if event.has_book_assignments?
+    event.book_assignments = EventAssignmentSet.new(event: event)
+    @event_assignment_set = event.book_assignments
   end
 
   # GET /event_assignment_sets/1/edit

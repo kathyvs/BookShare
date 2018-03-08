@@ -63,10 +63,6 @@ RSpec.describe "Events", type: :request do
         sign_in :admin
       end
 
-      after do
-        logout
-      end
-
       it "returns a success response" do
         get new_event_path
         expect(response).to be_success
@@ -106,7 +102,6 @@ RSpec.describe "Events", type: :request do
   describe "GET #edit" do
 
     before do
-      Event.delete_all
       @event = Event.create! valid_attributes
     end
 
@@ -174,9 +169,10 @@ RSpec.describe "Events", type: :request do
           }.to change(Event, :count).by(1)
         end
 
-        it "redirects to the created event" do
+        it "redirects to the event assignment page" do
           post events_path, params: {event: valid_attributes}
-          expect(response).to redirect_to(Event.all.last)
+          new_event = Event.where(name: valid_attributes[:name]).last
+          expect(response).to redirect_to(new_event_event_assignment_set_path(new_event.id))
         end
       end
 
