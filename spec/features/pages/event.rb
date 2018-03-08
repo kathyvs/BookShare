@@ -19,17 +19,16 @@ module Pages
 
     def submit
       click_button('Create Event')
-      binding.pry
       if has_css?("#error_explanation")
         yield this
       else
-        yield EditEventAssignmentsPage.new
+        yield EditEventCountsPage.new
       end
     end
 
   end
 
-  class EditEventAssignmentsPage < Page
+  class EditEventCountsPage < Page
   end
 
 end
