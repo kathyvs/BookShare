@@ -1,4 +1,4 @@
-class EventAssignment
+class BookCount
   include Mongoid::Document
 
   # The book that is being assigned
