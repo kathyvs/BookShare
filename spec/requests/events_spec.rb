@@ -74,6 +74,13 @@ RSpec.describe "Events", type: :request do
         expect(response.body).to include("January")
       end
 
+      it "renders a table containing all books" do
+        get new_event_path
+        Book.all do |book|
+          expect(response.body).to include(book.title)
+        end
+      end
+
       after do
         sign_out
       end
@@ -169,10 +176,10 @@ RSpec.describe "Events", type: :request do
           }.to change(Event, :count).by(1)
         end
 
-        it "redirects to the event assignment page" do
+        it "redirects to the show event page" do
           post events_path, params: {event: valid_attributes}
           new_event = Event.where(name: valid_attributes[:name]).last
-          expect(response).to redirect_to(new_event_event_assignment_set_path(new_event.id))
+          expect(response).to redirect_to(new_event)
         end
       end
 

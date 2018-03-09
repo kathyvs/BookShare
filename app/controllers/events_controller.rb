@@ -34,7 +34,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         format.html do
-          redirect_to new_event_event_assignment_set_url(@event), notice: 'Event was successfully created, now assign books'
+          redirect_to event_url(@event), notice: 'Event was successfully created'
         end
         format.json do
          render :show, status: :created, location: @event

@@ -17,18 +17,25 @@ module Pages
       select month, from: 'event[month]'
     end
 
+    def table
+      EditBookCountsTable.new(wrap(find("table.table")))
+    end
+
     def submit
       click_button('Create Event')
       if has_css?("#error_explanation")
         yield this
       else
-        yield EditEventCountsPage.new
+        yield ViewEventPage.new
       end
     end
 
   end
 
-  class EditEventCountsPage < Page
+  class ViewEventPage < Page
+  end
+
+  class EditBookCountsTable < PageTable
   end
 
 end

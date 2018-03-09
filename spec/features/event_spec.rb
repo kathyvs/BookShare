@@ -35,16 +35,15 @@ RSpec.describe "Event features", type: :feature do
       visit_page :new_event do |page|
         page.name = 'Simple Test Event'
         page.month = 'October'
-        page.submit do |next_page|
-          next_page.at_row(:parker).books = 215
-          next_page.at_row(:bahlow).books = 1
-          next_page.at_row(:ssno).set_show_to(false)
-          next_page.submit do |final_page|
-            expect(final_page).to have_current_path(root_path)
-            expect(final_page).to have_text("Simple Test Event Book")
-            expect(final_page).to have_text('215')
-            expect(nav_bar)
-          end
+        table = page.table
+        table.at_row(:parker).books = 215
+        table.at_row(:bahlow).books = 1
+        table.at_row(:ssno).set_show_to(false)
+        page.submit do|final_page|
+          expect(final_page).to have_current_path(root_path)
+          expect(final_page).to have_text("Simple Test Event Book")
+          expect(final_page).to have_text('215')
+          expect(nav_bar).to have_text('My Events')
         end
       end
     end

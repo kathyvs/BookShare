@@ -16,7 +16,7 @@ class Event
     end
   end
 
-  has_one :book_assignments, class_name: 'EventAssignmentSet'
+  embeds_many :books, class_name: 'BookCount'
 
   MIN_MONTH = 1
   MAX_MONTH = 12

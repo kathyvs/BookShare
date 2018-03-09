@@ -38,6 +38,9 @@ module Pages
     end
   end
 
+  class PageTable
+  end
+
   class ErrorPage < Page
   end
 
