@@ -1,6 +1,8 @@
+<%= javascript_pack_tag 'application' %>
+
 <% #The edit table for the requested counts of books for an event %>
-  <div class="table">
-    <%= react_component("event_count_table",
-       caption: "Book Assignments for #{@event.name}",
-       assignments: @event.book_assignments) %>
-  </div>
+<div class="table">
+  <%= react_component("book_count_table",
+     caption: "Book Assignments for #{event.name}",
+     counts: event.counts_for(Book.all.limit(1000))) %>
+</div>

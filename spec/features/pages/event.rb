@@ -18,6 +18,7 @@ module Pages
     end
 
     def table
+      binding.pry
       EditBookCountsTable.new(wrap(find("table.table")))
     end
 

@@ -48,8 +48,12 @@ class Event
     Date::MONTHNAMES[month.to_i]
   end
 
-  def has_book_assignments?
-    book_assignments && true
+  def counts_for(book_list)
+    return enum_for(:counts_for, book_list) unless block_given?
+    book_hash = books.map {|book_count| [book_count.book_id, book_count.count]}.to_h
+    book_hash.default = 0
+    book_list.each do |book|
+      yield [book, book_hash[book.id]]
+    end
   end
-
 end

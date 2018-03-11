@@ -61,6 +61,9 @@ RSpec.describe "Events", type: :request do
 
       before do
         sign_in :admin
+        create(:parker)
+        create(:ssno)
+        create(:ncmj)
       end
 
       it "returns a success response" do
@@ -76,7 +79,8 @@ RSpec.describe "Events", type: :request do
 
       it "renders a table containing all books" do
         get new_event_path
-        Book.all do |book|
+        expect(Book.all.size).to be > 0
+        Book.all.each do |book|
           expect(response.body).to include(book.title)
         end
       end

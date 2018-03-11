@@ -5,5 +5,5 @@ class BookCount
   belongs_to :book
   embedded_in :event
   field :count, type: Integer
-  field :show, type: Mongoid::Boolean
+  field :show, type: Mongoid::Boolean, default: true
 end

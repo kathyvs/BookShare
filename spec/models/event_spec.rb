@@ -3,13 +3,13 @@ require 'rails_helper'
 #require 'fake_dataset_helper'
 
 RSpec.describe "Event", type: :model do
-  
+
   context "persistence" do
-    
+
     it "is persisted by Mongoid" do
       expect(Event).to be_mongoid_document
     end
-    
+
   end
 
   context "when initializing" do
@@ -27,7 +27,7 @@ RSpec.describe "Event", type: :model do
       event = Event.new(replaced_attributes month: Date.new(2017, month))
       expect(event.month).to eq(month)
     end
-    
+
     context "when validating" do
 
       it "default attributes are valid" do
@@ -62,12 +62,12 @@ RSpec.describe "Event", type: :model do
   end
 
   context "current event" do
-    
+
     let (:events) {
       [:january, :march, :may, :june].map { |k| [k, create("#{k}_event".to_sym)] }.to_h
     }
 
-    it "finds by event id if given id" do 
+    it "finds by event id if given id" do
       event = events[:march]
       expect(Event.current(event.id)).to eq(event)
     end
@@ -77,6 +77,63 @@ RSpec.describe "Event", type: :model do
     it "uses the first event in the last month if none in current month"
 
     it "uses the event in the nearest following month otherwise"
+  end
+
+
+  context "counts_for" do
+
+    let (:books) {
+      (1..7).map do |index|
+        Book.new(title: "Book ##{index}", type: :test)
+      end
+    }
+
+    let (:event) {
+      Event.new(name: "Test Event", month: 8)
+    }
+
+    def count_hash(count_assoc)
+      count_assoc.map do |index, count|
+        book = books[index]
+        [book.id, count]
+      end.to_h
+    end
+
+    def add_counts(*count_assoc)
+      count_assoc.map do |index, count|
+        event.books << BookCount.new(book: books[index], count: count)
+      end
+    end
+
+    it "returns an entry for every book in the arguments " do
+      included_books = books[0..4]
+      counts = event.counts_for(included_books)
+      book_list = counts.map(&:first)
+      expect(book_list).to eq(included_books)
+    end
+
+    it "returns the book count if it is in the event" do
+      count_assoc = [[1, 2], [2,  3], [4, -1], [6, 0]]
+      add_counts(*count_assoc)
+      count_hash = count_hash(count_assoc)
+
+      counts = event.counts_for(books)
+      counts.each do |book, count|
+        if count_hash.has_key? book.id
+          expect(count).to eq(count_hash[book.id])
+        end
+      end
+    end
+
+    it "returns 0 if the corresponding book count is missing" do
+      set_book = books[4]
+      event.books << BookCount.new(book: set_book, count: 3)
+      event.counts_for(books).each do |book, count|
+        unless book == set_book
+          expect(count).to eq(0)
+        end
+      end
+    end
   end
 
 end

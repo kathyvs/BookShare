@@ -21,6 +21,8 @@
     <%= form.select :month, @months.collect {|m| [m.month_name, m.month] } %>
   </div>
 
+  <%= render 'table', event: event %>
+
   <div class="actions">
     <%= form.submit %>
   </div>

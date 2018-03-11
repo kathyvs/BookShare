@@ -32,18 +32,17 @@ RSpec.describe "Event features", type: :feature do
 
     scenario "successfully creating an event and assigning books", js: true do
       login_as(:admin)
-      visit_page :new_event do |page|
-        page.name = 'Simple Test Event'
-        page.month = 'October'
-        table = page.table
+      visit_page :new_event do |edit_page|
+        edit_page.name = 'Simple Test Event'
+        edit_page.month = 'October'
+        table = edit_page.table
         table.at_row(:parker).books = 215
         table.at_row(:bahlow).books = 1
         table.at_row(:ssno).set_show_to(false)
-        page.submit do|final_page|
-          expect(final_page).to have_current_path(root_path)
+        edit_page.submit do|final_page|
+          expect(final_page).to have_current_path(/events/)
           expect(final_page).to have_text("Simple Test Event Book")
           expect(final_page).to have_text('215')
-          expect(nav_bar).to have_text('My Events')
         end
       end
     end
