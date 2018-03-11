@@ -5,7 +5,7 @@ import BookShareTable from "./book_share_table"
 class BookCountTable extends React.Component  {
 
   render() {
-    return(<BookShareTable data={this.props.counts} caption={this.props.caption}/>);
+    return(<BookShareTable data={this.props.counts} book='0' caption={this.props.caption}/>);
   }
 }
 

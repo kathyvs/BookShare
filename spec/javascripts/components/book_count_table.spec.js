@@ -11,16 +11,20 @@ describe('BookCountTable', () => {
     [{'book': {'title': 'Test 1', 'key': '1'}}, 3]
     ];
 
-  it('should render a book share table', () => {
-    const wrapper = shallow(<BookCountTable counts={counts} caption="Table Test"/>);
-    expect(wrapper.find("BookShareTable")).to.have.length(1);
-  });
+  const findTable = function (caption) {
+    const wrapper = shallow(<BookCountTable counts={counts} caption={caption}/>);
+    return wrapper.find("BookShareTable").first();
+  };
 
   it('should copy counts to the table data', () => {
-    const wrapper = shallow(<BookCountTable counts={counts} caption="Data Test"/>);
-    const table = wrapper.find("BookShareTable").first();
-    console.log(table.debug());
+    const table = findTable("Data Test")
     expect(table.prop('data')).to.equal(counts);
+  });
+
+  it('should specify "0" as the book property', () => {
+    const table = findTable("Book Test")
+    console.log(table.debug());
+    expect(table.prop('book')).to.equal('0');
   });
 });
 
