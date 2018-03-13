@@ -2,20 +2,12 @@ import React from 'react';
 import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import BookShareTable from 'components/book_share_table';
+import { findColumn } from './book_share_helper.js';
 
 configure({ adapter: new Adapter() });
 
 
 describe('BookShareTable', () => {
-
-  function findColumn(columnList, dataFieldName) {
-    const result = columnList.filter((column) => column.dataField == dataFieldName);
-    if (result.length !== 1) {
-      console.log('Unable to find ' + dataFieldName + ' in ' + columnList.map((c) => c.dataField));
-      expect(result.length).toBe(1);
-    }
-    return result[0];
-  };
 
   const data = [{
       book_name: {
