@@ -11,7 +11,7 @@ describe('BookShareTable', () => {
   function findColumn(columnList, dataFieldName) {
     const result = columnList.filter((column) => column.dataField == dataFieldName);
     if (result.length !== 1) {
-      console.log(result);
+      console.log('Unable to find ' + dataFieldName + ' in ' + columnList.map((c) => c.dataField));
       expect(result.length).toBe(1);
     }
     return result[0];
@@ -28,8 +28,27 @@ describe('BookShareTable', () => {
       value: 3},
     ];
 
+  const defaultColumns = [
+    {dataField: 'book.title',
+     text: 'Title'
+    },
+    {dataField: 'book.type',
+     text: 'Book Type',
+     custom: 'Custom value'
+    },
+    {dataField: 'value',
+     text: 'Simple Value',
+     align: 'right'
+    },
+    {dataField: 'squaredValue',
+     text: 'Squared Value',
+     align: 'right',
+     extractBy: (v) => v * v
+    }
+  ];
+
   const shallowTable = function (caption, book = 'book_name') {
-    const wrapper = shallow(<BookShareTable data={data} book={book} caption={caption}/>);
+    const wrapper = shallow(<BookShareTable data={data} book={book} caption={caption} columns={defaultColumns}/>);
     return wrapper.find("BootstrapTableContainer").first();
   };
 
@@ -39,7 +58,6 @@ describe('BookShareTable', () => {
 
   it('should always have "bookId" as the key field', () => {
     const table = shallowTable("Key Test");
-    console.log(table.debug());
     expect(table.prop('keyField')).toEqual('book.key');
   });
 
@@ -55,6 +73,18 @@ describe('BookShareTable', () => {
     for (var i = 0; i < data.length; i++) {
       expect(tableData[i].book).toEqual(data[i].book_name);
     }
+  });
+
+  it('should copy the column data minus extractBy property', () => {
+    const table = shallowTable("Column Test");
+    console.log(table.debug());
+    const columns = table.prop('columns');
+    defaultColumns.forEach((inputColumn) => {
+      const foundColumn = findColumn(columns, inputColumn.dataField);
+      const expectedColumn = Object.assign({}, inputColumn);
+      delete expectedColumn['extractBy'];
+      expect(foundColumn).toEqual(expectedColumn);
+    });
   });
 
   // it('should convert data to the table data', () => {

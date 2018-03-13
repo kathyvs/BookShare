@@ -4,23 +4,41 @@ import BootstrapTable from 'react-bootstrap-table-next';
 
 class BookShareTable extends React.Component {
 
-  convertDataObj(obj) {
+  convertDataObj(converters, obj) {
     return {book: obj[this.props.book]};
   }
 
-  render() {
+  processColumns(columns) {
     const idColumn = {
       dataField: 'book.key',
       text: 'Ignored',
       hidden: true
     };
-    const data = this.props.data.map((obj) => this.convertDataObj(obj));
+    const result = {
+      converters: [],
+      columns: []
+    };
+    columns.forEach((column) => {
+      if ('extractBy' in column) {
+        const newColumn = Object.assign({}, column);
+        delete newColumn.extractBy;
+        result.converters.push({extractBy: column.extractBy, dataField: column.dataField})
+        result.columns.push(newColumn);
+      } else {
+        result.columns.push(column);
+      }
+    });
+    result.columns.push(idColumn);
+    return result;
+  }
 
-    const columns = [idColumn];
+  render() {
+    const processedColumns = this.processColumns(this.props.columns);
+    const data = this.props.data.map((obj) => this.convertDataObj(processedColumns.converters, obj));
     return(<BootstrapTable
         keyField='book.key'
         data={data}
-        columns = {columns}
+        columns = {processedColumns.columns}
       />);
   }
 }
