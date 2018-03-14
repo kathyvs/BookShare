@@ -35,7 +35,7 @@ describe('BookShareTable', () => {
     {dataField: 'squaredValue',
      text: 'Squared Value',
      align: 'right',
-     extractBy: (v) => v * v
+     extractBy: (obj) => obj.value * obj.value
     }
   ];
 
@@ -69,7 +69,6 @@ describe('BookShareTable', () => {
 
   it('should copy the column data minus extractBy property', () => {
     const table = shallowTable("Column Test");
-    console.log(table.debug());
     const columns = table.prop('columns');
     defaultColumns.forEach((inputColumn) => {
       const foundColumn = findColumn(columns, inputColumn.dataField);
@@ -79,11 +78,13 @@ describe('BookShareTable', () => {
     });
   });
 
-  // it('should convert data to the table data', () => {
-  //   const wrapper = shallow(<BookShareTable data={data} caption="Data Test"/>);
-  //   const table = wrapper.find("BootstrapTableContainer").first();
-  //   console.log(table.debug());
-
-  //   expect(table.prop('data')).to.equal(data);
-  // });
+  it('should convert data to the table data', () => {
+    const table = shallowTable("Key Column Test");
+    const convertedData = table.prop('data');
+    console.log(convertedData);
+    for (var i = 0; i < data.length; i++) {
+      expect(convertedData[i].value).toEqual(data[i].value);
+      expect(convertedData[i].squaredValue).toEqual(data[i].value * data[i].value);
+    }
+  });
 });

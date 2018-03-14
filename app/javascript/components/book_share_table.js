@@ -5,7 +5,12 @@ import BootstrapTable from 'react-bootstrap-table-next';
 class BookShareTable extends React.Component {
 
   convertDataObj(converters, obj) {
-    return {book: obj[this.props.book]};
+    const result = Object.assign({}, obj);
+    result.book = obj[this.props.book];
+    converters.forEach((converter) => {
+      result[converter.dataField] = converter.extractBy(obj);
+    });
+    return result;
   }
 
   processColumns(columns) {
@@ -51,8 +56,10 @@ BookShareTable.propTypes = {
 
 export const utils = {
 
-  test: function() {
-    return 1;
+  bookDescription: function(book) {
+    const title = <span className="title">{book.title}</span>;
+    const shortName = book.short_name && <span className="short-name">[{book.short_name}]</span>;
+    return(<span>{title} {shortName}</span>);
   }
 }
 export default BookShareTable;

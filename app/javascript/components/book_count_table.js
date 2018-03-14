@@ -1,11 +1,29 @@
 import React from "react"
 import PropTypes from "prop-types"
-import BookShareTable from "./book_share_table"
+import BookShareTable, {utils} from "./book_share_table"
 
 class BookCountTable extends React.Component  {
 
   render() {
-    return(<BookShareTable data={this.props.counts} book='0' caption={this.props.caption}/>);
+    const columns = [{
+      dataField: 'book.author',
+      text: 'Author',
+      classes: "author"
+    }, {
+      dataField: 'book',
+      text: 'Book',
+      classes: "description",
+      formatter: utils.bookDescription
+    }, {
+      dataField: '1',
+      text: 'Number requested',
+      classes: "need",
+    }];
+    return(<BookShareTable
+      data={this.props.counts}
+      columns={columns}
+      book='0'
+      caption={this.props.caption}/>);
   }
 }
 
