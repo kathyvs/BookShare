@@ -24,14 +24,14 @@ class BookShareTable extends React.Component {
       columns: []
     };
     columns.forEach((column) => {
+      const newColumn = Object.assign({}, column);
+      newColumn.headerAttrs = newColumn.headerAttrs || {};
+      newColumn.headerAttrs.scope = 'col';
       if ('extractBy' in column) {
-        const newColumn = Object.assign({}, column);
         delete newColumn.extractBy;
         result.converters.push({extractBy: column.extractBy, dataField: column.dataField})
-        result.columns.push(newColumn);
-      } else {
-        result.columns.push(column);
       }
+      result.columns.push(newColumn);
     });
     result.columns.push(idColumn);
     return result;

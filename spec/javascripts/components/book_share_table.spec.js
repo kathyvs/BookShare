@@ -74,17 +74,27 @@ describe('BookShareTable', () => {
       const foundColumn = findColumn(columns, inputColumn.dataField);
       const expectedColumn = Object.assign({}, inputColumn);
       delete expectedColumn['extractBy'];
-      expect(foundColumn).toEqual(expectedColumn);
+      expect(foundColumn).toEqual(expect.objectContaining(expectedColumn));
     });
   });
 
   it('should convert data to the table data', () => {
-    const table = shallowTable("Key Column Test");
+    const table = shallowTable("Data Test");
     const convertedData = table.prop('data');
     console.log(convertedData);
     for (var i = 0; i < data.length; i++) {
       expect(convertedData[i].value).toEqual(data[i].value);
       expect(convertedData[i].squaredValue).toEqual(data[i].value * data[i].value);
     }
+  });
+
+  it('should guarantee that the headers set scope', () => {
+    const table = shallowTable("Column Test");
+    const columns = table.prop('columns');
+    columns.forEach((column) => {
+      if (!column.hidden) {
+        expect(column.headerAttrs.scope).toEqual('col');
+      }
+    });
   });
 });
