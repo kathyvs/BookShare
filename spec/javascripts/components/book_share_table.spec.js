@@ -81,7 +81,6 @@ describe('BookShareTable', () => {
   it('should convert data to the table data', () => {
     const table = shallowTable("Data Test");
     const convertedData = table.prop('data');
-    console.log(convertedData);
     for (var i = 0; i < data.length; i++) {
       expect(convertedData[i].value).toEqual(data[i].value);
       expect(convertedData[i].squaredValue).toEqual(data[i].value * data[i].value);
@@ -89,12 +88,18 @@ describe('BookShareTable', () => {
   });
 
   it('should guarantee that the headers set scope', () => {
-    const table = shallowTable("Column Test");
+    const table = shallowTable("Scope Test");
     const columns = table.prop('columns');
     columns.forEach((column) => {
       if (!column.hidden) {
         expect(column.headerAttrs.scope).toEqual('col');
       }
     });
+  });
+
+  it('should copy the caption', () => {
+    const table = shallowTable("Caption Test");
+    console.log(table.debug());
+    expect(table.prop('caption')).toEqual("Caption Test");
   });
 });

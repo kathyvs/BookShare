@@ -42,6 +42,7 @@ class BookShareTable extends React.Component {
     const data = this.props.data.map((obj) => this.convertDataObj(processedColumns.converters, obj));
     return(<BootstrapTable
         keyField='book.key'
+        caption={this.props.caption}
         data={data}
         columns = {processedColumns.columns}
       />);

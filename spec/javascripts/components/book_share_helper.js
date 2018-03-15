@@ -7,3 +7,11 @@ export function findColumn(columnList, dataFieldName) {
   }
   return result[0];
 }
+
+export function findFormatter(wrapper, dataFieldName) {
+  const table = wrapper.find("BookShareTable").first();
+  const result = findColumn(table.prop('columns'), 'profile_assignments');
+  return result.formatter;
+}
+
+

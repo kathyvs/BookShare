@@ -1,18 +1,37 @@
 import React from "react"
+import ReactDOMServer from 'react-dom/server';
 import PropTypes from "prop-types"
 import BookShareTable, {utils} from "./book_share_table"
 
 class BookAssignmentTable extends React.Component {
+
+  generalAssignmentFormatter(profileAssignments) {
+    return(profileAssignments.map((pair, index) => (
+      <NameAndCount key={id_of(pair.profile)}
+        profile={pair.profile}
+        count={pair.count}
+        index={index}/>)));
+  }
+
   render () {
     const columns = [{
-      dataField: 'description',
-      text: 'Book',
-      classes: ["description"],
-      extractBy: (obj) => {utils.bookDescription(obj.book)}
+      dataField: 'book.author',
+      text: 'Author',
+      classes: 'description',
+     },{
+      dataField: 'book',
+      text: 'Title',
+      classes: "description",
+      formatter: utils.bookDescription
     }, {
       dataField: 'needs',
       text: 'Number still needed',
-      classes: ["need"]
+      classes: "need"
+    }, {
+      dataField: 'profile_assignments',
+      text: 'Currently bringing',
+      classes: "bringing",
+      formatter: this.generalAssignmentFormatter
     }
     ];
     return (
@@ -43,4 +62,25 @@ BookAssignmentTable.propTypes = {
   caption: PropTypes.string.isRequired,
   assignments: PropTypes.array.isRequired
 };
+
+function NameAndCount ( {profile, count, index} ) {
+  const prefix = index > 0 && ", ";
+  const countString = count > 1 ? ` (${count})` : "";
+  return (<span>{prefix}{profile.name}{countString}</span>);
+}
+
+NameAndCount.propTypes = {
+  profile: PropTypes.shape({
+    _id: PropTypes.object,
+    name: PropTypes.string.isRequired,
+  }),
+  count: PropTypes.number,
+  index: PropTypes.number.isRequired
+}
+
+function id_of(obj) {
+  return obj._id['$oid']
+}
+
+
 export default BookAssignmentTable

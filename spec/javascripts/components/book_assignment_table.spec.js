@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
 import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import BookAssignmentTable from 'components/book_assignment_table';
-import { findColumn } from './book_share_helper.js';
+import { findColumn, findFormatter } from './book_share_helper.js';
 
 configure({ adapter: new Adapter() });
 
@@ -26,19 +27,58 @@ describe('BookAssignmentTable', () => {
     expect(table.prop("book")).toBe("book");
   });
 
-  it('should contain a description column', () => {
-    const columns = findTable("Description Test").prop('columns');
-    console.log(columns);
-    const column = findColumn(columns, "description");
-    expect(column).toHaveProperty("extractBy");
-    expect(column).toHaveProperty("classes", ['description']);
+  it('should contain an author column', () => {
+    const columns = findTable("Author Test").prop('columns');
+    const column = findColumn(columns, "book.author");
+    expect(column).toHaveProperty("classes", 'description');
+  });
+
+  it('should contain a title column', () => {
+    const columns = findTable("Title Test").prop('columns');
+    const column = findColumn(columns, "book");
+    expect(column).toHaveProperty("formatter");
+    expect(column).toHaveProperty("classes", 'description');
   });
 
   it('should contain a needs column', () => {
     const columns = findTable("Description Test").prop('columns');
-    console.log(columns);
     const column = findColumn(columns, "needs");
-    expect(column).toHaveProperty("classes", ['need']);
+    expect(column).toHaveProperty("classes", 'need');
+  });
+
+  it('should contain a profile_assignments column', () => {
+    const columns = findTable("Brining Test").prop('columns');
+    const column = findColumn(columns, "profile_assignments");
+    expect(column).toHaveProperty("formatter");
+    expect(column).toHaveProperty("classes", 'bringing');
+  });
+
+});
+
+describe('BookAssignmentTable.generalAssignmentFormatter', () => {
+
+  const profiles = [{
+    profile: { name: "First Profile", _id: {'$oid' : 'aa'}},
+    count: 1,
+  }, {
+    profile: { name: "Second Profile", _id: {'$oid' : 'bb'}},
+    count: 3,
+  }];
+
+  const fetchFormatter = function() {
+    const wrapper = shallow(<BookAssignmentTable assignments={[]} caption={"General Formatter Test"}/>);
+    return findFormatter(wrapper, 'profile_assignments');
+  }
+
+  it('is an element with a profile, count and index', () => {
+    const formatter = fetchFormatter();
+    const result = formatter(profiles);
+    for (var i = 0; i < result.length; i++) {
+      const nameAndCount = result[i];
+      expect(nameAndCount.props['profile']).toEqual(profiles[i].profile);
+      expect(nameAndCount.props['count']).toEqual(profiles[i].count);
+      expect(nameAndCount.props['index']).toEqual(i);
+    }
   });
 
 });

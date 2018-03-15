@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
 import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import BookCountTable from 'components/book_count_table';

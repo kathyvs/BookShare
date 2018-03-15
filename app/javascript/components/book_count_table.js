@@ -28,7 +28,7 @@ class BookCountTable extends React.Component  {
 }
 
 BookCountTable.propTypes = {
-  //caption: PropTypes.string.isRequired,
+  caption: PropTypes.string.isRequired,
   counts: PropTypes.array.isRequired
 };
 
