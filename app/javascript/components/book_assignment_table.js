@@ -6,11 +6,10 @@ import BookShareTable, {utils} from "./book_share_table"
 class BookAssignmentTable extends React.Component {
 
   generalAssignmentFormatter(profileAssignments) {
-    return(profileAssignments.map((pair, index) => (
-      <NameAndCount key={id_of(pair.profile)}
+    return(<ul>{profileAssignments.map((pair) => (
+      <li key={id_of(pair.profile)}><NameAndCount
         profile={pair.profile}
-        count={pair.count}
-        index={index}/>)));
+        count={pair.count}/></li>))}</ul>);
   }
 
   render () {
@@ -43,21 +42,6 @@ class BookAssignmentTable extends React.Component {
         book="book"
         columns = {columns}
         caption={this.props.caption}/>
-      // <table className="table table-hover table-responsive">
-      //   <caption>{this.props.caption}</caption>
-      //   <thead className="thead-dark">
-      //     <tr>
-      //       <th className="description" scope="col" colSpan="2">Book</th>
-      //       <th className="need" scope="col">Number still needed</th>
-      //       <th className="bringing" scope="col">Currently bringing</th>
-      //     </tr>
-      //   </thead>
-      //   <tbody>
-      //     {this.props.assignments.map(assignment => (
-      //       <BookAssignmentRow key={assignment.book.key} assignment={assignment}/>
-      //     ))}
-      //   </tbody>
-      // </table>
     );
   }
 }
@@ -67,10 +51,9 @@ BookAssignmentTable.propTypes = {
   assignments: PropTypes.array.isRequired
 };
 
-function NameAndCount ( {profile, count, index} ) {
-  const prefix = index > 0 && ", ";
-  const countString = count > 1 ? ` (${count})` : "";
-  return (<span>{prefix}{profile.name}{countString}</span>);
+function NameAndCount ( {profile, count} ) {
+ const countString = count > 1 ? ` (${count})` : "";
+  return (<span>{profile.name}{countString}</span>);
 }
 
 NameAndCount.propTypes = {
@@ -78,8 +61,7 @@ NameAndCount.propTypes = {
     _id: PropTypes.object,
     name: PropTypes.string.isRequired,
   }),
-  count: PropTypes.number,
-  index: PropTypes.number.isRequired
+  count: PropTypes.number
 }
 
 function id_of(obj) {

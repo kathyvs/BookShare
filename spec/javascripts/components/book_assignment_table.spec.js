@@ -30,7 +30,7 @@ describe('BookAssignmentTable', () => {
   it('should contain an author column', () => {
     const columns = findTable("Author Test").prop('columns');
     const column = findColumn(columns, "book.author");
-    expect(column).toHaveProperty("classes", 'description');
+    expect(column).toHaveProperty("classes", 'author');
   });
 
   it('should contain a title column', () => {
@@ -73,11 +73,11 @@ describe('BookAssignmentTable.generalAssignmentFormatter', () => {
   it('is an element with a profile, count and index', () => {
     const formatter = fetchFormatter();
     const result = formatter(profiles);
-    for (var i = 0; i < result.length; i++) {
-      const nameAndCount = result[i];
-      expect(nameAndCount.props['profile']).toEqual(profiles[i].profile);
-      expect(nameAndCount.props['count']).toEqual(profiles[i].count);
-      expect(nameAndCount.props['index']).toEqual(i);
+    const counts = shallow(result).find("NameAndCount");
+    for (var i = 0; i < counts.length; i++) {
+      const nameAndCount = counts.at(i);
+      expect(nameAndCount.prop('profile')).toEqual(profiles[i].profile);
+      expect(nameAndCount.prop('count')).toEqual(profiles[i].count);
     }
   });
 
