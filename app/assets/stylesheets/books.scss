@@ -10,19 +10,6 @@
     width: 70%;
 }
 
-td.header {
-    font-weight: bold;
-    padding-top: 0.5em;
-}
-
-td.description {
-    width: 80%;
-
-    th {
-	text-align: left
-    }
-}
-
 td.actions {
     min-width: 3.5em;
 }
@@ -30,11 +17,6 @@ td.actions {
 .short_name {
     font-weight:bold;
     font-color: 333;
-}
-
-td.need, td.bringing {
-    text-align: center;
-    width: 10%;
 }
 
 button.add {

@@ -48,15 +48,9 @@ describe('BookShareTable', () => {
    * Book properties
    */
 
-  it('should always have "bookId" as the key field', () => {
+  it('should always have "book.key" as the key field', () => {
     const table = shallowTable("Key Test");
     expect(table.prop('keyField')).toEqual('book.key');
-  });
-
-  it('should have a hidden column pointing to book.key', () => {
-    const table = shallowTable("Key Column Test");
-    const bookColumn = findColumn(table.prop('columns'), 'book.key');
-    expect(bookColumn.hidden).toBeTruthy();
   });
 
   it('should retrieve the books from the book property when it is a string', () => {

@@ -17,20 +17,24 @@ class BookAssignmentTable extends React.Component {
     const columns = [{
       dataField: 'book.author',
       text: 'Author',
-      classes: 'description',
+      classes: 'author',
+      headerClasses: 'author col-sm-2'
      },{
       dataField: 'book',
       text: 'Title',
       classes: "description",
+      headerClasses: 'description col-sm-8',
       formatter: utils.bookDescription
     }, {
       dataField: 'needs',
       text: 'Number still needed',
-      classes: "need"
+      classes: "need",
+      headerClasses: 'need'
     }, {
       dataField: 'profile_assignments',
       text: 'Currently bringing',
       classes: "bringing",
+      headerClasses: 'bringing col-sm-3',
       formatter: this.generalAssignmentFormatter
     }
     ];

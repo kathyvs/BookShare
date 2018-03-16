@@ -1,10 +1,5 @@
 @import 'bootstrap';
-
-$light-color: #fffff0;
-$dark-color: #2b5d0f;
-$dark-text-color: #333;
-$outer-margin: 1.5em;
-$light-link-color: gold;
+@import '_colors';
 
 body {
   background-color: $light-color;
@@ -13,46 +8,6 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 1.2em;
   line-height: 1.5em;
-}
-
-#banner {
-  background-color: $dark-color;
-  color: $light-color;
-  a {
-    color: $light-link-color;
-
-    &:visited {
-      color: $light-link-color;
-    }
-
-    &:hover {
-      color: $light-color;
-      background-color: $dark-color;
-    }
-  }
-  .icon-bar {
-     background-color: $light-color;
-  }
-}
-
-h1 {
-  font-size: 1.4em;
-  font-weight: bold;
-}
-
-h2 {
-  font-size: 1.2em;
-  font-weight: bold;
-}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-}
-
-pre {
-  background-color: #eee;
-  padding: 0.9em;
-  font-size: 0.8em;
 }
 
 a {
@@ -74,19 +29,48 @@ div {
   }
 }
 
-#notice {
-  color: green;
+h1 {
+  font-size: 1.4em;
+  font-weight: bold;
 }
 
-.actions input {
-  background: $dark-color;
-  color: $light-link-color;
-
+h2 {
+  font-size: 1.2em;
+  font-weight: bold;
 }
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
+
+label {
+  display: block;
+}
+
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+}
+
+pre {
+  background-color: #eee;
+  padding: 0.9em;
+  font-size: 0.8em;
+}
+
+#banner {
+  background-color: $dark-color;
+  color: $light-color;
+  a {
+    color: $light-link-color;
+
+    &:visited {
+      color: $light-link-color;
+    }
+
+    &:hover {
+      color: $light-color;
+      background-color: $dark-color;
+    }
+  }
+  .icon-bar {
+     background-color: $light-color;
+  }
 }
 
 #error_explanation {
@@ -112,8 +96,43 @@ div {
   }
 }
 
-label {
-  display: block;
+#notice {
+  color: green;
+}
+
+.actions input {
+  background: $dark-color;
+  color: $light-link-color;
+
+}
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+.assignment-table {
+  caption {
+    font-weight: bold;
+    font-size: 1.1em;
+    color: $dark-text-color;
+  }
+
+  thead {
+    th {
+      color: $light-color;
+      background-color: $dark-comp-color;
+    }
+  }
+
+  tbody {
+    tr {
+      th {
+        font-weight: normal;
+
+      }
+    }
+  }
 }
 
 // General book items

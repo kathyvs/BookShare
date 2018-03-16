@@ -14,11 +14,6 @@ class BookShareTable extends React.Component {
   }
 
   processColumns(columns) {
-    const idColumn = {
-      dataField: 'book.key',
-      text: 'Ignored',
-      hidden: true
-    };
     const result = {
       converters: [],
       columns: []
@@ -33,7 +28,6 @@ class BookShareTable extends React.Component {
       }
       result.columns.push(newColumn);
     });
-    result.columns.push(idColumn);
     return result;
   }
 
@@ -45,6 +39,7 @@ class BookShareTable extends React.Component {
         caption={this.props.caption}
         data={data}
         columns = {processedColumns.columns}
+        hover condensed
       />);
   }
 }
