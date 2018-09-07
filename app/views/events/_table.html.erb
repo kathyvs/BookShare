@@ -2,7 +2,12 @@
 
 <% #The edit table for the requested counts of books for an event %>
 <div class="assignment-table">
+  <% counts = event.counts_for(Book.all.limit(1000)) %>
   <%= react_component("book_count_table",
-     caption: "Book Assignments for #{event.name.blank? ? "new event" : event.name}",
-     counts: event.counts_for(Book.all.limit(1000))) %>
+    event_name: event.name || "",
+    editable: editing,
+    caption: "Book Assignments for #{event.name.blank? ? "new event" : event.name}",
+    form_name: form_name,
+    counts: event.counts_for(Book.all.limit(1000))) #event.counts_for(Book.all))
+    %>
 </div>

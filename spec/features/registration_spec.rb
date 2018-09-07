@@ -29,7 +29,7 @@ RSpec.describe "Registration features", type: :feature do
 
     def an_user_with_name(name)
       an_object_satisfying do |o|
-        o.current_profile.name == name
+        o.current_profile && o.current_profile.name == name
       end
     end
   end

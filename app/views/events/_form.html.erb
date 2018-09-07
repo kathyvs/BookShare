@@ -21,9 +21,13 @@
     <%= form.select :month, @months.collect {|m| [m.month_name, m.month] } %>
   </div>
 
-  <%= render 'table', event: event %>
+  <%= render 'table',
+    event: event,
+    editing: true,
+    ref_name: 'bookTable',
+    form_name: 'event' %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= react_component("event_submit", table_name: 'bookTable') %>
   </div>
 <% end %>

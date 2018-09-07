@@ -38,7 +38,7 @@ RSpec.describe "Event features", type: :feature do
         table = edit_page.table
         table.at_row(:parker).books = 215
         table.at_row(:bahlow).books = 1
-        table.at_row(:ssno).set_show_to(false)
+        #table.at_row(:ssno).set_show_to(false)
         edit_page.submit do|final_page|
           expect(final_page).to have_current_path(/events/)
           expect(final_page).to have_text("Simple Test Event Book")

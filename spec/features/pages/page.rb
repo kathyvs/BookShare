@@ -39,6 +39,27 @@ module Pages
   end
 
   class PageTable
+
+    def initialize(node)
+      @table = node
+    end
+
+    def find_row(&filter)
+      table.all("tbody tr").find(&filter)
+    end
+
+    private
+       attr_accessor :table
+  end
+
+  class TableRow
+
+    def initialize(node)
+      @row = node
+    end
+
+    protected
+      attr_accessor :row
   end
 
   class ErrorPage < Page
