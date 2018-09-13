@@ -1,92 +1,92 @@
 FactoryBot.define do
   factory :event_assignment_set do
-    event ""
-    year ""
-    books ""
+    event { "" }
+    year { "" }
+    books { "" }
   end
   factory :event_assignment do
-    book ""
-    count ""
-    show false
+    book { "" }
+    count { "" }
+    show { false }
   end
   factory :user, class: AuthUser do
-    email "user@test.kathyvs.net"
-    password "user-password"
-    image_url "http://test.kathyvs.net/user"
+    email { "user@test.kathyvs.net" }
+    password { "user-password" }
+    image_url { "http://test.kathyvs.net/user" }
 
   end
   factory :admin_user, class: AuthUser do
-    email "admin@test.kathyvs.net"
-    password "admin-password"
-    roles [:admin]
+    email { "admin@test.kathyvs.net" }
+    password { "admin-password" }
+    roles { [:admin] }
   end
   factory :profile, class: Profile do
-    name "Test User"
+    name { "Test User" }
     association :user, factory: :user, strategy: :build
   end
   factory :admin, class: Profile do
-    name "Admin"
+    name { "Admin" }
     association :user, factory: :admin_user, strategy: :build
   end
 
   factory :january_event, class: Event do
-    name "January Event"
-    month 1
+    name { "January Event" }
+    month { 1 }
   end
   factory :march_event, class: Event do
-    name "March Event"
-    month 3
+    name { "March Event" }
+    month { 3 }
   end
   factory :may_event, class: Event do
-    name "May Event"
-    month 5
+    name { "May Event" }
+    month { 5 }
   end
   factory :june_event, class: Event do
-    name "June Event"
-    month 6
+    name { "June Event" }
+    month { 6 }
   end
 
   factory :book do
-    title "Test Book"
+    title { "Test Book" }
   end
   factory :parker, class: Book do
-    author "Parker, James"
-    title "A Glossary of Terms Used in Heraldry"
-    type :armory
+    author { "Parker, James" }
+    title { "A Glossary of Terms Used in Heraldry" }
+    type { :armory }
   end
   factory :bahlow, class: Book do
-    author "Bahlow, Hans and Edda Gentry"
-    title "Dictionary of German Names"
-    type :name
+    author { "Bahlow, Hans and Edda Gentry" }
+    title { "Dictionary of German Names" }
+    type { :name }
   end
   factory :ssno, class: Book do
-    author "Taszycki, Witold"
-    title "S\u0142ownik Staropolskich Nazw Osobowych"
-    volume 1
-    type :name
+    author { "Taszycki, Witold" }
+    title { "S\u0142ownik Staropolskich Nazw Osobowych" }
+    volume { 1 }
+    type { :name }
   end
   factory :ncmj, class: Book do
-    author "Sólveig Þróndardóttir"
-    title "Name Construction in Medieval Japan"
-    type :name
+    author { "Sólveig Þróndardóttir" }
+    title { "Name Construction in Medieval Japan" }
+    type { :name }
   end
 
   factory :empty_assignment, class: AssignmentSet do
-    year 2017
+    year { 2017 }
     association :event, factory: :january_event
     profile
   end
 
   factory :mar_user_assignments, class: AssignmentSet do
-    arriving "2018-02-14"
-    leaving "2018-02-28"
-    year 2018
+    arriving { "2018-02-14" }
+    leaving { "2018-02-28" }
+    year { 2018 }
     association :event, factory: :march_event
     profile
 
     factory :mar_admin_assignments, class: AssignmentSet do
-      arriving "2018-02-16"
-      leaving "2018-02-27"
+      arriving { "2018-02-16" }
+      leaving { "2018-02-27" }
       association :profile, factory: :admin
     end
   end
