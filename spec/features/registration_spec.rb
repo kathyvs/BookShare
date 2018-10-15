@@ -19,7 +19,6 @@ RSpec.describe "Registration features", type: :feature do
         rpage.password = password = 'pwd4test'
         rpage.password_confirmation = password
         rpage.signup
-
         expect(AuthUser.where(email: email)).to contain_exactly(an_user_with_name(name))
       end
       expect(page).to have_current_path(root_path)

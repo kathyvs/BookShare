@@ -40,6 +40,11 @@ class Event
     return query.exists? ? query.first : Event.first
   end
 
+  def counts=(counts)
+    book_counts = counts.map {|id, count| BookCount.new({book_id: id, count: count})}
+    write_attribute(:books, book_counts)
+  end
+
   def month=(month)
     write_attribute(:month, get_or_use(month, :mon))
   end

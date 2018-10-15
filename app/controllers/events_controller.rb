@@ -82,6 +82,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :month)
+      counts = Book.only(:id).all.map(&:id).map(&:to_s)
+      params.require(:event).permit(:name, :month, counts: counts)
     end
 end

@@ -46,7 +46,7 @@ class AuthUser
   field :image_url, type: String
   field :default_profile_index, type: Integer
 
-  has_many :profiles
+  has_many :profiles, autosave: true
 
   accepts_nested_attributes_for :profiles
 

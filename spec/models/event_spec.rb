@@ -4,6 +4,10 @@ require 'rails_helper'
 
 RSpec.describe "Event", type: :model do
 
+  def book_counts(book_sym, count)
+    BookCount.new({book: books[book_sym], count: count})
+  end
+
   context "persistence" do
 
     it "is persisted by Mongoid" do
@@ -18,6 +22,10 @@ RSpec.describe "Event", type: :model do
       {name: "Test", month: 8}
     }
 
+    let(:books) {
+      [:parker, :bahlow].map { |k| [k, create(k)] }.to_h
+    }
+
     def replaced_attributes(attrs)
       valid_attributes.merge(attrs)
     end
@@ -26,6 +34,14 @@ RSpec.describe "Event", type: :model do
       month = 5
       event = Event.new(replaced_attributes month: Date.new(2017, month))
       expect(event.month).to eq(month)
+    end
+
+    it "converts counts to books" do
+      book_countlist = [book_counts(:parker, 3), book_counts(:bahlow, 1)]
+      count_map = book_countlist.map {|bc| [bc.book_id.to_s, bc.count.to_s]}.to_h
+      event = Event.new(replaced_attributes counts: count_map)
+      expect(event.books.map {|bc| [bc.book_id, bc.count]}).to eq(
+        book_countlist.map {|bc| [bc.book_id, bc.count]})
     end
 
     context "when validating" do
@@ -57,10 +73,40 @@ RSpec.describe "Event", type: :model do
         expect(Event.new replaced_attributes month: 0).to be_invalid
         expect(Event.new replaced_attributes month: -35).to be_invalid
       end
+
+      it "book counts can be negative" do
+        expect(Event.new replaced_attributes books: [book_counts(:parker, -3)]).to be_valid
+      end
     end
 
   end
 
+  context "when updating" do
+
+    let(:books) {
+      [:parker, :bahlow].map { |k| [k, create(k)] }.to_h
+    }
+
+    let(:event) {
+      Event.new(name: "Update Test", month: 3,
+        counts: {books[:parker].id => 1})
+    }
+
+    it "converts dates to month" do
+      month = 4
+      event.update(month: Date.new(2018, month))
+      expect(event.month).to eq(month)
+    end
+
+    it "converts counts to books" do
+      book_countlist = [book_counts(:parker, 2), book_counts(:bahlow, -1)]
+      count_map = book_countlist.map {|bc| [bc.book_id.to_s, bc.count.to_s]}.to_h
+      event.update(counts: count_map)
+      expect(event.books.map {|bc| [bc.book_id, bc.count]}).to eq(
+        book_countlist.map {|bc| [bc.book_id, bc.count]})
+    end
+
+  end
   context "current event" do
 
     let (:events) {
