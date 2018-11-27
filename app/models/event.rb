@@ -42,7 +42,7 @@ class Event
 
   def counts=(counts)
     book_counts = counts.map {|id, count| BookCount.new({book_id: id, count: count})}
-    write_attribute(:books, book_counts)
+    self.books = book_counts
   end
 
   def month=(month)

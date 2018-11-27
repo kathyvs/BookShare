@@ -22,7 +22,7 @@ gem "omniauth"
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use React for JS
@@ -59,6 +59,9 @@ gem 'dotenv-rails'
 
 # Use Pundit for authorization
 gem 'pundit'
+
+# Limiting nokogiri for now due to oddities of installing it on Mac
+gem 'nokogiri', '~> 1.8.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

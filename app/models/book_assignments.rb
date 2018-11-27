@@ -8,10 +8,11 @@ class BookAssignments
 
   include Enumerable
   include GetOrUse
-  def initialize(books, assignments = [])
+  def initialize(books, assignments = [], book_counts = [])
     @book_assignments = {}
     books.each {|book| add_book(book)}
     assignments.each {|assignment_set| add_assignment_set(assignment_set)}
+    book_counts.each {|book_count| add_book_count(book_count)}
   end
 
   def each(&block)
@@ -33,6 +34,11 @@ class BookAssignments
       book_assignments[book_key] << assignment_set if book_assignments.has_key? book_key
     end
   end
+
+  def add_book_count(book_count)
+    book_assignments[book_count.book.key].total_need = book_count.count
+  end
+
   private
 
     attr_reader :book_assignments

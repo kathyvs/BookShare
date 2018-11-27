@@ -48,4 +48,43 @@ RSpec.describe "Event features", type: :feature do
     end
   end
 
+  feature "creating an event" do
+
+    attr_reader :event
+    before do
+      create(:parker)
+      create(:ssno)
+      @event = create(:may_event)
+    end
+
+    scenario "when not logged in" do
+      visit_page(:edit_event, id: event.id) do |page|
+        expect(page.status).to match(:unauthorized)
+      end
+    end
+
+    scenario "when not authorized" do
+      login_as(:profile)
+      visit_page(:edit_event, id: event.id) do |page|
+        expect(page.status).to match(:forbidden)
+      end
+    end
+
+    scenario "successfully updating event and reassigning books", js: true do
+      login_as(:admin)
+      visit_page(:edit_event, id: event.id) do |edit_page|
+        edit_page.name = 'Edited May Event'
+        edit_page.month = 'June'
+        table = edit_page.table
+        table.at_row(:parker).books = 2
+        table.at_row(:ssno).books = -1
+        #table.at_row(:ssno).set_show_to(false)
+        edit_page.submit do|final_page|
+          expect(final_page).to have_current_path(/events/)
+          expect(final_page).to have_text("Edited May Event Book")
+          expect(final_page).to have_text('-1')
+        end
+      end
+    end
+  end
 end

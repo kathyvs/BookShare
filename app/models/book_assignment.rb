@@ -25,6 +25,14 @@ class BookAssignment
     profile_counts.values.sum
   end
 
+  def total_need=(count)
+    @total_need = count
+  end
+
+  def need
+    @total_need - profile_counts.values.sum
+  end
+
   def [](profile_or_id)
     return profile_counts[get_or_use(profile_or_id, :id)]
   end

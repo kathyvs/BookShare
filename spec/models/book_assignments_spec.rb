@@ -23,13 +23,25 @@ RSpec.describe BookAssignments, type: :model do
     end
   }
 
+  let (:book_counts) do
+    need = [-1, 6, 4, 1, 2]
+    books.zip(need).map do |book, need|
+      BookCount.new(book: book, count: need)
+    end
+  end
+
   let (:total_book_counts) {
     # derived from above
-    [0, 4, 3, 5, 1]
+    [0, 4, 3, 5, 3]
+  }
+
+  let (:still_needed) {
+    # derived from above
+    [-1, 2, 1, -4, -1]
   }
 
   let (:book_assignments) {
-    BookAssignments.new(books, assignments)
+    BookAssignments.new(books, assignments, book_counts)
   }
 
   it "contains all books in order" do
@@ -44,6 +56,15 @@ RSpec.describe BookAssignments, type: :model do
         book_assignment = book_assignments[book_key]
         expect(book_assignment[assignment_set.profile_id]).to be >= count
       end
+    end
+  end
+
+  it "contains the number of books still needed" do
+    expect(still_needed.count).to be > 0
+    books.zip(still_needed).each do |book, need|
+      book_assignment = book_assignments[book]
+      puts book.title
+      expect(book_assignment.need).to eq(need)
     end
   end
 end

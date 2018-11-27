@@ -6,7 +6,7 @@ function BookAssignmentRow  ( {assignment} ) {
     <tr>
       <td>{assignment.book.author}</td>
       <BookDescription book={assignment.book}/>
-      <td className="need"></td>
+      <td className="need">{assignment.need}</td>
       <td className="bringing">
         {assignment.profile_assignments.map((pair, index) => (
           <NameAndCount key={id_of(pair.profile)} profile={pair.profile} count={pair.count} index={index}/>))}</td>
