@@ -8,12 +8,22 @@ configure({ adapter: new Adapter() });
 describe('EventSubmit', () => {
 
   it('should contain a submit input', () => {
-    const wrapper = shallow(<EventSubmit tableName='test'/>);
+    const wrapper = shallow(<EventSubmit tableName='test' type='new'/>);
     const submit = wrapper.find('input');
-    console.log("Submit length = " + submit.length);
     expect(submit).toHaveLength(1);
 
   });
 
+  it('says create event when type is new', () => {
+     const wrapper = shallow(<EventSubmit tableName='test' type='new'/>);
+     const submit = wrapper.find('input');
+     expect(submit.prop('value')).toEqual('Create Event');
+  });
+
+  it('says save event when type is edit', () => {
+      const wrapper = shallow(<EventSubmit tableName='test' type='edit'/>);
+      const submit = wrapper.find('input');
+      expect(submit.prop('value')).toEqual("Save Event");
+  });
 });
 

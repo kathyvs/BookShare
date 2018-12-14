@@ -25,9 +25,9 @@
     event: event,
     editing: true,
     ref_name: 'bookTable',
-    form_name: 'event' %>
+    form_name: 'event'%>
 
   <div class="actions">
-    <%= react_component("event_submit", table_name: 'bookTable') %>
+    <%= react_component("event_submit", table_name: 'bookTable', type: type) %>
   </div>
 <% end %>
