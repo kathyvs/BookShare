@@ -1,3 +1,5 @@
+current_year = Date.today.year
+
 FactoryBot.define do
   factory :event_assignment_set do
     event { "" }
@@ -78,15 +80,16 @@ FactoryBot.define do
   end
 
   factory :mar_user_assignments, class: AssignmentSet do
-    arriving { "2018-02-14" }
-    leaving { "2018-02-28" }
-    year { 2018 }
+    arriving { "#{current_year}-02-14" }
+    leaving { "#{current_year}-02-28" }
+    year { current_year }
     association :event, factory: :march_event
     profile
 
     factory :mar_admin_assignments, class: AssignmentSet do
-      arriving { "2018-02-16" }
-      leaving { "2018-02-27" }
+      arriving { "#{current_year}-02-16" }
+      leaving { "#{current_year}-02-27" }
+      year { current_year }
       association :profile, factory: :admin
     end
   end

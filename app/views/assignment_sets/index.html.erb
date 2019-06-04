@@ -3,9 +3,10 @@
 <p id="notice"><%= notice %></p>
 
 <div id="books">
-  <h2></h1>
+  <h2></h2>
   <div class="assignment-table table-responsive">
     <%= react_component("book_assignment_table",
        caption: "Current Book Assignments for #{@year}",
        assignments: @book_assignments) %>
   </div>
+</div>

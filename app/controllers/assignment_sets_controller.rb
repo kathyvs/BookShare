@@ -1,11 +1,12 @@
 class AssignmentSetsController < ApplicationController
   #before_action :set_assignment_set, only: [:show, :edit, :update, :destroy]
-  BOOK_LIMIT = 500 # incase an insane number of books gets added maliciously
+  BOOK_LIMIT = 500 # in case an insane number of books gets added maliciously
   # GET /events/:event/:year/assignment_sets
   def index
     @book_assignments = BookAssignments.new(
       Book.all.limit(BOOK_LIMIT),
-      AssignmentSet.where(event: event, year: year))
+      AssignmentSet.where(event: event, year: year),
+      event.books)
   end
 
   # GET /assignment_sets/1

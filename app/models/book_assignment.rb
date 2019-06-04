@@ -13,6 +13,7 @@ class BookAssignment
     @book = book
     @profile_counts = Hash.new(0)
     @profiles = {}
+    @total_need = 0
   end
 
   def << (assignment_set)
@@ -30,7 +31,7 @@ class BookAssignment
   end
 
   def need
-    @total_need - profile_counts.values.sum
+    return @total_need - total_count
   end
 
   def [](profile_or_id)
@@ -53,6 +54,8 @@ class BookAssignment
       {'profile' => profile.as_json,
        'count' => count}
     end
+    result['need'] = need
+    result['needs'] = 'wrong'
     result
   end
 

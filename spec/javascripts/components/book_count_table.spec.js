@@ -57,20 +57,20 @@ describe('BookCountTable', () => {
     expect(column).toHaveProperty("classes", 'description');
   });
 
-  it('should contain a needs column', () => {
-    const columns = findTable("Needs Test").prop('columns');
+  it('should contain a need column', () => {
+    const columns = findTable("Need Test").prop('columns');
     const column = findColumn(columns, "1");
     expect(column).toHaveProperty("classes", 'need');
   });
 
-  it('should have no formatter in the needs columns by default', () => {
-    const columns = findTable("Needs Renderer Test").prop('columns');
+  it('should have no formatter in the need columns by default', () => {
+    const columns = findTable("Need Renderer Test").prop('columns');
     const column = findColumn(columns, "1");
     expect(column).not.toHaveProperty('formatter');
   });
 
-  it('should have a formatter in the needs column if editable is set to true', () => {
-    const columns = findTable("Needs Renderer Test", true).prop('columns');
+  it('should have a formatter in the need column if editable is set to true', () => {
+    const columns = findTable("Need Renderer Test", true).prop('columns');
     const column = findColumn(columns, "1");
     console.log(column);
     expect(column).toHaveProperty('formatter');

@@ -40,9 +40,9 @@ describe('BookAssignmentTable', () => {
     expect(column).toHaveProperty("classes", 'description');
   });
 
-  it('should contain a needs column', () => {
+  it('should contain a need column', () => {
     const columns = findTable("Description Test").prop('columns');
-    const column = findColumn(columns, "needs");
+    const column = findColumn(columns, "need");
     expect(column).toHaveProperty("classes", 'need');
   });
 

@@ -28,11 +28,24 @@ RSpec.describe BookAssignment, type: :model do
     assignment_sets.each do |aset|
       book_assignment << aset
     end
+    book_assignment.total_need = 5
     book_assignment
   }
 
-  it "contains a total count its book" do
+  it "contains a total count of its book" do
     expect(book_assignment.total_count).to eq(counts.sum)
+  end
+
+  it "calculates need from total" do
+    expect(book_assignment.need).to eq(1)
+  end
+
+  it "defaults to a total need of 0 if total_need is not set" do
+    book_assignment = BookAssignment.new(book)
+    assignment_sets.each do |aset|
+      book_assignment << aset
+    end
+    expect(book_assignment.need).to eq(-book_assignment.total_count)
   end
 
   it "contains a list of pairs of profiles and counts" do
@@ -68,5 +81,8 @@ RSpec.describe BookAssignment, type: :model do
       end
     end
 
+    it "saves need" do
+      expect(book_assignment.as_json['need']).to eq(book_assignment.need)
+    end
   end
 end

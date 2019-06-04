@@ -25,8 +25,8 @@ class BookAssignmentTable extends React.Component {
       headerClasses: 'description col-sm-8',
       formatter: utils.bookDescription
     }, {
-      dataField: 'needs',
-      text: 'Number still needed',
+      dataField: 'need',
+      text: 'Number still needed 2',
       classes: "need",
       headerClasses: 'need'
     }, {

@@ -63,7 +63,6 @@ RSpec.describe BookAssignments, type: :model do
     expect(still_needed.count).to be > 0
     books.zip(still_needed).each do |book, need|
       book_assignment = book_assignments[book]
-      puts book.title
       expect(book_assignment.need).to eq(need)
     end
   end
