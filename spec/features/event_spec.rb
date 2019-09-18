@@ -48,7 +48,7 @@ RSpec.describe "Event features", type: :feature do
     end
   end
 
-  feature "creating an event" do
+  feature "editing an event" do
 
     attr_reader :event
     before do

@@ -35,7 +35,7 @@ module PageHelper
         root: {url: :root_path, page: Pages::AssignmentsPage},
         signin: {url: :new_auth_user_session_path, page: Pages::LoginPage},
         registration: {url: :new_auth_user_registration_path, page: Pages::RegistrationPage},
-        new_event: {url: :new_event_path, page: Pages::EditEventPage},
+        new_event: {url: :new_event_path, page: Pages::CreateEventPage},
         edit_event: {url: :edit_event_path, page: Pages::EditEventPage}
         }
     end

@@ -9,6 +9,10 @@ module Pages
   #
   class EditEventPage < Page
 
+    def initialize(type = :edit)
+      @type = type
+    end
+
     def name=(name)
       fill_in 'event[name]', with: name
     end
@@ -22,7 +26,8 @@ module Pages
     end
 
     def submit
-      click_button('Create Event')
+      buttonName = @type == :edit ? 'Save Event' : 'Create Event'
+      click_button(buttonName)
       if has_css?("#error_explanation")
         yield this
       else
@@ -30,6 +35,13 @@ module Pages
       end
     end
 
+  end
+
+  class CreateEventPage < EditEventPage
+
+    def initialize
+      super(:create)
+    end
   end
 
   class ViewEventPage < Page
