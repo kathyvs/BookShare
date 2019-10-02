@@ -39,6 +39,7 @@
     "roots": [
       "spec/javascripts"
     ],
+    "testURL": "http://localhost",
     "moduleDirectories": [
       "node_modules",
       "app/javascript"
