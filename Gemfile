@@ -61,7 +61,7 @@ gem 'dotenv-rails'
 gem 'pundit'
 
 # Limiting nokogiri for now due to oddities of installing it on Mac
-gem 'nokogiri', '~> 1.8.5'
+gem 'nokogiri', '~> 1.10.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
